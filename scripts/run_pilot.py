@@ -117,6 +117,7 @@ def parse_args(argv=None):
     ap.add_argument("--system", help="override every item's system prompt key, e.g. none")
     ap.add_argument("--workers", type=int, default=1, help="parallel requests per model (keep 1 for Ollama)")
     ap.add_argument("--order-seed", type=int, default=0, help="seed for shuffling item order")
+    ap.add_argument("--out-dir", type=Path, default=OUT_DIR, help="where to write responses (default data/responses)")
     ap.add_argument("--dry-run", action="store_true", help="print the plan and one example request, then exit")
     return ap.parse_args(argv)
 
@@ -138,17 +139,18 @@ def main(argv=None):
         raise SystemExit(f"unknown model id(s): {', '.join(unknown)}")
     models = [by_id[m] for m in args.models] if args.models else [m for m in config["models"] if m.get("enabled")]
 
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    out_dir = args.out_dir if args.out_dir.is_absolute() else ROOT / args.out_dir
+    out_dir.mkdir(parents=True, exist_ok=True)
     for cfg in models:
         cfg = {**config["defaults"], **cfg}
-        out = OUT_DIR / f"{cfg['id']}.jsonl"
+        out = out_dir / f"{cfg['id']}.jsonl"
         done = load_done(out)
         tasks = [(i, s) for i in items for s in range(args.samples) if (i["id"], s) not in done]
         random.Random(f"{args.order_seed}|{cfg['id']}").shuffle(tasks)
         if args.limit:
             tasks = tasks[: args.limit]
         n_calls = sum(len(i["turns"]) for i, _ in tasks)
-        print(f"[{cfg['id']}] {len(tasks)} items to run ({n_calls} calls), {len(done)} already done -> {out.relative_to(ROOT)}")
+        print(f"[{cfg['id']}] {len(tasks)} items to run ({n_calls} calls), {len(done)} already done -> {out}")
 
         if args.dry_run:
             if tasks:
