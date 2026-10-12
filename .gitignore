@@ -21,3 +21,6 @@ outputs/
 
 # Smoke-test runs
 data/smoke*/
+data/planted/
+data/mockcheck/
+analysis/output/planted_report.*
