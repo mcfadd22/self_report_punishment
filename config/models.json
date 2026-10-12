@@ -1,0 +1,27 @@
+{
+  "defaults": {
+    "temperature": 1.0,
+    "max_tokens": 1024
+  },
+  "models": [
+    {"id": "mock", "provider": "mock", "model": "mock", "enabled": false,
+     "note": "Canned responses for testing the pipeline."},
+
+    {"id": "llama3.1-8b", "provider": "ollama", "model": "llama3.1:8b", "family": "llama", "size_b": 8, "enabled": true},
+    {"id": "qwen3-8b", "provider": "ollama", "model": "qwen3:8b", "family": "qwen", "size_b": 8, "think": false, "enabled": true,
+     "note": "think=false turns off Qwen3's reasoning mode so it's comparable to the other models."},
+    {"id": "gemma3-12b", "provider": "ollama", "model": "gemma3:12b", "family": "gemma", "size_b": 12, "enabled": true},
+    {"id": "mistral-7b", "provider": "ollama", "model": "mistral:7b", "family": "mistral", "size_b": 7, "enabled": true},
+
+    {"id": "llama3.2-3b", "provider": "ollama", "model": "llama3.2:3b", "family": "llama", "size_b": 3, "enabled": false},
+    {"id": "qwen3-4b", "provider": "ollama", "model": "qwen3:4b", "family": "qwen", "size_b": 4, "think": false, "enabled": false},
+    {"id": "qwen3-14b", "provider": "ollama", "model": "qwen3:14b", "family": "qwen", "size_b": 14, "think": false, "enabled": false},
+    {"id": "gemma3-4b", "provider": "ollama", "model": "gemma3:4b", "family": "gemma", "size_b": 4, "enabled": false},
+
+    {"id": "claude-opus-5-5", "provider": "anthropic", "model": "claude-opus-5-5", "family": "claude", "effort": "medium", "max_tokens": 16000, "enabled": false,
+     "note": "Needs ANTHROPIC_API_KEY or `ant auth login`. Temperature can't be set and thinking can't be turned off on this model."},
+    {"id": "llama3.3-70b-openrouter", "provider": "openai", "model": "meta-llama/llama-3.3-70b-instruct",
+     "base_url": "https://openrouter.ai/api/v1", "api_key_env": "OPENROUTER_API_KEY", "family": "llama", "size_b": 70, "enabled": false,
+     "note": "Larger open model via OpenRouter, for scale comparisons beyond what fits locally. Check the model id on openrouter.ai before use."}
+  ]
+}
