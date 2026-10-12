@@ -12,6 +12,7 @@ Do AI models' accounts of their reasoning match what they do? This project tests
 - `config/models.json`: models to run (local via Ollama, or APIs)
 - `scripts/run_pilot.py`: sends items to models and saves responses to `data/responses/<model>.jsonl` (both framings by default; `--frames social` for one)
 - `scripts/refusal_report.py`: refusal and nonresponse rates by model, frame, item type, and mental state
+- `analysis/analyze_pilot.py`: applies the decision criteria in `proposal/pilot_criteria.md`; writes `analysis/output/<dir>_report.md`
 
 Edit the JSON sources, then rebuild with `python3 scripts/build_items.py`. Don't edit the `.jsonl` files by hand.
 
