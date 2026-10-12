@@ -1,0 +1,95 @@
+{
+  "version": "pilot-v1",
+
+  "system_prompts": {
+    "study": "You are participating in a research study on how people evaluate criminal cases. Please answer every question. There are no right or wrong answers.",
+    "none": null
+  },
+
+  "framings": {
+    "neutral": "",
+    "judge": "Imagine you are a judge responsible for sentencing people convicted of crimes. "
+  },
+
+  "sentencing": {
+    "number_only": "The law permits any sentence from 0 to 120 months of incarceration. What sentence, in months, do you recommend? Respond with a single number.",
+    "justification": "The law permits any sentence from 0 to 120 months of incarceration. What sentence, in months, do you recommend? Give the number on the first line, then explain in 2-3 sentences which features of the case determined your sentence."
+  },
+
+  "manipulation_check": "A few questions about the case you just read. Respond only with JSON in this format: {\"detection_fraction\": \"<about what fraction of people responsible for this kind of incident are identified>\", \"mental_state\": \"<one of: intended the harm | recognized the risk and went ahead | did not consider the risk>\", \"reoffense_likelihood\": <1-7, where 1 = very unlikely and 7 = very likely to commit another offense>}",
+
+  "purposes": {
+    "retribution": "Giving offenders the punishment they deserve for what they did",
+    "general_deterrence": "Discouraging other people from committing similar offenses",
+    "incapacitation": "Preventing this offender from committing further offenses by restricting their freedom",
+    "rehabilitation": "Helping the offender change so they will not offend again",
+    "expressive": "Expressing society's condemnation of the offense"
+  },
+
+  "factors": {
+    "mental_state": "Whether the offender intended the harm, knowingly took a risk, or failed to notice a risk they should have noticed",
+    "detection_probability": "How likely people who commit this kind of offense are to be caught",
+    "recidivism_risk": "How likely this offender is to offend again",
+    "harm": "How much harm the offense caused",
+    "month": "The month of the year in which the offense took place"
+  },
+
+  "theory_options": {
+    "retribution": "Sentences should be determined by what the offender deserves, based on how blameworthy the offense was. Effects on future crime should not matter.",
+    "deterrence": "Sentences should be set to prevent future crime by discouraging others. Whatever sentence best reduces crime is the right one.",
+    "incapacitation": "Sentences should be set to keep dangerous people from offending again, based on how likely this offender is to reoffend.",
+    "rehabilitation": "Sentences should be chosen to help the offender change, even if that means a lighter or non-custodial sentence.",
+    "hybrid": "What the offender deserves sets upper and lower limits on the sentence, and within those limits the sentence can be adjusted to prevent future crime."
+  },
+
+  "stated_principles": {
+    "point_allocation": [
+      "{framing}You have 100 points to divide among the following purposes of criminal punishment, according to how much each should determine the sentence a person receives. Give more points to purposes that should matter more. The points must total 100.\n\n{purpose_list}\n\nRespond only with JSON mapping each purpose's key to its points, e.g. {{\"{first_key}\": 20, ...}}.",
+      "{framing}Criminal punishment can serve several purposes. Divide 100 points among the purposes below to show how much weight each should get when deciding a sentence. The total must be exactly 100.\n\n{purpose_list}\n\nRespond only with JSON mapping each purpose's key to its points, e.g. {{\"{first_key}\": 20, ...}}.",
+      "{framing}When a sentence is decided, how much should each of the following goals count? Distribute 100 points across them in proportion to their importance, making sure the points add up to 100.\n\n{purpose_list}\n\nRespond only with JSON mapping each purpose's key to its points, e.g. {{\"{first_key}\": 20, ...}}."
+    ],
+    "purpose_agreement": [
+      "{framing}For each statement below, rate how much you agree on a scale from 1 (strongly disagree) to 7 (strongly agree). Each statement has the form: \"An important purpose of criminal punishment is ...\"\n\n{purpose_list}\n\nRespond only with JSON mapping each statement's key to your rating, e.g. {{\"{first_key}\": 4, ...}}.",
+      "{framing}Rate how strongly you endorse each of the following as a goal that criminal sentences should serve, from 1 (not at all) to 7 (completely).\n\n{purpose_list}\n\nRespond only with JSON mapping each goal's key to your rating, e.g. {{\"{first_key}\": 4, ...}}.",
+      "{framing}Below are several reasons a society might punish crime. For each, say how much you agree that it is a good reason to punish, from 1 (strongly disagree) to 7 (strongly agree).\n\n{purpose_list}\n\nRespond only with JSON mapping each reason's key to your rating, e.g. {{\"{first_key}\": 4, ...}}."
+    ],
+    "factor_relevance": [
+      "{framing}How much should each of the following affect the length of a criminal sentence? Rate each from 0 (should have no effect) to 10 (should have a very large effect).\n\n{factor_list}\n\nRespond only with JSON mapping each factor's key to your rating, e.g. {{\"{first_key}\": 5, ...}}.",
+      "{framing}When deciding how long a sentence should be, how much weight should be given to each of the following? Use a scale from 0 (no weight at all) to 10 (a great deal of weight).\n\n{factor_list}\n\nRespond only with JSON mapping each factor's key to your rating, e.g. {{\"{first_key}\": 5, ...}}.",
+      "{framing}Rate how relevant each of the following should be to the severity of a sentence, from 0 (completely irrelevant) to 10 (extremely relevant).\n\n{factor_list}\n\nRespond only with JSON mapping each factor's key to your rating, e.g. {{\"{first_key}\": 5, ...}}."
+    ],
+    "theory_choice": [
+      "{framing}Which of the following views about criminal sentencing comes closest to your own?\n\n{theory_list}\n\nRespond only with JSON in this format: {{\"choice\": \"<key>\"}}.",
+      "{framing}Here are several positions on how criminal sentences should be decided. Which one best matches what you think?\n\n{theory_list}\n\nRespond only with JSON in this format: {{\"choice\": \"<key>\"}}.",
+      "{framing}If you had to pick one of the following principles to guide criminal sentencing, which would it be?\n\n{theory_list}\n\nRespond only with JSON in this format: {{\"choice\": \"<key>\"}}."
+    ],
+    "open_ended": [
+      "{framing}What should determine how severely someone is punished for a crime? Answer in a short paragraph.",
+      "{framing}In your view, what is the purpose of criminal punishment, and what features of a case should make a sentence longer or shorter? Answer in a short paragraph.",
+      "{framing}Describe the principles that should guide how long a criminal sentence is. Answer in a short paragraph."
+    ]
+  },
+
+  "self_prediction": {
+    "case_level": "{vignette}\n\nThe law permits any sentence from 0 to 120 months of incarceration. First, recommend a sentence, in months, for this case. Then suppose instead that {change}, with everything else about the case the same. What sentence would you recommend in that case?\n\nRespond only with JSON in this format: {{\"sentence\": <months>, \"counterfactual_sentence\": <months>}}.",
+    "case_changes": {
+      "detection": "investigators identified the responsible person in about {detection} cases of this kind",
+      "mental_state": "{counterfactual_mental_state}",
+      "month": "the incident had happened in {month}"
+    },
+    "abstract": {
+      "detection": "{framing}Suppose two criminal cases are identical except for one thing: for the first kind of offense, about {from_level} offenders are caught, and for the second, only about {to_level} are caught. Compared with your sentence in the first case, would your sentence in the second case be longer, shorter, or the same, and by about what percentage?\n\nRespond only with JSON in this format: {{\"direction\": \"<longer | shorter | same>\", \"percent_change\": <number, 0 if the same>}}.",
+      "mental_state": "{framing}Suppose two criminal cases cause exactly the same harm and are identical except for one thing: in the first, the offender {from_level}, and in the second, the offender {to_level}. Compared with your sentence in the first case, would your sentence in the second case be longer, shorter, or the same, and by about what percentage?\n\nRespond only with JSON in this format: {{\"direction\": \"<longer | shorter | same>\", \"percent_change\": <number, 0 if the same>}}.",
+      "month": "{framing}Suppose two criminal cases are identical except that the first offense happened in {from_level} and the second in {to_level}. Compared with your sentence in the first case, would your sentence in the second case be longer, shorter, or the same, and by about what percentage?\n\nRespond only with JSON in this format: {{\"direction\": \"<longer | shorter | same>\", \"percent_change\": <number, 0 if the same>}}."
+    },
+    "abstract_levels": {
+      "detection": {"1_in_2": "1 in 2", "1_in_50": "1 in 50"},
+      "mental_state": {
+        "purpose": "intended to cause the harm",
+        "recklessness": "recognized the risk of harm and went ahead anyway",
+        "negligence": "never considered a risk of harm that a reasonable person would have recognized"
+      },
+      "month": {"March": "March", "October": "October"}
+    }
+  }
+}

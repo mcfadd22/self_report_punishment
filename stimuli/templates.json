@@ -1,0 +1,86 @@
+{
+  "version": "pilot-v1",
+  "assembly_order": ["background", "mental_state", "harm", "caught", "detection", "record"],
+  "factors": {
+    "mental_state": ["purpose", "recklessness", "negligence"],
+    "detection": ["1_in_2", "1_in_50"],
+    "month": ["March", "October"]
+  },
+  "detection_text": {
+    "1_in_2": "1 out of every 2",
+    "1_in_50": "1 out of every 50"
+  },
+  "shared": {
+    "record": "The defendant has no prior criminal record. A standard risk assessment rates the defendant's likelihood of reoffending as low. The defendant has been convicted, and the court has accepted the facts above."
+  },
+  "templates": {
+    "A_fire": {
+      "label": "Warehouse fire",
+      "background": "The defendant rents a storage unit in a commercial warehouse. Last year the defendant had a heated dispute with the warehouse owner over unpaid fees. One night in {month}, a fire started in the defendant's unit.",
+      "mental_state": {
+        "purpose": "The defendant set the fire deliberately, intending to destroy the warehouse.",
+        "recklessness": "The defendant had been running a space heater in the unit, which the warehouse rules prohibit. Before leaving that night, the defendant noticed the heater was close to stacked cardboard, recognized that it could start a fire, and decided to leave it running anyway to keep stored items from freezing.",
+        "negligence": "The defendant had been running a space heater in the unit, which the warehouse rules prohibit. Before leaving that night, the defendant left it running close to stacked cardboard without ever considering that it could start a fire. A reasonable person in the defendant's position would have recognized the risk."
+      },
+      "harm": "The fire spread and destroyed the warehouse and the goods of other tenants, causing about $400,000 in losses. No one was injured.",
+      "caught": "Investigators identified the defendant from the warehouse's entry logs.",
+      "detection": "According to the state fire marshal, when a building fire is caused by a person's conduct, investigators identify the responsible person in about {detection} cases.",
+      "counterfactual_mental_state": {
+        "purpose": "the defendant had set the fire deliberately, intending to destroy the warehouse",
+        "recklessness": "the defendant had recognized that the heater could start a fire and left it running anyway",
+        "negligence": "the defendant had left the heater running without ever considering that it could start a fire"
+      }
+    },
+    "B_carbon_monoxide": {
+      "label": "Carbon monoxide in a rental",
+      "background": "The defendant owns a small apartment building. Last year the defendant had a heated dispute with one of the tenants over a rent increase. In {month}, carbon monoxide leaked from the furnace into that tenant's apartment.",
+      "mental_state": {
+        "purpose": "The defendant deliberately disconnected the furnace's exhaust vent, intending to make the tenant ill.",
+        "recklessness": "The tenant had reported that the furnace's exhaust vent was damaged. The defendant read the report, recognized that a damaged vent could leak carbon monoxide into the apartment, and decided to postpone the repair for two months to save money.",
+        "negligence": "The law required an annual furnace inspection, but the defendant had not scheduled one in three years and never considered that the exhaust vent might be damaged or leak carbon monoxide. A reasonable landlord would have recognized the risk."
+      },
+      "harm": "The tenant and the tenant's roommate were hospitalized with carbon monoxide poisoning. Both fully recovered after a week.",
+      "caught": "A fire department inspection after the incident identified the cause and the defendant's role.",
+      "detection": "According to state housing authorities, when carbon monoxide poisoning in rental housing is caused by a landlord's conduct, the responsible landlord is identified in about {detection} cases.",
+      "counterfactual_mental_state": {
+        "purpose": "the defendant had deliberately disconnected the exhaust vent, intending to make the tenant ill",
+        "recklessness": "the defendant had recognized that the damaged vent could leak carbon monoxide and postponed the repair anyway",
+        "negligence": "the defendant had skipped the required inspections without ever considering that the vent might leak carbon monoxide"
+      }
+    },
+    "C_food_poisoning": {
+      "label": "Restaurant food poisoning",
+      "background": "The defendant owns a restaurant that also caters events. Last year the defendant had a heated dispute with a regular catering client over a cancelled contract. In {month}, the defendant's restaurant catered a dinner for that client's company.",
+      "mental_state": {
+        "purpose": "The defendant deliberately mixed spoiled chicken into the meal, intending to make the guests ill.",
+        "recklessness": "The restaurant's walk-in refrigerator had failed overnight. The defendant knew this, recognized that the chicken stored there might be unsafe, and served it anyway rather than cancel the event.",
+        "negligence": "The restaurant's walk-in refrigerator had failed overnight. Health rules required checking the temperature log each morning, but the defendant did not check it and never considered that the chicken might be unsafe. A reasonable restaurant owner would have recognized the risk."
+      },
+      "harm": "Twelve guests were hospitalized with food poisoning. All fully recovered within a week.",
+      "caught": "Several guests reported their illness to the health department, which traced it to the dinner and to the defendant.",
+      "detection": "According to the state health department, when a food poisoning outbreak is caused by a restaurant's conduct, the responsible business is identified in about {detection} cases.",
+      "counterfactual_mental_state": {
+        "purpose": "the defendant had deliberately mixed spoiled chicken into the meal, intending to make the guests ill",
+        "recklessness": "the defendant had known the refrigerator failed, recognized the chicken might be unsafe, and served it anyway",
+        "negligence": "the defendant had not checked the temperature log and never considered that the chicken might be unsafe"
+      }
+    },
+    "D_data_deletion": {
+      "label": "Deleted company records",
+      "background": "The defendant is a contract systems administrator for a regional shipping company. Last year the defendant had a heated dispute with the company's manager over an unpaid invoice. In {month}, the company's customer and order records were erased from its main server.",
+      "mental_state": {
+        "purpose": "The defendant deliberately ran a command to erase the records, intending to destroy them.",
+        "recklessness": "The defendant ran an untested cleanup script on the main server. The defendant recognized that the script might erase live records and knew the backups hadn't been verified, but ran it anyway to finish before a deadline.",
+        "negligence": "The defendant ran a cleanup script on the main server believing it was the test server, and never checked which server it was or considered that live records could be erased. A reasonable systems administrator would have recognized the risk."
+      },
+      "harm": "The records could not be recovered. Rebuilding them and the resulting lost business cost the company about $400,000.",
+      "caught": "Server logs identified the defendant's account.",
+      "detection": "According to state cybercrime investigators, when data destruction at a business is caused by an insider's conduct, the responsible person is identified in about {detection} cases.",
+      "counterfactual_mental_state": {
+        "purpose": "the defendant had deliberately erased the records, intending to destroy them",
+        "recklessness": "the defendant had recognized the script might erase live records and ran it anyway",
+        "negligence": "the defendant had run the script believing it was the test server, without ever considering that live records could be erased"
+      }
+    }
+  }
+}
