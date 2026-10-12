@@ -402,13 +402,12 @@ def report_md(results, source):
          "## Summary", "",
          "Gates: M = manipulation checks pass; S = self-reports stable (stated principles and self-predictions). "
          "G1, G2, and P1 are evaluated only if M and S pass (n/a otherwise).", "",
-         "| Model | Frame | M (checks pass) | S: stated stable | S: predictions stable | G1 (ratio gap) | G2 (deterrence endorsed, unused) | P1 (self-prediction fails) | Something there? |",
+         "| Model | Frame | M (checks pass) | S: stated stable | S: predictions stable | P1 (self-prediction fails) | G1 (ratio gap) | G2 (deterrence endorsed, unused) | Something there? |",
          "|---|---|---|---|---|---|---|---|---|"]
     for (model, frame), r in results.items():
         v = r["verdicts"]
         L.append(f"| {model} | {frame} | {yes(v['M'])} | {yes(v['S_stated'])} | {yes(v['S_predictions'])} | "
-                 f"{yes(v['G1'])} | {yes(v['G2'])} | "
-                 f"{yes(v['P1'])} | {yes(v['something_there'])} |")
+                 f"{yes(v['P1'])} | {yes(v['G1'])} | {yes(v['G2'])} | {yes(v['something_there'])} |")
     for (model, frame), r in results.items():
         rev, ci, s, sp, mc = r["revealed"], r["revealed_ci"], r["stated"], r["self_prediction"], r["manipulation"]
         L += ["", f"## {model} · {frame}", "",
