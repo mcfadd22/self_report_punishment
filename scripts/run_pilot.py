@@ -12,7 +12,7 @@ Examples:
   python3 scripts/run_pilot.py --models mock --samples 2          # test the pipeline offline
   python3 scripts/run_pilot.py --models llama3.1-8b --limit 20    # quick smoke test on a real model
   python3 scripts/run_pilot.py --samples 10                       # full pilot on all enabled models
-  python3 scripts/run_pilot.py --models qwen3-8b --frames legal   # legal-framing check
+  python3 scripts/run_pilot.py --frames social --samples 5        # one framing only
 """
 
 import argparse
@@ -49,17 +49,28 @@ def parse_json(text):
         return None
 
 
+TOP_CATEGORY = "permanent"
+
+
 def to_number(d, key):
-    """Models sometimes return numbers as strings ("35"); coerce, or None if missing or not numeric."""
+    """Models sometimes return numbers as strings ("35"); coerce, or None if missing or not numeric.
+    The social frame's top category ("permanent") is returned as the string itself."""
     try:
-        return float(d[key])
-    except (TypeError, KeyError, ValueError):
+        v = d[key]
+    except (TypeError, KeyError):
+        return None
+    if isinstance(v, str) and v.strip().lower() == TOP_CATEGORY:
+        return TOP_CATEGORY
+    try:
+        return float(v)
+    except (TypeError, ValueError):
         return None
 
 
 def parse(item, replies):
     """Best-effort parse of the model's answer. Raw text is always saved, so this can be redone later.
-    Penalty answers are also copied to a frame-independent "penalty" field (weeks or months, per meta.penalty_key)."""
+    Penalty answers are also copied to a frame-independent "penalty" field (weeks or months, per meta.penalty_key);
+    "permanent" (social frame only) is kept as that string, to be treated as a censored top category in analysis."""
     key = item["meta"].get("penalty_key")
     last = parse_json(replies[-1]) if item["response_format"] == "json" else None
     if item["measure"] == "manipulation_check":
@@ -122,7 +133,7 @@ def parse_args(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--models", nargs="+", help="model ids from config/models.json (default: all enabled)")
     ap.add_argument("--samples", type=int, default=10, help="samples per item (default 10)")
-    ap.add_argument("--frames", nargs="+", default=["social"], help="social (main study) and/or legal (default social)")
+    ap.add_argument("--frames", nargs="+", default=["social", "legal"], help="social and/or legal (default both)")
     ap.add_argument("--measures", nargs="+", help="only these measures, e.g. penalty stated_principles")
     ap.add_argument("--limit", type=int, help="only the first N calls per model after shuffling (smoke tests)")
     ap.add_argument("--system", help="override every item's system prompt key, e.g. none")

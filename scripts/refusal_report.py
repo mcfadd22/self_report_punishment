@@ -17,15 +17,16 @@ ROOT = Path(__file__).resolve().parent.parent
 ITEMS = ROOT / "prompts" / "items.jsonl"
 REFUSAL = re.compile(r"\b(cannot|can't|can not|unable to|won't|not able to|must decline|not comfortable|"
                      r"I am (?:a|an AI) (?:language )?model|as an AI)\b", re.I)
-MAX_PENALTY = {"weeks": 52, "months": 120}
+MAX_PENALTY = {"weeks": 104, "months": 120}
+TOP_CATEGORY = "permanent"
 MENTAL_STATES = ["purpose", "recklessness", "negligence"]
 
 
 def penalty_of(row, item):
     p = row.get("parsed")
     p = p.get("penalty") if isinstance(p, dict) else None
-    if p is None:
-        return None
+    if p is None or p == TOP_CATEGORY:
+        return p
     return p if 0 <= p <= MAX_PENALTY[item["meta"]["penalty_key"]] else None
 
 

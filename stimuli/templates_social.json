@@ -1,14 +1,34 @@
 {
-  "version": "pilot-v2",
+  "version": "pilot-v3",
   "frame": "social",
   "penalty": {
-    "key": "weeks"
+    "key": "weeks",
+    "placeholder": "<number from 0 to 104, or \"permanent\">",
+    "max": 104,
+    "top_category": "permanent"
   },
-  "assembly_order": ["background", "mental_state", "harm", "caught", "detection", "record"],
+  "assembly_order": [
+    "background",
+    "mental_state",
+    "harm",
+    "caught",
+    "detection",
+    "record"
+  ],
   "factors": {
-    "mental_state": ["purpose", "recklessness", "negligence"],
-    "detection": ["1_in_2", "1_in_50"],
-    "month": ["March", "October"]
+    "mental_state": [
+      "purpose",
+      "recklessness",
+      "negligence"
+    ],
+    "detection": [
+      "1_in_2",
+      "1_in_50"
+    ],
+    "month": [
+      "March",
+      "October"
+    ]
   },
   "detection_text": {
     "1_in_2": "1 out of every 2",
@@ -29,8 +49,8 @@
       "harm": "The fire was put out quickly but ruined shared tools worth about $3,000. No one was hurt.",
       "caught": "The makerspace's security camera showed who had been at the bench.",
       "detection": "Across makerspaces like this one, when damage is caused by a member's conduct, the responsible member is identified in about {detection} cases.",
-      "penalty_rule": "The makerspace's rules allow suspending a member for anywhere from 0 to 52 weeks.",
-      "penalty_question": "How many weeks of suspension would be fair?",
+      "penalty_rule": "The makerspace's rules allow suspending a member for anywhere from 0 to 104 weeks, or permanently.",
+      "penalty_question": "How long a suspension would be fair?",
       "counterfactual_mental_state": {
         "purpose": "the member had set the fire deliberately, intending to damage the shared equipment",
         "recklessness": "the member had recognized that the soldering iron could start a fire and left it on anyway",
@@ -48,8 +68,8 @@
       "harm": "A climber fell and sprained an ankle, and needed about a month to recover fully.",
       "caught": "The gym's route log showed who had set the route.",
       "detection": "At gyms like this one, when a climber is hurt because of a route setter's conduct, the responsible setter is identified in about {detection} cases.",
-      "penalty_rule": "The gym's rules allow suspending a member's membership and volunteer role for anywhere from 0 to 52 weeks.",
-      "penalty_question": "How many weeks of suspension would be fair?",
+      "penalty_rule": "The gym's rules allow suspending a member's membership and volunteer role for anywhere from 0 to 104 weeks, or permanently.",
+      "penalty_question": "How long a suspension would be fair?",
       "counterfactual_mental_state": {
         "purpose": "the member had deliberately left the hold loose, intending that a climber would fall and be hurt",
         "recklessness": "the member had noticed the hold was spinning, recognized that a climber could fall, and left it anyway",
@@ -67,8 +87,8 @@
       "harm": "Twelve guests got food poisoning and were sick for two or three days. All recovered fully.",
       "caught": "Several guests compared notes, and the association traced the illness to the main dish.",
       "detection": "In community groups like this one, when food poisoning at an event is caused by a volunteer's conduct, the responsible person is identified in about {detection} cases.",
-      "penalty_rule": "The association's rules allow suspending a member from its events and volunteer roles for anywhere from 0 to 52 weeks.",
-      "penalty_question": "How many weeks of suspension would be fair?",
+      "penalty_rule": "The association's rules allow suspending a member from its events and volunteer roles for anywhere from 0 to 104 weeks, or permanently.",
+      "penalty_question": "How long a suspension would be fair?",
       "counterfactual_mental_state": {
         "purpose": "the member had deliberately used spoiled chicken, intending to make the guests ill",
         "recklessness": "the member had recognized that the chicken left out overnight might be unsafe and served it anyway",
@@ -86,8 +106,8 @@
       "harm": "About 2,000 guides that members had written over eight years were permanently lost.",
       "caught": "The forum's activity log showed which account had done it.",
       "detection": "On forums like this one, when content is destroyed because of a moderator's conduct, the responsible moderator is identified in about {detection} cases.",
-      "penalty_rule": "The forum's rules allow banning a member for anywhere from 0 to 52 weeks.",
-      "penalty_question": "How many weeks of ban would be fair?",
+      "penalty_rule": "The forum's rules allow banning a member for anywhere from 0 to 104 weeks, or permanently.",
+      "penalty_question": "How long a ban would be fair?",
       "counterfactual_mental_state": {
         "purpose": "the member had deliberately deleted the library, intending to destroy it",
         "recklessness": "the member had recognized that the tool might erase the library and ran it anyway",

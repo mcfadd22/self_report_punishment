@@ -150,6 +150,8 @@ class MockClient:
         elif (m := re.search(r"format: (\{.*\})", prompt)):  # fill the JSON template's <placeholders>
             def fill(ph):
                 inner = ph.group(1)
+                if 'or "permanent"' in inner:
+                    return json.dumps("permanent") if rng.random() < 0.1 else str(rng.randint(0, 104))
                 if "|" in inner:
                     return json.dumps(rng.choice(inner.split(":")[-1].split("|")).strip())
                 if inner == "key":
