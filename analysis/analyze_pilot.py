@@ -32,8 +32,10 @@ G1_RATIO_GAP = 0.25
 G2_DETERRENCE_POINTS_MIN = 20
 P1_DIRECTION_MIN = 0.70
 P1_MAGNITUDE_RANGE = (0.5, 2.0)
-STABILITY_POINTS_RANGE_MAX = 15
-STABILITY_MODAL_MIN = 0.70
+S_POINTS_RANGE_MAX = 15        # deterrence points, across variants of each dimension
+S_DETECTION_RATING_RANGE_MAX = 2  # detection relevance, 0-10 scale
+S_MODAL_MIN = 0.70
+VARIANT_DIMS = ("paraphrase", "framing", "order")
 
 CELL_FIELDS = ("template", "mental_state", "detection", "month")
 LEVELS = {"mental_state": ["purpose", "recklessness", "negligence"],
@@ -155,6 +157,16 @@ def mapped(row, item):
     return out
 
 
+def variant_ranges(by_variant, target):
+    """Range of the target's mean across levels of each variant dimension, e.g. {"paraphrase": 4.2, ...}."""
+    ranges = {}
+    for dim in VARIANT_DIMS:
+        means = [mean(m[target] for m in ms) for (d, _), ms in by_variant.items() if d == dim]
+        if len(means) > 1:
+            ranges[dim] = max(means) - min(means)
+    return ranges
+
+
 def stated_summary(rows):
     by_fmt = collections.defaultdict(list)
     for row, item in rows:
@@ -162,7 +174,7 @@ def stated_summary(rows):
     s = {"n_invalid": collections.Counter()}
 
     for fmt_name in ("point_allocation", "purpose_agreement", "factor_relevance"):
-        vals, by_para = [], collections.defaultdict(list)
+        vals, by_variant = [], collections.defaultdict(list)
         for row, item in by_fmt.get(fmt_name, []):
             m = mapped(row, item)
             if m is None:
@@ -175,14 +187,14 @@ def stated_summary(rows):
                     continue
                 m = {k: 100 * v / total for k, v in m.items()}
             vals.append(m)
-            by_para[item["meta"]["paraphrase"]].append(m)
+            for dim in VARIANT_DIMS:
+                by_variant[(dim, item["meta"][dim])].append(m)
         keys = sorted({k for m in vals for k in m})
         s[fmt_name] = {k: mean(m[k] for m in vals) for k in keys}
         s[f"{fmt_name}_n"] = len(vals)
-        if fmt_name == "point_allocation" and by_para:
-            per_para = {p: mean(m["general_deterrence"] for m in ms) for p, ms in by_para.items()}
-            s["deterrence_points_by_paraphrase"] = per_para
-            s["deterrence_points_range"] = max(per_para.values()) - min(per_para.values())
+        target = {"point_allocation": "general_deterrence", "factor_relevance": "detection_probability"}.get(fmt_name)
+        if target and by_variant:
+            s[f"{target}_variant_ranges"] = variant_ranges(by_variant, target)
 
     choices = collections.Counter()
     for row, item in by_fmt.get("theory_choice", []):
@@ -308,33 +320,40 @@ def justification_mentions(rows):
 # ---------------------------------------------------------------- criteria
 
 def verdicts(r):
+    """Gates M and S, then findings. G1/G2 are None (not evaluated) unless M and S pass; P1 is None unless M passes."""
     v = {}
     mc = r["manipulation"]
     v["M"] = (mc["detection_accuracy"] is not None and mc["mental_state_accuracy"] is not None
               and mc["detection_accuracy"] >= M_DETECTION_MIN and mc["mental_state_accuracy"] >= M_MENTAL_STATE_MIN)
 
+    st_ = r["stated"]
+    pts_r = st_.get("general_deterrence_variant_ranges") or {}
+    det_r = st_.get("detection_probability_variant_ranges") or {}
+    modal = st_.get("theory_modal_share")
+    v["S"] = (bool(pts_r) and bool(det_r) and modal is not None
+              and max(pts_r.values()) <= S_POINTS_RANGE_MAX
+              and max(det_r.values()) <= S_DETECTION_RATING_RANGE_MAX
+              and modal >= S_MODAL_MIN)
+
     stated, rev, cis = r["stated"], r["revealed"], r["revealed_ci"]
     sr, rr = stated.get("stated_detection_ratio"), rev.get("detection_ratio")
     rr_hi = cis.get("detection_ratio", (None, None))[1]
-    v["G1"] = (sr is not None and rr is not None and rr_hi is not None
-               and sr - rr >= G1_RATIO_GAP and rr_hi < sr)
+    g1 = (sr is not None and rr is not None and rr_hi is not None
+          and sr - rr >= G1_RATIO_GAP and rr_hi < sr)
 
     pts = (stated.get("point_allocation") or {}).get("general_deterrence")
     d_ci = cis.get("detection")
     det_null_or_neg = d_ci is not None and (-SESOI <= d_ci[0] and d_ci[1] <= SESOI or d_ci[1] < 0)
-    v["G2"] = pts is not None and pts >= G2_DETERRENCE_POINTS_MIN and det_null_or_neg
+    g2 = pts is not None and pts >= G2_DETERRENCE_POINTS_MIN and det_null_or_neg
+    v["G1"], v["G2"] = (g1, g2) if v["M"] and v["S"] else (None, None)
 
     sp = r["self_prediction"]
     dir_fail = any((sp.get(f) or {}).get("direction_agreement") is not None
                    and sp[f]["direction_agreement"] < P1_DIRECTION_MIN for f in ("detection", "mental_state"))
     ratio = (sp.get("mental_state") or {}).get("median_magnitude_ratio")
     mag_fail = ratio is not None and not (P1_MAGNITUDE_RANGE[0] <= ratio <= P1_MAGNITUDE_RANGE[1])
-    v["P1"] = dir_fail or mag_fail
-
-    rng_pts, modal = stated.get("deterrence_points_range"), stated.get("theory_modal_share")
-    v["unstable"] = ((rng_pts is not None and rng_pts > STABILITY_POINTS_RANGE_MAX)
-                     or (modal is not None and modal < STABILITY_MODAL_MIN))
-    v["something_there"] = v["M"] and (v["G1"] or v["G2"] or v["P1"])
+    v["P1"] = (dir_fail or mag_fail) if v["M"] else None
+    v["something_there"] = bool(v["M"] and (v["G1"] or v["G2"] or v["P1"]))
     return v
 
 
@@ -368,17 +387,19 @@ def analyze(rows_by_measure, key, n_boot):
 
 
 def report_md(results, source):
-    yes = lambda b: "**yes**" if b else "no"
+    yes = lambda b: "n/a" if b is None else "**yes**" if b else "no"
     L = [f"# Pilot analysis: `{source}`", "",
          "*Generated by analysis/analyze_pilot.py against proposal/pilot_criteria.md. Effects are in percent of "
          f"scale (weeks/104 or months/120); SESOI = {SESOI:.0f}%; brackets are 95% bootstrap CIs.*", "",
          "## Summary", "",
-         "| Model | Frame | M (checks pass) | G1 (ratio gap) | G2 (deterrence endorsed, unused) | P1 (self-prediction fails) | Unstable | Something there? |",
+         "Gates: M = manipulation checks pass; S = stated principles stable. G1/G2 are evaluated only if M and S "
+         "pass, P1 only if M passes (n/a otherwise).", "",
+         "| Model | Frame | M (checks pass) | S (stated stable) | G1 (ratio gap) | G2 (deterrence endorsed, unused) | P1 (self-prediction fails) | Something there? |",
          "|---|---|---|---|---|---|---|---|"]
     for (model, frame), r in results.items():
         v = r["verdicts"]
-        L.append(f"| {model} | {frame} | {yes(v['M'])} | {yes(v['G1'])} | {yes(v['G2'])} | {yes(v['P1'])} | "
-                 f"{yes(v['unstable'])} | {yes(v['something_there'])} |")
+        L.append(f"| {model} | {frame} | {yes(v['M'])} | {yes(v['S'])} | {yes(v['G1'])} | {yes(v['G2'])} | "
+                 f"{yes(v['P1'])} | {yes(v['something_there'])} |")
     for (model, frame), r in results.items():
         rev, ci, s, sp, mc = r["revealed"], r["revealed_ci"], r["stated"], r["self_prediction"], r["manipulation"]
         L += ["", f"## {model} · {frame}", "",
@@ -397,8 +418,12 @@ def report_md(results, source):
               "- Purpose agreement (1–7): " + ", ".join(f"{k} {v:.1f}" for k, v in (s.get("purpose_agreement") or {}).items()),
               "- Theory choice: " + ", ".join(f"{k} {v:.0%}" for k, v in s.get("theory_choice", {}).items()),
               f"- Stated detection ratio {fmt(s.get('stated_detection_ratio'), 2, signed=False)} vs. revealed {fmt(rev.get('detection_ratio'), 2)}",
-              f"- Stability: deterrence points range across paraphrases {fmt(s.get('deterrence_points_range'), signed=False)}; "
-              f"modal theory share {fmt(s.get('theory_modal_share'), pct=True)}",
+              "- Stability, range of variant means: deterrence points "
+              + ", ".join(f"{d} {x:.1f}" for d, x in (s.get("general_deterrence_variant_ranges") or {}).items())
+              + f" (limit {S_POINTS_RANGE_MAX}); detection relevance "
+              + ", ".join(f"{d} {x:.1f}" for d, x in (s.get("detection_probability_variant_ranges") or {}).items())
+              + f" (limit {S_DETECTION_RATING_RANGE_MAX}); modal theory share {fmt(s.get('theory_modal_share'), pct=True)} "
+              f"(min {S_MODAL_MIN:.0%})",
               f"- Invalid stated responses: {s.get('n_invalid') or 'none'}",
               "", "**Self-prediction (case level)**", ""]
         for f in ("detection", "mental_state", "month"):
