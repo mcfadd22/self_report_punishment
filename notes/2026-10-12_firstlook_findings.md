@@ -63,6 +63,8 @@ Qwen answered "permanent" in 89 of 144 social penalty prompts. In C (community d
 
 ## Game plan
 
+> **Decide first: should theory choice stay in the stability gate (S)?** Qwen fails S only because its theory choice follows option position. G1 and G2 don't use theory choice, but it is a self-report, and this is exactly the instability S is meant to catch. **Recommendation:** keep it in, so the criterion isn't changed after seeing the data, and report the weights-vs.-theory contrast as a Stage 1 result. This must be settled before step 4 (criteria update) and logged with a reason either way.
+
 Do these in order. Steps 1–4 are edits; nothing should be run against models until the criteria are updated (step 4).
 
 ### Step 1. Fix negligence wording and the manipulation check
@@ -98,7 +100,7 @@ Add dated change-log entries to `proposal/pilot_criteria.md`, and update the con
 
 - **M:** each mental state must reach 70% on its own, as well as detection at 80% or more. Reason: averaging hid the negligence failure.
 - **S:** the order criterion becomes the order-sensitivity measure across 5 rotations instead of the forward/reversed range. Set the threshold now (proposal: 70% of choice responses pick the same *option* across rotations; for points and ratings, keep the range limits but compute them across rotations).
-- **Decision for you (open):** should theory choice stay in S? G1 and G2 don't use it, but it is a self-report, and Qwen's order effect is exactly the kind of instability S is meant to catch. Recommendation: keep it in, so the criterion isn't changed after the data, and report the weights-vs.-theory difference as a Stage 1 result. Either way, log the reason.
+- **Theory choice in S** (the decision at the top of the game plan): should theory choice stay in S? G1 and G2 don't use it, but it is a self-report, and Qwen's order effect is exactly the kind of instability S is meant to catch. Recommendation: keep it in, so the criterion isn't changed after the data, and report the weights-vs.-theory difference as a Stage 1 result. Either way, log the reason.
 - Record the first-look outcome itself in the change log: what failed and why the criteria changed.
 
 ### Step 5. Validate cheaply, then rerun
