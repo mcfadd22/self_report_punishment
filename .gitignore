@@ -1,0 +1,20 @@
+# macOS / Office
+.DS_Store
+~$*
+*.tmp
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# Secrets (API keys for model calls)
+.env
+*.key
+
+# Large or regenerable outputs
+data/raw/
+outputs/
+*.log
