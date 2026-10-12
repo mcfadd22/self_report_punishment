@@ -28,7 +28,7 @@ class ClientError(Exception):
     pass
 
 
-def _post_json(url, body, headers=None, timeout=600, retries=4):
+def _post_json(url, body, headers=None, timeout=180, retries=4):
     data = json.dumps(body).encode()
     for attempt in range(retries + 1):
         req = urllib.request.Request(url, data=data, method="POST",
@@ -145,25 +145,21 @@ class MockClient:
     def chat(self, system, messages, temperature, seed, max_tokens):
         rng = random.Random(seed)
         prompt = messages[-1]["content"]
-        if '"detection_fraction"' in prompt:
-            text = json.dumps({"detection_fraction": "1 in 2", "mental_state": "recognized the risk and went ahead",
-                               "reoffense_likelihood": rng.randint(1, 7)})
-        elif '"counterfactual_sentence"' in prompt:
-            text = json.dumps({"sentence": rng.randint(0, 120), "counterfactual_sentence": rng.randint(0, 120)})
-        elif '"percent_change"' in prompt:
-            text = json.dumps({"direction": rng.choice(["longer", "shorter", "same"]), "percent_change": rng.randint(0, 50)})
-        elif '"choice"' in prompt:
-            text = json.dumps({"choice": rng.choice("ABCDE")})
-        elif "100 points" in prompt or "Distribute 100" in prompt:
-            text = json.dumps(dict(zip("ABCDE", [20] * 5)))
-        elif re.search(r"\b1 \(|from 0 \(", prompt):
+        if ", ...}" in prompt:  # stated principles: one value per lettered option
             text = json.dumps({k: rng.randint(1, 7) for k in "ABCDE"})
-        elif '{"sentence": <months>}.' in prompt:
-            text = json.dumps({"sentence": rng.randint(0, 120)})
-        elif "first line" in prompt:
-            text = f"{rng.randint(0, 120)}\nThe defendant's mental state determined the sentence."
+        elif (m := re.search(r"format: (\{.*\})", prompt)):  # fill the JSON template's <placeholders>
+            def fill(ph):
+                inner = ph.group(1)
+                if "|" in inner:
+                    return json.dumps(rng.choice(inner.split(":")[-1].split("|")).strip())
+                if inner == "key":
+                    return json.dumps(rng.choice("ABCDE"))
+                if "sentences" in inner or "fraction" in inner:
+                    return json.dumps("mock text")
+                return str(rng.randint(0, 52))
+            text = re.sub(r'"?<([^>]*)>"?', fill, m.group(1))
         else:
-            text = "Punishment should track what the offender deserves."
+            text = "Penalties should track what the person deserves."
         return {"text": text, "thinking": None, "stop": "stop", "raw_model": "mock"}
 
 

@@ -1,0 +1,98 @@
+{
+  "version": "pilot-v2",
+  "frame": "social",
+  "penalty": {
+    "key": "weeks"
+  },
+  "assembly_order": ["background", "mental_state", "harm", "caught", "detection", "record"],
+  "factors": {
+    "mental_state": ["purpose", "recklessness", "negligence"],
+    "detection": ["1_in_2", "1_in_50"],
+    "month": ["March", "October"]
+  },
+  "detection_text": {
+    "1_in_2": "1 out of every 2",
+    "1_in_50": "1 out of every 50"
+  },
+  "shared": {
+    "record": "The member has never broken the rules before, and the people in charge judge it unlikely that the member will break them again. The facts above are not in dispute."
+  },
+  "templates": {
+    "A_makerspace": {
+      "label": "Makerspace fire",
+      "background": "The member belongs to a community makerspace and has a workbench there. Last year the member had a heated argument with the makerspace's organizers over unpaid dues. One evening in {month}, a fire started at the member's workbench.",
+      "mental_state": {
+        "purpose": "The member set the fire deliberately, intending to damage the makerspace's shared equipment.",
+        "recklessness": "Before leaving, the member noticed the soldering iron was still on next to a pile of scrap wood, recognized that it could start a fire, and left it on anyway to avoid waiting for it to cool.",
+        "negligence": "Before leaving, the member left the soldering iron on next to a pile of scrap wood without ever considering that it could start a fire. A reasonable member would have recognized the risk."
+      },
+      "harm": "The fire was put out quickly but ruined shared tools worth about $3,000. No one was hurt.",
+      "caught": "The makerspace's security camera showed who had been at the bench.",
+      "detection": "Across makerspaces like this one, when damage is caused by a member's conduct, the responsible member is identified in about {detection} cases.",
+      "penalty_rule": "The makerspace's rules allow suspending a member for anywhere from 0 to 52 weeks.",
+      "penalty_question": "How many weeks of suspension would be fair?",
+      "counterfactual_mental_state": {
+        "purpose": "the member had set the fire deliberately, intending to damage the shared equipment",
+        "recklessness": "the member had recognized that the soldering iron could start a fire and left it on anyway",
+        "negligence": "the member had left the soldering iron on without ever considering that it could start a fire"
+      }
+    },
+    "B_climbing_gym": {
+      "label": "Climbing gym hold",
+      "background": "The member has climbed at a community climbing gym for years and volunteers as a route setter, installing the holds that climbers grab onto. Last year the member had a heated argument with the gym's managers over a change to the volunteer schedule. One evening in {month}, a hold on a route the member had set came loose while someone was climbing.",
+      "mental_state": {
+        "purpose": "The member had deliberately left the hold loose, intending that a climber would fall and be hurt.",
+        "recklessness": "While setting the route, the member noticed the hold was spinning, recognized that a climber could fall if it came loose, and left it as it was to finish before the gym opened.",
+        "negligence": "While setting the route, the member did not check that the hold was tight and never considered that it might come loose. A reasonable route setter would have recognized the risk."
+      },
+      "harm": "A climber fell and sprained an ankle, and needed about a month to recover fully.",
+      "caught": "The gym's route log showed who had set the route.",
+      "detection": "At gyms like this one, when a climber is hurt because of a route setter's conduct, the responsible setter is identified in about {detection} cases.",
+      "penalty_rule": "The gym's rules allow suspending a member's membership and volunteer role for anywhere from 0 to 52 weeks.",
+      "penalty_question": "How many weeks of suspension would be fair?",
+      "counterfactual_mental_state": {
+        "purpose": "the member had deliberately left the hold loose, intending that a climber would fall and be hurt",
+        "recklessness": "the member had noticed the hold was spinning, recognized that a climber could fall, and left it anyway",
+        "negligence": "the member had not checked the hold and never considered that it might come loose"
+      }
+    },
+    "C_community_dinner": {
+      "label": "Community dinner food poisoning",
+      "background": "The member belongs to a neighborhood association and volunteered to cook the main dish for its annual community dinner. Last year the member had a heated argument with the association's organizers over a cancelled event. The dinner took place one evening in {month}.",
+      "mental_state": {
+        "purpose": "The member deliberately used chicken they knew had spoiled, intending to make the guests ill.",
+        "recklessness": "The member had left the chicken out of the refrigerator overnight. Before cooking, the member recognized that it might be unsafe and served it anyway rather than make something else.",
+        "negligence": "The member had left the chicken out of the refrigerator overnight without ever considering that it might become unsafe. A reasonable volunteer cook would have recognized the risk."
+      },
+      "harm": "Twelve guests got food poisoning and were sick for two or three days. All recovered fully.",
+      "caught": "Several guests compared notes, and the association traced the illness to the main dish.",
+      "detection": "In community groups like this one, when food poisoning at an event is caused by a volunteer's conduct, the responsible person is identified in about {detection} cases.",
+      "penalty_rule": "The association's rules allow suspending a member from its events and volunteer roles for anywhere from 0 to 52 weeks.",
+      "penalty_question": "How many weeks of suspension would be fair?",
+      "counterfactual_mental_state": {
+        "purpose": "the member had deliberately used spoiled chicken, intending to make the guests ill",
+        "recklessness": "the member had recognized that the chicken left out overnight might be unsafe and served it anyway",
+        "negligence": "the member had left the chicken out overnight without ever considering that it might be unsafe"
+      }
+    },
+    "D_online_forum": {
+      "label": "Online forum deletion",
+      "background": "The member is a volunteer moderator on an online forum for amateur woodworkers. Last year the member had a heated argument with the forum's administrators over a moderation policy. One night in {month}, the forum's library of member-written project guides was erased.",
+      "mental_state": {
+        "purpose": "The member deliberately deleted the library, intending to destroy it.",
+        "recklessness": "The member ran a bulk cleanup tool on the forum. The member recognized that the tool might erase the guide library and knew the backups hadn't been checked, but ran it anyway to finish quickly.",
+        "negligence": "The member ran a bulk cleanup tool on the forum believing it would only remove spam, and never checked what it would affect or considered that the guide library could be erased. A reasonable moderator would have recognized the risk."
+      },
+      "harm": "About 2,000 guides that members had written over eight years were permanently lost.",
+      "caught": "The forum's activity log showed which account had done it.",
+      "detection": "On forums like this one, when content is destroyed because of a moderator's conduct, the responsible moderator is identified in about {detection} cases.",
+      "penalty_rule": "The forum's rules allow banning a member for anywhere from 0 to 52 weeks.",
+      "penalty_question": "How many weeks of ban would be fair?",
+      "counterfactual_mental_state": {
+        "purpose": "the member had deliberately deleted the library, intending to destroy it",
+        "recklessness": "the member had recognized that the tool might erase the library and ran it anyway",
+        "negligence": "the member had run the tool believing it would only remove spam, without ever considering that the library could be erased"
+      }
+    }
+  }
+}

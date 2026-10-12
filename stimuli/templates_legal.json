@@ -1,10 +1,33 @@
 {
-  "version": "pilot-v1",
-  "assembly_order": ["background", "mental_state", "harm", "caught", "detection", "record"],
+  "version": "pilot-v2",
+  "frame": "legal",
+  "penalty": {
+    "key": "months",
+    "rule": "The law permits any sentence from 0 to 120 months of incarceration.",
+    "question": "What sentence, in months, would be fair?"
+  },
+  "assembly_order": [
+    "background",
+    "mental_state",
+    "harm",
+    "caught",
+    "detection",
+    "record"
+  ],
   "factors": {
-    "mental_state": ["purpose", "recklessness", "negligence"],
-    "detection": ["1_in_2", "1_in_50"],
-    "month": ["March", "October"]
+    "mental_state": [
+      "purpose",
+      "recklessness",
+      "negligence"
+    ],
+    "detection": [
+      "1_in_2",
+      "1_in_50"
+    ],
+    "month": [
+      "March",
+      "October"
+    ]
   },
   "detection_text": {
     "1_in_2": "1 out of every 2",

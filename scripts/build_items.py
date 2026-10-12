@@ -1,16 +1,22 @@
 """Build pilot stimuli and prompt items from the JSON sources.
 
-Reads stimuli/templates.json and prompts/pilot_prompts.json and writes:
-  stimuli/vignettes.jsonl  one row per vignette cell (template x mental state x detection x month)
-  prompts/items.jsonl      one row per prompt to send to a model
+Reads stimuli/templates_<frame>.json and prompts/pilot_prompts.json and writes:
+  stimuli/vignettes.jsonl         one row per vignette cell (frame x template x mental state x detection x month)
+  stimuli/vignettes_preview.md    every vignette as readable text, for review
+  prompts/items.jsonl             one row per prompt to send to a model
+
+Frames:
+  social  the main study: rule violations in community organizations; every measure
+  legal   a small check: the original criminal-sentencing vignettes; penalty items only
 
 Each item has:
   id               unique, stable identifier
-  measure          sentencing | manipulation_check | stated_principles | self_prediction_case | self_prediction_abstract
+  frame            social | legal
+  measure          penalty | manipulation_check | stated_principles | self_prediction_case | self_prediction_abstract
   system           key into pilot_prompts.json "system_prompts"
   turns            user messages to send in order, in one conversation (the model replies after each)
-  response_format  number | json | text
-  meta             design variables for analysis
+  response_format  json | text
+  meta             design variables for analysis; penalty items carry "penalty_key", the JSON key holding the answer
 
 Usage: python3 scripts/build_items.py
 """
@@ -22,18 +28,22 @@ import string
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-TEMPLATES = ROOT / "stimuli" / "templates.json"
+TEMPLATE_FILES = {"social": ROOT / "stimuli" / "templates_social.json",
+                  "legal": ROOT / "stimuli" / "templates_legal.json"}
 PROMPTS = ROOT / "prompts" / "pilot_prompts.json"
 VIGNETTES_OUT = ROOT / "stimuli" / "vignettes.jsonl"
+PREVIEW_OUT = ROOT / "stimuli" / "vignettes_preview.md"
 ITEMS_OUT = ROOT / "prompts" / "items.jsonl"
 
+MAIN_FRAME = "social"
 DEFAULT_SYSTEM = "study"
 BASE_MONTH = "March"
 LIST_ORDERS = ["forward", "reversed"]
+CELL_KEYS = ("frame", "template", "mental_state", "detection", "month")
 UNFILLED = re.compile(r"\{[a-z_]+\}")
 
 
-def build_vignettes(t):
+def build_vignettes(frame, t):
     vignettes = []
     f = t["factors"]
     for (tid, tpl), ms, det, month in itertools.product(
@@ -48,12 +58,12 @@ def build_vignettes(t):
             "record": t["shared"]["record"],
         }
         vignettes.append({
-            "id": f"{tid}|{ms}|{det}|{month}",
-            "template": tid,
-            "mental_state": ms,
-            "detection": det,
-            "month": month,
+            "id": f"{frame}|{tid}|{ms}|{det}|{month}",
+            "frame": frame, "template": tid, "mental_state": ms, "detection": det, "month": month,
             "text": " ".join(parts[k] for k in t["assembly_order"]),
+            "penalty_key": t["penalty"]["key"],
+            "penalty_rule": tpl.get("penalty_rule", t["penalty"].get("rule")),
+            "penalty_question": tpl.get("penalty_question", t["penalty"].get("question")),
         })
     return vignettes
 
@@ -68,24 +78,30 @@ def lettered_list(options, order):
     return text, dict(zip(letters, keys))
 
 
-def item(id_, measure, turns, response_format, meta, system=DEFAULT_SYSTEM):
-    return {"id": id_, "measure": measure, "system": system, "turns": turns,
+def item(id_, frame, measure, turns, response_format, meta, system=DEFAULT_SYSTEM):
+    return {"id": id_, "frame": frame, "measure": measure, "system": system, "turns": turns,
             "response_format": response_format, "meta": meta}
 
 
-def sentencing_items(p, vignettes):
+def cell_meta(v):
+    return {**{k: v[k] for k in CELL_KEYS}, "vignette_id": v["id"], "penalty_key": v["penalty_key"]}
+
+
+def penalty_prompt(p, fmt, v):
+    return p["penalty"][fmt].format(rule=v["penalty_rule"], question=v["penalty_question"], key=v["penalty_key"])
+
+
+def penalty_items(p, vignettes, with_checks):
     items = []
     for v in vignettes:
-        meta = {k: v[k] for k in ("template", "mental_state", "detection", "month")}
-        meta["vignette_id"] = v["id"]
-        for fmt, prompt in p["sentencing"].items():
-            items.append(item(f"sent|{fmt}|{v['id']}", "sentencing",
-                              [f"{v['text']}\n\n{prompt}"],
-                              "json" if fmt == "sentence_only" else "text",
-                              {**meta, "format": fmt}))
-        items.append(item(f"check|{v['id']}", "manipulation_check",
-                          [f"{v['text']}\n\n{p['sentencing']['sentence_only']}", p["manipulation_check"]],
-                          "json", meta))
+        for fmt in p["penalty"]:
+            items.append(item(f"penalty|{fmt}|{v['id']}", v["frame"], "penalty",
+                              [f"{v['text']}\n\n{penalty_prompt(p, fmt, v)}"], "json",
+                              {**cell_meta(v), "format": fmt}))
+        if with_checks:
+            items.append(item(f"check|{v['id']}", v["frame"], "manipulation_check",
+                              [f"{v['text']}\n\n{penalty_prompt(p, 'penalty_only', v)}", p["manipulation_check"]],
+                              "json", cell_meta(v)))
     return items
 
 
@@ -111,14 +127,14 @@ def stated_items(p):
                 fill.update({slot: text, "first_key": "A"})
                 meta.update({"order": order, "letter_map": letter_map})
             suffix = f"|{order}" if order else ""
-            items.append(item(f"stated|{fmt}|p{i}|{framing}{suffix}", "stated_principles",
+            items.append(item(f"stated|{fmt}|p{i}|{framing}{suffix}", MAIN_FRAME, "stated_principles",
                               [stem.format(**fill)], rfmt, meta))
     return items
 
 
 def case_prediction_items(t, p, vignettes):
-    """Model gives a sentence and predicts its sentence under one changed factor, in one response.
-    Compare the predicted change with the actual change between separately sampled sentencing cells."""
+    """Model gives a penalty and predicts its penalty under one changed factor, in one response.
+    Compare the predicted change with the actual change between separately sampled penalty cells."""
     by_id = {v["id"]: v for v in vignettes}
     sp = p["self_prediction"]
     f = t["factors"]
@@ -126,18 +142,18 @@ def case_prediction_items(t, p, vignettes):
     items = []
 
     def add(factor, base, to_level, change):
-        v = by_id[f"{base['template']}|{base['mental_state']}|{base['detection']}|{base['month']}"]
-        counterfactual = {**base, factor: to_level}
-        target_id = "|".join(counterfactual[k] for k in ("template", "mental_state", "detection", "month"))
-        items.append(item(f"selfpred_case|{factor}|{v['id']}->{to_level}", "self_prediction_case",
-                          [sp["case_level"].format(vignette=v["text"], change=change)], "json",
+        v = by_id["|".join(base[k] for k in CELL_KEYS)]
+        target_id = "|".join({**base, factor: to_level}[k] for k in CELL_KEYS)
+        prompt = sp["case_level"].format(vignette=v["text"], rule=v["penalty_rule"], key=v["penalty_key"], change=change)
+        items.append(item(f"selfpred_case|{factor}|{v['id']}->{to_level}", v["frame"], "self_prediction_case",
+                          [prompt], "json",
                           {"factor": factor, "from_level": base[factor], "to_level": to_level,
                            "base_vignette_id": v["id"], "counterfactual_vignette_id": target_id,
-                           "template": base["template"]}))
+                           "template": base["template"], "penalty_key": v["penalty_key"]}))
 
     for tid, tpl in t["templates"].items():
         for ms, det in itertools.product(f["mental_state"], f["detection"]):
-            base = {"template": tid, "mental_state": ms, "detection": det, "month": BASE_MONTH}
+            base = {"frame": MAIN_FRAME, "template": tid, "mental_state": ms, "detection": det, "month": BASE_MONTH}
             for to_det in other(f["detection"], det):
                 add("detection", base, to_det,
                     sp["case_changes"]["detection"].format(detection=t["detection_text"][to_det]))
@@ -159,7 +175,7 @@ def abstract_prediction_items(p):
         for (a, b), (framing, ftext) in itertools.product(
             itertools.permutations(levels, 2), p["framings"].items()
         ):
-            items.append(item(f"selfpred_abstract|{factor}|{a}->{b}|{framing}", "self_prediction_abstract",
+            items.append(item(f"selfpred_abstract|{factor}|{a}->{b}|{framing}", MAIN_FRAME, "self_prediction_abstract",
                               [stem.format(framing=ftext, from_level=levels[a], to_level=levels[b])], "json",
                               {"factor": factor, "from_level": a, "to_level": b, "framing": framing}))
     return items
@@ -180,21 +196,39 @@ def write_jsonl(path, rows):
             fh.write(json.dumps(r, ensure_ascii=False) + "\n")
 
 
+def write_preview(vignettes, p):
+    lines = ["# Vignette preview", "", "*Generated by scripts/build_items.py. Edit the templates JSON, not this file.*", ""]
+    for v in vignettes:
+        if v["month"] != BASE_MONTH:
+            continue  # month only changes one word
+        lines += [f"## {v['frame']} · {v['template']} · {v['mental_state']} · {v['detection']}", "",
+                  v["text"], "", f"> {penalty_prompt(p, 'penalty_only', v)}", ""]
+    PREVIEW_OUT.write_text("\n".join(lines))
+
+
 def main():
-    t = json.loads(TEMPLATES.read_text())
     p = json.loads(PROMPTS.read_text())
-    vignettes = build_vignettes(t)
-    items = (sentencing_items(p, vignettes) + stated_items(p)
-             + case_prediction_items(t, p, vignettes) + abstract_prediction_items(p))
+    templates = {frame: json.loads(path.read_text()) for frame, path in TEMPLATE_FILES.items()}
+    vignettes = {frame: build_vignettes(frame, t) for frame, t in templates.items()}
+
+    items = (penalty_items(p, vignettes[MAIN_FRAME], with_checks=True)
+             + stated_items(p)
+             + case_prediction_items(templates[MAIN_FRAME], p, vignettes[MAIN_FRAME])
+             + abstract_prediction_items(p)
+             + penalty_items(p, vignettes["legal"], with_checks=False))
     check(items)
-    write_jsonl(VIGNETTES_OUT, vignettes)
+    all_vignettes = [v for vs in vignettes.values() for v in vs]
+    write_jsonl(VIGNETTES_OUT, all_vignettes)
     write_jsonl(ITEMS_OUT, items)
+    write_preview(all_vignettes, p)
 
     counts = {}
     for i in items:
-        key = i["measure"] if i["measure"] != "stated_principles" else f"stated_principles/{i['meta']['format']}"
+        key = f"{i['frame']}/{i['measure']}"
+        if i["measure"] == "stated_principles":
+            key += f"/{i['meta']['format']}"
         counts[key] = counts.get(key, 0) + 1
-    print(f"{len(vignettes)} vignettes -> {VIGNETTES_OUT.relative_to(ROOT)}")
+    print(f"{len(all_vignettes)} vignettes -> {VIGNETTES_OUT.relative_to(ROOT)} (preview: {PREVIEW_OUT.relative_to(ROOT)})")
     print(f"{len(items)} items -> {ITEMS_OUT.relative_to(ROOT)}")
     for k, n in sorted(counts.items()):
         print(f"  {k}: {n}")

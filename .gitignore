@@ -20,4 +20,4 @@ outputs/
 *.log
 
 # Smoke-test runs
-data/smoke/
+data/smoke*/

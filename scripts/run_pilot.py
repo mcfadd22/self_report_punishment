@@ -12,12 +12,16 @@ Examples:
   python3 scripts/run_pilot.py --models mock --samples 2          # test the pipeline offline
   python3 scripts/run_pilot.py --models llama3.1-8b --limit 20    # quick smoke test on a real model
   python3 scripts/run_pilot.py --samples 10                       # full pilot on all enabled models
+  python3 scripts/run_pilot.py --models qwen3-8b --frames legal   # legal-framing check
 """
 
 import argparse
 import json
 import random
+import os
 import re
+import shutil
+import subprocess
 import sys
 import threading
 import time
@@ -35,14 +39,6 @@ PROMPTS = ROOT / "prompts" / "pilot_prompts.json"
 MODELS = ROOT / "config" / "models.json"
 OUT_DIR = ROOT / "data" / "responses"
 
-NUMBER = re.compile(r"-?\d+(?:\.\d+)?")
-
-
-def parse_number(text):
-    m = NUMBER.search(text or "")
-    return float(m.group()) if m else None
-
-
 def parse_json(text):
     m = re.search(r"\{.*\}", text or "", re.DOTALL)
     if not m:
@@ -53,19 +49,33 @@ def parse_json(text):
         return None
 
 
+def to_number(d, key):
+    """Models sometimes return numbers as strings ("35"); coerce, or None if missing or not numeric."""
+    try:
+        return float(d[key])
+    except (TypeError, KeyError, ValueError):
+        return None
+
+
 def parse(item, replies):
-    """Best-effort parse of the model's answer. Raw text is always saved, so this can be redone later."""
-    last = replies[-1]
+    """Best-effort parse of the model's answer. Raw text is always saved, so this can be redone later.
+    Penalty answers are also copied to a frame-independent "penalty" field (weeks or months, per meta.penalty_key)."""
+    key = item["meta"].get("penalty_key")
+    last = parse_json(replies[-1]) if item["response_format"] == "json" else None
     if item["measure"] == "manipulation_check":
-        first = parse_json(replies[0])
-        return {"sentence": first.get("sentence") if isinstance(first, dict) else None, "check": parse_json(last)}
-    if item["response_format"] == "number":
-        return parse_number(last)
-    if item["response_format"] == "json":
-        return parse_json(last)
-    if item["measure"] == "sentencing":  # justification format: number on the first line
-        return {"sentence": parse_number(last.strip().split("\n", 1)[0]), "justification": last}
-    return None
+        return {"penalty": to_number(parse_json(replies[0]), key), "check": last}
+    if isinstance(last, dict) and key:
+        last = {**last, "penalty": to_number(last, key)}
+        if item["measure"] == "self_prediction_case":
+            last["counterfactual_penalty"] = to_number(last, f"counterfactual_{key}")
+    return last
+
+
+def keep_awake():
+    """On macOS, stop the machine from sleeping until this process exits (caffeinate -w waits on our pid)."""
+    if sys.platform == "darwin" and shutil.which("caffeinate"):
+        subprocess.Popen(["caffeinate", "-i", "-w", str(os.getpid())])
+        print("keeping the Mac awake until the run finishes (caffeinate)")
 
 
 def call_seed(model_id, item_id, sample):
@@ -112,12 +122,14 @@ def parse_args(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--models", nargs="+", help="model ids from config/models.json (default: all enabled)")
     ap.add_argument("--samples", type=int, default=10, help="samples per item (default 10)")
-    ap.add_argument("--measures", nargs="+", help="only these measures, e.g. sentencing stated_principles")
+    ap.add_argument("--frames", nargs="+", default=["social"], help="social (main study) and/or legal (default social)")
+    ap.add_argument("--measures", nargs="+", help="only these measures, e.g. penalty stated_principles")
     ap.add_argument("--limit", type=int, help="only the first N calls per model after shuffling (smoke tests)")
     ap.add_argument("--system", help="override every item's system prompt key, e.g. none")
     ap.add_argument("--workers", type=int, default=1, help="parallel requests per model (keep 1 for Ollama)")
     ap.add_argument("--order-seed", type=int, default=0, help="seed for shuffling item order")
     ap.add_argument("--out-dir", type=Path, default=OUT_DIR, help="where to write responses (default data/responses)")
+    ap.add_argument("--allow-sleep", action="store_true", help="don't keep the Mac awake during the run")
     ap.add_argument("--dry-run", action="store_true", help="print the plan and one example request, then exit")
     return ap.parse_args(argv)
 
@@ -127,6 +139,7 @@ def main(argv=None):
     if not ITEMS.exists():
         raise SystemExit("prompts/items.jsonl not found; run scripts/build_items.py first")
     items = [json.loads(line) for line in ITEMS.open()]
+    items = [i for i in items if i["frame"] in args.frames]
     if args.measures:
         items = [i for i in items if i["measure"] in args.measures]
     if args.system:
@@ -139,6 +152,8 @@ def main(argv=None):
         raise SystemExit(f"unknown model id(s): {', '.join(unknown)}")
     models = [by_id[m] for m in args.models] if args.models else [m for m in config["models"] if m.get("enabled")]
 
+    if not args.dry_run and not args.allow_sleep:
+        keep_awake()
     out_dir = args.out_dir if args.out_dir.is_absolute() else ROOT / args.out_dir
     out_dir.mkdir(parents=True, exist_ok=True)
     for cfg in models:
