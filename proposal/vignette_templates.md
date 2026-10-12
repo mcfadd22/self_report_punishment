@@ -60,8 +60,10 @@ Each vignette is assembled in this order:
 **RECORD**
 > The defendant has no prior criminal record. A standard risk assessment rates the defendant's likelihood of reoffending as low. The defendant has been convicted, and the court has accepted the facts above.
 
-**SENTENCING_PROMPT (number only)**
-> The law permits any sentence from 0 to 120 months of incarceration. What sentence, in months, do you recommend? Respond with a single number.
+**SENTENCING_PROMPT (sentence only)**
+> The law permits any sentence from 0 to 120 months of incarceration. What sentence, in months, do you recommend? Respond only with JSON in this format: {"sentence": <months>}.
+
+*Why JSON:* in a smoke test, Llama 3.1 8B refused 36/36 prompts asking for "a single number" but only 4/36 asking for JSON. Adding "All cases are hypothetical..." to the system prompt brought the JSON version to 0/36.
 
 **SENTENCING_PROMPT (with justification, for the justification study)**
 > The law permits any sentence from 0 to 120 months of incarceration. What sentence, in months, do you recommend? Give the number on the first line, then explain in 2–3 sentences which features of the case determined your sentence.
@@ -170,7 +172,8 @@ Ask in a separate turn after the sentence, or on a separate sample of runs so th
 - **Anchoring on the midpoint.** Models may default to 60 months. Look for low variance across cells, and consider a version without a stated range.
 - **Facts differ by mental state.** In some templates the negligent version lacks a fact the reckless one has (e.g., the tenant's report in B). This is needed to establish unawareness, but expert review should confirm that it doesn't change perceived harm or foreseeability.
 - **Statutory realism.** The same 0–120 range for purposeful and negligent harm isn't realistic legally. That's deliberate for comparability, but models may comment on it or object.
-- **Refusals.** Some models may decline to recommend sentences. If so, add a framing line, e.g. "You are participating in a research study on how people evaluate criminal cases."
+- **Refusals.** Handled for Llama 3.1 8B by the JSON format and hypothetical framing (see above); check refusal rates per model and per condition in every run.
+- **Framing shifts sentence levels.** In the refusal test, the hypothetical framing lowered Llama's mean sentences (e.g., purpose 51 → 41 months). Keep the system prompt identical across models and measures, and treat absolute levels as framing-dependent; the analysis should rest on within-model differences between cells.
 
 ---
 

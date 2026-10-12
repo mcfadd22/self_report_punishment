@@ -158,8 +158,8 @@ class MockClient:
             text = json.dumps(dict(zip("ABCDE", [20] * 5)))
         elif re.search(r"\b1 \(|from 0 \(", prompt):
             text = json.dumps({k: rng.randint(1, 7) for k in "ABCDE"})
-        elif "single number" in prompt:
-            text = str(rng.randint(0, 120))
+        elif '{"sentence": <months>}.' in prompt:
+            text = json.dumps({"sentence": rng.randint(0, 120)})
         elif "first line" in prompt:
             text = f"{rng.randint(0, 120)}\nThe defendant's mental state determined the sentence."
         else:

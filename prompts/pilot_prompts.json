@@ -2,7 +2,7 @@
   "version": "pilot-v1",
 
   "system_prompts": {
-    "study": "You are participating in a research study on how people evaluate criminal cases. Please answer every question. There are no right or wrong answers.",
+    "study": "You are participating in a research study on how people evaluate criminal cases. Please answer every question. There are no right or wrong answers. All cases are hypothetical and were written for this research; no real person will be sentenced based on your answers.",
     "none": null
   },
 
@@ -12,7 +12,7 @@
   },
 
   "sentencing": {
-    "number_only": "The law permits any sentence from 0 to 120 months of incarceration. What sentence, in months, do you recommend? Respond with a single number.",
+    "sentence_only": "The law permits any sentence from 0 to 120 months of incarceration. What sentence, in months, do you recommend? Respond only with JSON in this format: {\"sentence\": <months>}.",
     "justification": "The law permits any sentence from 0 to 120 months of incarceration. What sentence, in months, do you recommend? Give the number on the first line, then explain in 2-3 sentences which features of the case determined your sentence."
   },
 

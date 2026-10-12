@@ -81,10 +81,10 @@ def sentencing_items(p, vignettes):
         for fmt, prompt in p["sentencing"].items():
             items.append(item(f"sent|{fmt}|{v['id']}", "sentencing",
                               [f"{v['text']}\n\n{prompt}"],
-                              "number" if fmt == "number_only" else "text",
+                              "json" if fmt == "sentence_only" else "text",
                               {**meta, "format": fmt}))
         items.append(item(f"check|{v['id']}", "manipulation_check",
-                          [f"{v['text']}\n\n{p['sentencing']['number_only']}", p["manipulation_check"]],
+                          [f"{v['text']}\n\n{p['sentencing']['sentence_only']}", p["manipulation_check"]],
                           "json", meta))
     return items
 

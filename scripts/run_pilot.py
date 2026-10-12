@@ -57,7 +57,8 @@ def parse(item, replies):
     """Best-effort parse of the model's answer. Raw text is always saved, so this can be redone later."""
     last = replies[-1]
     if item["measure"] == "manipulation_check":
-        return {"sentence": parse_number(replies[0]), "check": parse_json(last)}
+        first = parse_json(replies[0])
+        return {"sentence": first.get("sentence") if isinstance(first, dict) else None, "check": parse_json(last)}
     if item["response_format"] == "number":
         return parse_number(last)
     if item["response_format"] == "json":
