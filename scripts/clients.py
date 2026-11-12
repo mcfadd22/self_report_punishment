@@ -5,6 +5,8 @@ Every client takes a list of chat messages (role/content dicts) plus a system pr
   thinking  reasoning text if the model returned any (Ollama thinking models, Claude summaries), else None
   stop      stop/finish reason as reported by the provider
   raw_model model name as reported by the provider
+  usage     token counts (and cost, from OpenRouter) as reported by the provider, if any
+  provider  serving provider as reported by OpenRouter, if any
 
 Providers:
   ollama     local models via Ollama's native /api/chat (stdlib only)
@@ -83,6 +85,9 @@ class OllamaClient:
 
 
 class OpenAICompatibleClient:
+    """`extra_body` in the model config is merged into every request, e.g. OpenRouter's reasoning effort, or a
+    provider pin with fallbacks off so every row of an open-weight model comes from the same deployment."""
+
     def __init__(self, cfg):
         self.cfg = cfg
         self.base = cfg.get("base_url", "https://api.openai.com/v1")
@@ -97,12 +102,16 @@ class OpenAICompatibleClient:
                 "max_tokens": max_tokens, "seed": seed}
         if temperature is not None:
             body["temperature"] = temperature
+        body.update(self.cfg.get("extra_body", {}))
         r = _post_json(f"{self.base}/chat/completions", body,
                        headers={"Authorization": f"Bearer {os.environ[self.key_env]}"})
+        if "error" in r:  # OpenRouter can report provider errors with HTTP 200
+            raise ClientError(f"provider error: {json.dumps(r['error'])[:500]}")
         choice = r["choices"][0]
         msg = choice.get("message", {})
         return {"text": msg.get("content") or "", "thinking": msg.get("reasoning") or None,
-                "stop": choice.get("finish_reason"), "raw_model": r.get("model")}
+                "stop": choice.get("finish_reason"), "raw_model": r.get("model"),
+                "usage": r.get("usage"), "provider": r.get("provider")}
 
 
 class AnthropicClient:

@@ -95,7 +95,7 @@ def call_seed(model_id, item_id, sample):
 
 def run_one(client, model_cfg, item, sample, system_text, temperature, max_tokens):
     seed = call_seed(model_cfg["id"], item["id"], sample)
-    messages, replies, thinking, stops = [], [], [], []
+    messages, replies, thinking, stops, usage = [], [], [], [], []
     row = {"item_id": item["id"], "sample": sample, "model_id": model_cfg["id"], "seed": seed,
            "temperature": temperature, "system": item["system"], "started": now()}
     try:
@@ -106,11 +106,14 @@ def run_one(client, model_cfg, item, sample, system_text, temperature, max_token
             replies.append(r["text"])
             thinking.append(r["thinking"])
             stops.append(r["stop"])
+            usage.append(r.get("usage"))
             row["raw_model"] = r["raw_model"]
-        row.update({"replies": replies, "thinking": thinking, "stop": stops,
+            if r.get("provider"):
+                row["provider"] = r["provider"]
+        row.update({"replies": replies, "thinking": thinking, "stop": stops, "usage": usage,
                     "parsed": parse(item, replies), "error": None})
     except Exception as e:  # keep going; failed rows are retried on the next run
-        row.update({"replies": replies, "error": f"{type(e).__name__}: {e}"})
+        row.update({"replies": replies, "usage": usage, "error": f"{type(e).__name__}: {e}"})
     row["finished"] = now()
     return row
 
