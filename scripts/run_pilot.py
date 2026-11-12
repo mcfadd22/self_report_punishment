@@ -13,6 +13,8 @@ Examples:
   python3 scripts/run_pilot.py --models llama3.1-8b --limit 20    # quick smoke test on a real model
   python3 scripts/run_pilot.py --samples 10                       # full pilot on all enabled models
   python3 scripts/run_pilot.py --frames social --samples 5        # one framing only
+  python3 scripts/run_pilot.py --formats justification --first-sample 3 --samples 10 --out-dir data/x
+                                                                  # samples 3-9 of the justification items only
 """
 
 import argparse
@@ -138,6 +140,10 @@ def parse_args(argv=None):
     ap.add_argument("--samples", type=int, default=10, help="samples per item (default 10)")
     ap.add_argument("--frames", nargs="+", default=["social", "legal"], help="social and/or legal (default both)")
     ap.add_argument("--measures", nargs="+", help="only these measures, e.g. penalty stated_principles")
+    ap.add_argument("--formats", nargs="+", help="only items with these meta.format values, e.g. justification")
+    ap.add_argument("--first-sample", type=int, default=0,
+                    help="first sample index (default 0); with a new --out-dir, extends an earlier run "
+                         "without repeating its seeds")
     ap.add_argument("--limit", type=int, help="only the first N calls per model after shuffling (smoke tests)")
     ap.add_argument("--system", help="override every item's system prompt key, e.g. none")
     ap.add_argument("--workers", type=int, default=1, help="parallel requests per model (keep 1 for Ollama)")
@@ -156,6 +162,8 @@ def main(argv=None):
     items = [i for i in items if i["frame"] in args.frames]
     if args.measures:
         items = [i for i in items if i["measure"] in args.measures]
+    if args.formats:
+        items = [i for i in items if i["meta"].get("format") in args.formats]
     if args.system:
         items = [{**i, "system": args.system} for i in items]
     system_prompts = json.loads(PROMPTS.read_text())["system_prompts"]
@@ -174,7 +182,7 @@ def main(argv=None):
         cfg = {**config["defaults"], **cfg}
         out = out_dir / f"{cfg['id']}.jsonl"
         done = load_done(out)
-        tasks = [(i, s) for i in items for s in range(args.samples) if (i["id"], s) not in done]
+        tasks = [(i, s) for i in items for s in range(args.first_sample, args.samples) if (i["id"], s) not in done]
         random.Random(f"{args.order_seed}|{cfg['id']}").shuffle(tasks)
         if args.limit:
             tasks = tasks[: args.limit]
