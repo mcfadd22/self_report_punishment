@@ -53,6 +53,9 @@ def parse_json(text):
 
 TOP_CATEGORY = "permanent"
 
+# OpenRouter replies that mean the key or account is out of budget; retrying can't help
+SPEND_LIMIT_ERRORS = ("Key limit exceeded", "HTTP 402", "Insufficient credits")
+
 
 def to_number(d, key):
     """Models sometimes return numbers as strings ("35"); coerce, or None if missing or not numeric.
@@ -136,6 +139,7 @@ def load_done(path):
 
 def parse_args(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--items", type=Path, default=ITEMS, help="item file (default prompts/items.jsonl)")
     ap.add_argument("--models", nargs="+", help="model ids from config/models.json (default: all enabled)")
     ap.add_argument("--samples", type=int, default=10, help="samples per item (default 10)")
     ap.add_argument("--frames", nargs="+", default=["social", "legal"], help="social and/or legal (default both)")
@@ -156,9 +160,10 @@ def parse_args(argv=None):
 
 def main(argv=None):
     args = parse_args(argv)
-    if not ITEMS.exists():
-        raise SystemExit("prompts/items.jsonl not found; run scripts/build_items.py first")
-    items = [json.loads(line) for line in ITEMS.open()]
+    items_path = args.items if args.items.is_absolute() else ROOT / args.items
+    if not items_path.exists():
+        raise SystemExit(f"{items_path} not found; run scripts/build_items.py (or make_variants.py) first")
+    items = [json.loads(line) for line in items_path.open()]
     items = [i for i in items if i["frame"] in args.frames]
     if args.measures:
         items = [i for i in items if i["measure"] in args.measures]
@@ -209,6 +214,10 @@ def main(argv=None):
                                    cfg.get("temperature"), cfg["max_tokens"]) for i, s in tasks]
             for n, fut in enumerate(as_completed(futures), 1):
                 row = fut.result()
+                if row["error"] and any(x in row["error"] for x in SPEND_LIMIT_ERRORS):
+                    for f in futures:  # out of budget: stop instead of writing an error row for every item
+                        f.cancel()
+                    raise SystemExit(f"[{cfg['id']}] stopped: {row['error'][:200]}")
                 errors += row["error"] is not None
                 with lock:
                     fh.write(json.dumps(row, ensure_ascii=False) + "\n")

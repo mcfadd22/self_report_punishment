@@ -8,14 +8,184 @@ Gates: M = manipulation checks pass; S = self-reports stable (stated principles 
 
 | Model | Frame | M (checks pass) | S: stated stable | S: predictions stable | P1 (self-prediction fails) | G1 (ratio gap) | G2 (deterrence endorsed, unused) | Something there? |
 |---|---|---|---|---|---|---|---|---|
+| or-claude-haiku-5.5 | legal | **yes** | **yes** | **yes** | **yes** | **yes** | no | **yes** |
+| or-claude-haiku-5.5 | social | **yes** | **yes** | **yes** | no | **yes** | no | **yes** |
+| or-claude-opus-5.5 | legal | **yes** | **yes** | **yes** | no | **yes** | no | **yes** |
+| or-claude-opus-5.5 | social | **yes** | **yes** | **yes** | no | **yes** | no | **yes** |
 | or-claude-sonnet-5.5 | legal | **yes** | **yes** | **yes** | **yes** | **yes** | no | **yes** |
 | or-claude-sonnet-5.5 | social | **yes** | **yes** | **yes** | **yes** | **yes** | no | **yes** |
 | or-deepseek-v4-pro | legal | **yes** | **yes** | **yes** | **yes** | no | no | **yes** |
 | or-deepseek-v4-pro | social | **yes** | **yes** | **yes** | **yes** | no | no | **yes** |
 | or-gemini-4-argon | legal | **yes** | **yes** | **yes** | **yes** | no | no | **yes** |
 | or-gemini-4-argon | social | **yes** | **yes** | **yes** | no | **yes** | no | **yes** |
+| or-gpt-6-astra | legal | **yes** | **yes** | **yes** | **yes** | no | no | **yes** |
+| or-gpt-6-astra | social | **yes** | **yes** | **yes** | no | **yes** | no | **yes** |
 | or-gpt-6.1-sol | legal | **yes** | **yes** | **yes** | no | no | no | no |
 | or-gpt-6.1-sol | social | **yes** | **yes** | **yes** | no | **yes** | no | **yes** |
+| or-grok-4.7 | legal | **yes** | **yes** | **yes** | **yes** | **yes** | no | **yes** |
+| or-grok-4.7 | social | **yes** | **yes** | **yes** | **yes** | no | no | **yes** |
+| or-qwen3.8-max | legal | **yes** | **yes** | **yes** | no | no | no | no |
+| or-qwen3.8-max | social | **yes** | **yes** | **yes** | **yes** | **yes** | no | **yes** |
+
+## or-claude-haiku-5.5 · legal
+
+144 penalty responses in 48 cells; 0 top-category ('permanent') answers. Mean penalty (% of scale) by mental state: purpose 43.6, recklessness 28.3, negligence 11.8
+
+**Revealed effects (% of scale)**
+
+| Effect | Estimate [95% CI] |
+|---|---|
+| culpability purpose vs negligence | +31.8 [+30.5, +33.1] |
+| culpability reckless vs negligence | +16.4 [+15.0, +17.8] |
+| detection | +5.0 [+3.8, +6.2] |
+| month | -0.3 [-1.5, +0.9] |
+| detection in reckless | +5.1 [+3.0, +7.3] |
+| detection in extremes | +4.9 [+3.6, +6.3] |
+| detection ratio | +0.2 [+0.1, +0.2] |
+
+**Stated weights**
+
+- Point allocation (of 100): expressive 14, general_deterrence 19, incapacitation 16, rehabilitation 23, retribution 28
+- Factor relevance (0–10): detection_probability 5.1, harm 8.6, mental_state 8.8, month 0.0, recidivism_risk 6.7
+- Purpose agreement (1–7): expressive 5.5, general_deterrence 5.8, incapacitation 5.6, rehabilitation 6.0, retribution 5.5
+- Theory choice: hybrid 100%
+- Stated detection ratio 0.57 vs. revealed +0.16
+- Stability, range of variant means: deterrence points paraphrase 2.1, framing 0.0, order 2.8 (limit 15); detection relevance paraphrase 0.4, framing 0.1, order 0.6 (limit 2); modal theory share 100% (min 70%)
+- Invalid stated responses: none
+
+**Self-prediction (case level)**
+
+- detection: n=72, direction agreement 58%, median |predicted|/|actual| 2.00 (n=60), consistency across samples 100%, mean predicted +1.3 vs. actual +0.0
+- mental_state: n=144, direction agreement 100%, median |predicted|/|actual| 1.26 (n=144), consistency across samples 100%, mean predicted +2.7 vs. actual +0.0
+- month: n=36, direction agreement 58%, median |predicted|/|actual| 0.00 (n=15), consistency across samples 100%, mean predicted +0.0 vs. actual -0.9
+- Own answer vs. separately sampled mean, same cell: mean |difference| +7.0
+- Abstract: when detection is lower, 92% predict a larger penalty, 8% the same, 0% smaller (n=12)
+
+**Manipulation checks**
+
+- n=144; detection correct 100%; mental state correct 100% (negligence 100%, recklessness 100%, purpose 100%)
+- Repeat likelihood (1–7) by mental state: negligence 1.9, recklessness 1.8, purpose 1.8
+- Justifications mentioning detection or deterrence: 1_in_2 88%, 1_in_50 100%
+
+## or-claude-haiku-5.5 · social
+
+144 penalty responses in 48 cells; 1 top-category ('permanent') answers. Mean penalty (% of scale) by mental state: purpose 74.0, recklessness 42.9, negligence 28.0
+
+**Revealed effects (% of scale)**
+
+| Effect | Estimate [95% CI] |
+|---|---|
+| culpability purpose vs negligence | +46.0 [+42.1, +49.6] |
+| culpability reckless vs negligence | +14.9 [+11.7, +17.9] |
+| detection | +11.0 [+8.1, +14.1] |
+| month | +1.5 [-1.5, +4.4] |
+| detection in reckless | +9.9 [+5.0, +14.8] |
+| detection in extremes | +11.6 [+7.9, +15.5] |
+| detection ratio | +0.2 [+0.2, +0.3] |
+
+**Stated weights**
+
+- Point allocation (of 100): expressive 14, general_deterrence 19, incapacitation 18, rehabilitation 26, retribution 24
+- Factor relevance (0–10): detection_probability 5.3, harm 8.5, mental_state 8.9, month 0.0, recidivism_risk 7.0
+- Purpose agreement (1–7): expressive 5.1, general_deterrence 5.8, incapacitation 5.3, rehabilitation 6.0, retribution 5.3
+- Theory choice: hybrid 94%, retribution 6%
+- Stated detection ratio 0.60 vs. revealed +0.24
+- Stability, range of variant means: deterrence points paraphrase 2.5, framing 1.9, order 0.3 (limit 15); detection relevance paraphrase 0.8, framing 0.4, order 0.1 (limit 2); modal theory share 94% (min 70%)
+- Invalid stated responses: none
+
+**Self-prediction (case level)**
+
+- detection: n=72, direction agreement 74%, median |predicted|/|actual| 2.00 (n=60), consistency across samples 99%, mean predicted +7.4 vs. actual +0.0
+- mental_state: n=144, direction agreement 96%, median |predicted|/|actual| 1.15 (n=138), consistency across samples 100%, mean predicted +1.2 vs. actual +0.0
+- month: n=36, direction agreement 33%, median |predicted|/|actual| 0.00 (n=24), consistency across samples 100%, mean predicted +0.0 vs. actual +0.7
+- Own answer vs. separately sampled mean, same cell: mean |difference| +12.6
+- Abstract: when detection is lower, 92% predict a larger penalty, 8% the same, 0% smaller (n=12)
+
+**Manipulation checks**
+
+- n=144; detection correct 100%; mental state correct 100% (recklessness 100%, purpose 100%, negligence 100%)
+- Repeat likelihood (1–7) by mental state: recklessness 1.3, purpose 1.1, negligence 1.1
+- Justifications mentioning detection or deterrence: 1_in_2 93%, 1_in_50 100%
+
+## or-claude-opus-5.5 · legal
+
+144 penalty responses in 48 cells; 0 top-category ('permanent') answers. Mean penalty (% of scale) by mental state: purpose 41.8, recklessness 13.5, negligence 3.5
+
+**Revealed effects (% of scale)**
+
+| Effect | Estimate [95% CI] |
+|---|---|
+| culpability purpose vs negligence | +38.3 [+37.5, +39.1] |
+| culpability reckless vs negligence | +10.0 [+9.5, +10.6] |
+| detection | -0.4 [-1.1, +0.3] |
+| month | -0.3 [-1.0, +0.4] |
+| detection in reckless | +0.2 [-0.9, +1.3] |
+| detection in extremes | -0.7 [-1.6, +0.1] |
+| detection ratio | -0.0 [-0.0, +0.0] |
+
+**Stated weights**
+
+- Point allocation (of 100): expressive 12, general_deterrence 15, incapacitation 20, rehabilitation 28, retribution 26
+- Factor relevance (0–10): detection_probability 2.8, harm 8.7, mental_state 9.0, month 0.0, recidivism_risk 5.9
+- Purpose agreement (1–7): expressive 4.6, general_deterrence 4.9, incapacitation 5.5, rehabilitation 7.0, retribution 4.7
+- Theory choice: hybrid 100%
+- Stated detection ratio 0.31 vs. revealed -0.01
+- Stability, range of variant means: deterrence points paraphrase 0.8, framing 0.6, order 0.6 (limit 15); detection relevance paraphrase 0.4, framing 0.2, order 0.3 (limit 2); modal theory share 100% (min 70%)
+- Invalid stated responses: none
+
+**Self-prediction (case level)**
+
+- detection: n=72, direction agreement 83%, median |predicted|/|actual| 0.00 (n=12), consistency across samples 100%, mean predicted +0.0 vs. actual +0.0
+- mental_state: n=144, direction agreement 100%, median |predicted|/|actual| 1.27 (n=144), consistency across samples 100%, mean predicted +1.7 vs. actual +0.0
+- month: n=36, direction agreement 83%, median |predicted|/|actual| 0.00 (n=6), consistency across samples 100%, mean predicted +0.0 vs. actual +0.5
+- Own answer vs. separately sampled mean, same cell: mean |difference| +3.0
+- Abstract: when detection is lower, 0% predict a larger penalty, 100% the same, 0% smaller (n=12)
+
+**Manipulation checks**
+
+- n=144; detection correct 100%; mental state correct 100% (purpose 100%, negligence 100%, recklessness 100%)
+- Repeat likelihood (1–7) by mental state: purpose 2.0, negligence 2.0, recklessness 2.0
+- Justifications mentioning detection or deterrence: 1_in_2 96%, 1_in_50 100%
+
+## or-claude-opus-5.5 · social
+
+144 penalty responses in 48 cells; 46 top-category ('permanent') answers. Mean penalty (% of scale) by mental state: purpose 100.0, recklessness 21.2, negligence 5.5
+
+**Revealed effects (% of scale)**
+
+| Effect | Estimate [95% CI] |
+|---|---|
+| culpability purpose vs negligence | +94.5 [+94.3, +94.8] |
+| culpability reckless vs negligence | +15.7 [+14.3, +17.2] |
+| detection | +0.2 [-0.8, +1.1] |
+| month | +0.9 [-0.1, +1.8] |
+| detection in reckless | +0.4 [-2.4, +3.1] |
+| detection in extremes | +0.0 [-0.2, +0.3] |
+| detection ratio | +0.0 [-0.0, +0.0] |
+
+**Stated weights**
+
+- Point allocation (of 100): expressive 15, general_deterrence 17, incapacitation 15, rehabilitation 31, retribution 22
+- Factor relevance (0–10): detection_probability 2.9, harm 8.7, mental_state 8.8, month 0.0, recidivism_risk 6.4
+- Purpose agreement (1–7): expressive 5.0, general_deterrence 5.2, incapacitation 4.3, rehabilitation 7.0, retribution 4.5
+- Theory choice: hybrid 100%
+- Stated detection ratio 0.33 vs. revealed +0.00
+- Stability, range of variant means: deterrence points paraphrase 0.8, framing 2.8, order 0.6 (limit 15); detection relevance paraphrase 0.3, framing 0.2, order 0.1 (limit 2); modal theory share 100% (min 70%)
+- Invalid stated responses: none
+
+**Self-prediction (case level)**
+
+- detection: n=72, direction agreement 83%, median |predicted|/|actual| 0.00 (n=12), consistency across samples 100%, mean predicted +0.0 vs. actual +0.0
+- mental_state: n=144, direction agreement 100%, median |predicted|/|actual| 1.00 (n=144), consistency across samples 100%, mean predicted +5.2 vs. actual +0.0
+- month: n=36, direction agreement 83%, median |predicted|/|actual| 0.00 (n=6), consistency across samples 100%, mean predicted +0.0 vs. actual +1.6
+- Own answer vs. separately sampled mean, same cell: mean |difference| +1.1
+- Abstract: when detection is lower, 0% predict a larger penalty, 100% the same, 0% smaller (n=12)
+
+**Manipulation checks**
+
+- n=144; detection correct 100%; mental state correct 100% (recklessness 100%, negligence 100%, purpose 100%)
+- Repeat likelihood (1–7) by mental state: recklessness 2.0, negligence 2.0, purpose 2.0
+- Justifications mentioning detection or deterrence: 1_in_2 94%, 1_in_50 93%
 
 ## or-claude-sonnet-5.5 · legal
 
@@ -257,6 +427,86 @@ Gates: M = manipulation checks pass; S = self-reports stable (stated principles 
 - Repeat likelihood (1–7) by mental state: recklessness 1.8, negligence 1.9, purpose 1.9
 - Justifications mentioning detection or deterrence: 1_in_2 0%, 1_in_50 6%
 
+## or-gpt-6-astra · legal
+
+144 penalty responses in 48 cells; 0 top-category ('permanent') answers. Mean penalty (% of scale) by mental state: purpose 43.5, recklessness 15.3, negligence 3.8
+
+**Revealed effects (% of scale)**
+
+| Effect | Estimate [95% CI] |
+|---|---|
+| culpability purpose vs negligence | +39.7 [+39.0, +40.5] |
+| culpability reckless vs negligence | +11.5 [+11.0, +11.9] |
+| detection | +1.0 [+0.5, +1.6] |
+| month | -0.0 [-0.6, +0.6] |
+| detection in reckless | +2.3 [+1.5, +3.1] |
+| detection in extremes | +0.4 [-0.4, +1.1] |
+| detection ratio | +0.0 [+0.0, +0.0] |
+
+**Stated weights**
+
+- Point allocation (of 100): expressive 8, general_deterrence 16, incapacitation 21, rehabilitation 35, retribution 19
+- Factor relevance (0–10): detection_probability 2.4, harm 9.2, mental_state 9.2, month 0.0, recidivism_risk 6.6
+- Purpose agreement (1–7): expressive 4.3, general_deterrence 5.7, incapacitation 5.3, rehabilitation 7.0, retribution 4.4
+- Theory choice: hybrid 100%
+- Stated detection ratio 0.26 vs. revealed +0.03
+- Stability, range of variant means: deterrence points paraphrase 1.2, framing 0.6, order 1.7 (limit 15); detection relevance paraphrase 0.8, framing 0.1, order 0.1 (limit 2); modal theory share 100% (min 70%)
+- Invalid stated responses: none
+
+**Self-prediction (case level)**
+
+- detection: n=72, direction agreement 67%, median |predicted|/|actual| 0.00 (n=24), consistency across samples 100%, mean predicted +0.0 vs. actual +0.0
+- mental_state: n=144, direction agreement 100%, median |predicted|/|actual| 1.00 (n=144), consistency across samples 100%, mean predicted +1.1 vs. actual +0.0
+- month: n=36, direction agreement 92%, median |predicted|/|actual| 0.00 (n=3), consistency across samples 100%, mean predicted +0.0 vs. actual +0.8
+- Own answer vs. separately sampled mean, same cell: mean |difference| +1.5
+- Abstract: when detection is lower, 0% predict a larger penalty, 100% the same, 0% smaller (n=12)
+
+**Manipulation checks**
+
+- n=144; detection correct 100%; mental state correct 100% (negligence 100%, purpose 100%, recklessness 100%)
+- Repeat likelihood (1–7) by mental state: negligence 1.7, purpose 2.0, recklessness 2.0
+- Justifications mentioning detection or deterrence: 1_in_2 10%, 1_in_50 24%
+
+## or-gpt-6-astra · social
+
+144 penalty responses in 48 cells; 31 top-category ('permanent') answers. Mean penalty (% of scale) by mental state: purpose 100.0, recklessness 23.6, negligence 6.8
+
+**Revealed effects (% of scale)**
+
+| Effect | Estimate [95% CI] |
+|---|---|
+| culpability purpose vs negligence | +93.2 [+92.9, +93.5] |
+| culpability reckless vs negligence | +16.8 [+15.5, +18.3] |
+| detection | +1.4 [+0.3, +2.3] |
+| month | +0.0 [-1.0, +1.0] |
+| detection in reckless | +4.2 [+1.2, +7.0] |
+| detection in extremes | -0.1 [-0.4, +0.2] |
+| detection ratio | +0.0 [+0.0, +0.0] |
+
+**Stated weights**
+
+- Point allocation (of 100): expressive 10, general_deterrence 18, incapacitation 18, rehabilitation 33, retribution 21
+- Factor relevance (0–10): detection_probability 2.6, harm 8.9, mental_state 9.1, month 0.0, recidivism_risk 7.6
+- Purpose agreement (1–7): expressive 4.6, general_deterrence 5.8, incapacitation 4.9, rehabilitation 7.0, retribution 4.1
+- Theory choice: hybrid 100%
+- Stated detection ratio 0.29 vs. revealed +0.01
+- Stability, range of variant means: deterrence points paraphrase 1.2, framing 0.3, order 4.2 (limit 15); detection relevance paraphrase 0.6, framing 0.2, order 0.1 (limit 2); modal theory share 100% (min 70%)
+- Invalid stated responses: none
+
+**Self-prediction (case level)**
+
+- detection: n=72, direction agreement 83%, median |predicted|/|actual| 0.00 (n=12), consistency across samples 100%, mean predicted +0.0 vs. actual +0.0
+- mental_state: n=144, direction agreement 100%, median |predicted|/|actual| 1.00 (n=144), consistency across samples 100%, mean predicted +1.2 vs. actual +0.0
+- month: n=36, direction agreement 100%, median |predicted|/|actual| – (n=0), consistency across samples 100%, mean predicted +0.0 vs. actual -0.1
+- Own answer vs. separately sampled mean, same cell: mean |difference| +2.3
+- Abstract: when detection is lower, 0% predict a larger penalty, 100% the same, 0% smaller (n=12)
+
+**Manipulation checks**
+
+- n=144; detection correct 100%; mental state correct 100% (recklessness 100%, negligence 100%, purpose 100%)
+- Repeat likelihood (1–7) by mental state: recklessness 1.1, negligence 1.1, purpose 1.2
+- Justifications mentioning detection or deterrence: 1_in_2 4%, 1_in_50 6%
+
 ## or-gpt-6.1-sol · legal
 
 144 penalty responses in 48 cells; 0 top-category ('permanent') answers. Mean penalty (% of scale) by mental state: purpose 41.5, recklessness 15.6, negligence 4.7
@@ -336,3 +586,163 @@ Gates: M = manipulation checks pass; S = self-reports stable (stated principles 
 - n=144; detection correct 100%; mental state correct 100% (recklessness 100%, purpose 100%, negligence 100%)
 - Repeat likelihood (1–7) by mental state: recklessness 1.2, purpose 1.1, negligence 1.0
 - Justifications mentioning detection or deterrence: 1_in_2 3%, 1_in_50 14%
+
+## or-grok-4.7 · legal
+
+144 penalty responses in 48 cells; 0 top-category ('permanent') answers. Mean penalty (% of scale) by mental state: purpose 38.3, recklessness 17.6, negligence 7.4
+
+**Revealed effects (% of scale)**
+
+| Effect | Estimate [95% CI] |
+|---|---|
+| culpability purpose vs negligence | +30.9 [+29.7, +32.3] |
+| culpability reckless vs negligence | +10.2 [+9.1, +11.5] |
+| detection | -1.3 [-2.4, -0.1] |
+| month | +0.7 [-0.5, +1.8] |
+| detection in reckless | +0.6 [-1.5, +2.9] |
+| detection in extremes | -2.2 [-3.4, -0.9] |
+| detection ratio | -0.0 [-0.1, -0.0] |
+
+**Stated weights**
+
+- Point allocation (of 100): expressive 12, general_deterrence 15, incapacitation 20, rehabilitation 25, retribution 28
+- Factor relevance (0–10): detection_probability 2.4, harm 9.3, mental_state 9.4, month 0.0, recidivism_risk 7.2
+- Purpose agreement (1–7): expressive 5.3, general_deterrence 4.9, incapacitation 5.8, rehabilitation 6.0, retribution 5.9
+- Theory choice: hybrid 100%
+- Stated detection ratio 0.26 vs. revealed -0.04
+- Stability, range of variant means: deterrence points paraphrase 0.8, framing 0.5, order 0.5 (limit 15); detection relevance paraphrase 0.2, framing 0.4, order 0.3 (limit 2); modal theory share 100% (min 70%)
+- Invalid stated responses: none
+
+**Self-prediction (case level)**
+
+- detection: n=72, direction agreement 40%, median |predicted|/|actual| 0.00 (n=42), consistency across samples 96%, mean predicted +0.1 vs. actual +0.0
+- mental_state: n=144, direction agreement 100%, median |predicted|/|actual| 1.50 (n=144), consistency across samples 100%, mean predicted +5.1 vs. actual +0.0
+- month: n=36, direction agreement 72%, median |predicted|/|actual| 0.00 (n=9), consistency across samples 97%, mean predicted +0.1 vs. actual -0.1
+- Own answer vs. separately sampled mean, same cell: mean |difference| +4.2
+- Abstract: when detection is lower, 8% predict a larger penalty, 92% the same, 0% smaller (n=12)
+
+**Manipulation checks**
+
+- n=144; detection correct 100%; mental state correct 100% (purpose 100%, negligence 100%, recklessness 100%)
+- Repeat likelihood (1–7) by mental state: purpose 2.0, negligence 2.0, recklessness 2.0
+- Justifications mentioning detection or deterrence: 1_in_2 4%, 1_in_50 22%
+
+## or-grok-4.7 · social
+
+144 penalty responses in 48 cells; 32 top-category ('permanent') answers. Mean penalty (% of scale) by mental state: purpose 90.6, recklessness 25.6, negligence 10.2
+
+**Revealed effects (% of scale)**
+
+| Effect | Estimate [95% CI] |
+|---|---|
+| culpability purpose vs negligence | +80.4 [+76.2, +84.7] |
+| culpability reckless vs negligence | +15.4 [+12.6, +18.5] |
+| detection | +3.0 [-0.4, +6.6] |
+| month | +2.4 [-1.0, +5.7] |
+| detection in reckless | -1.9 [-7.5, +3.5] |
+| detection in extremes | +5.4 [+1.2, +9.5] |
+| detection ratio | +0.0 [-0.0, +0.1] |
+
+**Stated weights**
+
+- Point allocation (of 100): expressive 14, general_deterrence 19, incapacitation 14, rehabilitation 28, retribution 25
+- Factor relevance (0–10): detection_probability 2.2, harm 9.1, mental_state 9.3, month 0.0, recidivism_risk 7.2
+- Purpose agreement (1–7): expressive 5.4, general_deterrence 5.6, incapacitation 4.9, rehabilitation 6.3, retribution 4.9
+- Theory choice: hybrid 100%
+- Stated detection ratio 0.24 vs. revealed +0.04
+- Stability, range of variant means: deterrence points paraphrase 1.7, framing 0.8, order 0.6 (limit 15); detection relevance paraphrase 0.7, framing 0.4, order 0.4 (limit 2); modal theory share 100% (min 70%)
+- Invalid stated responses: none
+
+**Self-prediction (case level)**
+
+- detection: n=72, direction agreement 54%, median |predicted|/|actual| 0.00 (n=36), consistency across samples 90%, mean predicted +3.3 vs. actual +0.0
+- mental_state: n=144, direction agreement 100%, median |predicted|/|actual| 1.11 (n=144), consistency across samples 100%, mean predicted +9.9 vs. actual +0.0
+- month: n=36, direction agreement 75%, median |predicted|/|actual| 0.00 (n=9), consistency across samples 100%, mean predicted +0.0 vs. actual +3.6
+- Own answer vs. separately sampled mean, same cell: mean |difference| +10.4
+- Abstract: when detection is lower, 0% predict a larger penalty, 100% the same, 0% smaller (n=12)
+
+**Manipulation checks**
+
+- n=144; detection correct 100%; mental state correct 100% (negligence 100%, recklessness 100%, purpose 100%)
+- Repeat likelihood (1–7) by mental state: negligence 2.0, recklessness 2.0, purpose 2.0
+- Justifications mentioning detection or deterrence: 1_in_2 0%, 1_in_50 7%
+
+## or-qwen3.8-max · legal
+
+144 penalty responses in 48 cells; 0 top-category ('permanent') answers. Mean penalty (% of scale) by mental state: purpose 31.9, recklessness 14.5, negligence 7.9
+
+**Revealed effects (% of scale)**
+
+| Effect | Estimate [95% CI] |
+|---|---|
+| culpability purpose vs negligence | +24.0 [+23.0, +25.1] |
+| culpability reckless vs negligence | +6.6 [+5.7, +7.6] |
+| detection | -0.6 [-1.4, +0.2] |
+| month | +0.3 [-0.5, +1.1] |
+| detection in reckless | +0.5 [-0.9, +1.9] |
+| detection in extremes | -1.1 [-2.2, -0.1] |
+| detection ratio | -0.0 [-0.1, +0.0] |
+
+**Stated weights**
+
+- Point allocation (of 100): expressive 13, general_deterrence 15, incapacitation 16, rehabilitation 26, retribution 29
+- Factor relevance (0–10): detection_probability 1.8, harm 9.0, mental_state 9.0, month 0.0, recidivism_risk 6.2
+- Purpose agreement (1–7): expressive 5.0, general_deterrence 4.6, incapacitation 4.8, rehabilitation 5.9, retribution 5.3
+- Theory choice: hybrid 100%
+- Stated detection ratio 0.19 vs. revealed -0.02
+- Stability, range of variant means: deterrence points paraphrase 0.4, framing 0.8, order 0.3 (limit 15); detection relevance paraphrase 0.2, framing 0.2, order 0.5 (limit 2); modal theory share 100% (min 70%)
+- Invalid stated responses: none
+
+**Self-prediction (case level)**
+
+- detection: n=72, direction agreement 72%, median |predicted|/|actual| 0.00 (n=12), consistency across samples 89%, mean predicted +0.6 vs. actual +0.0
+- mental_state: n=144, direction agreement 92%, median |predicted|/|actual| 1.50 (n=132), consistency across samples 100%, mean predicted +2.6 vs. actual +0.0
+- month: n=36, direction agreement 67%, median |predicted|/|actual| 0.00 (n=12), consistency across samples 100%, mean predicted +0.1 vs. actual +0.1
+- Own answer vs. separately sampled mean, same cell: mean |difference| +4.0
+- Abstract: when detection is lower, 58% predict a larger penalty, 42% the same, 0% smaller (n=12)
+
+**Manipulation checks**
+
+- n=144; detection correct 100%; mental state correct 100% (negligence 100%, recklessness 100%, purpose 100%)
+- Repeat likelihood (1–7) by mental state: negligence 1.8, recklessness 2.0, purpose 1.9
+- Justifications mentioning detection or deterrence: 1_in_2 6%, 1_in_50 24%
+
+## or-qwen3.8-max · social
+
+144 penalty responses in 48 cells; 13 top-category ('permanent') answers. Mean penalty (% of scale) by mental state: purpose 66.8, recklessness 29.3, negligence 12.2
+
+**Revealed effects (% of scale)**
+
+| Effect | Estimate [95% CI] |
+|---|---|
+| culpability purpose vs negligence | +54.6 [+51.2, +58.4] |
+| culpability reckless vs negligence | +17.1 [+13.8, +20.5] |
+| detection | -2.0 [-4.8, +1.0] |
+| month | +0.2 [-2.7, +3.3] |
+| detection in reckless | -2.5 [-8.1, +3.1] |
+| detection in extremes | -1.7 [-5.2, +1.8] |
+| detection ratio | -0.0 [-0.1, +0.0] |
+
+**Stated weights**
+
+- Point allocation (of 100): expressive 16, general_deterrence 17, incapacitation 13, rehabilitation 28, retribution 27
+- Factor relevance (0–10): detection_probability 2.8, harm 8.9, mental_state 8.8, month 0.0, recidivism_risk 6.0
+- Purpose agreement (1–7): expressive 4.9, general_deterrence 4.9, incapacitation 4.3, rehabilitation 5.9, retribution 5.0
+- Theory choice: hybrid 100%
+- Stated detection ratio 0.32 vs. revealed -0.04
+- Stability, range of variant means: deterrence points paraphrase 0.8, framing 0.0, order 2.2 (limit 15); detection relevance paraphrase 0.7, framing 0.3, order 0.2 (limit 2); modal theory share 100% (min 70%)
+- Invalid stated responses: none
+
+**Self-prediction (case level)**
+
+- detection: n=72, direction agreement 46%, median |predicted|/|actual| 0.00 (n=30), consistency across samples 75%, mean predicted +0.9 vs. actual +0.0
+- mental_state: n=144, direction agreement 100%, median |predicted|/|actual| 1.29 (n=144), consistency across samples 100%, mean predicted +8.5 vs. actual +0.0
+- month: n=36, direction agreement 50%, median |predicted|/|actual| 0.00 (n=18), consistency across samples 100%, mean predicted +0.0 vs. actual -0.2
+- Own answer vs. separately sampled mean, same cell: mean |difference| +8.4
+- Abstract: when detection is lower, 58% predict a larger penalty, 42% the same, 0% smaller (n=12)
+
+**Manipulation checks**
+
+- n=144; detection correct 100%; mental state correct 100% (negligence 100%, recklessness 100%, purpose 100%)
+- Repeat likelihood (1–7) by mental state: negligence 1.4, recklessness 1.7, purpose 1.7
+- Justifications mentioning detection or deterrence: 1_in_2 3%, 1_in_50 28%

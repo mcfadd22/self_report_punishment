@@ -24,3 +24,6 @@ data/smoke*/
 data/planted/
 data/mockcheck/
 analysis/output/planted_report.*
+
+# Orchestration logs
+data/run_logs/

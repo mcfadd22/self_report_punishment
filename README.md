@@ -15,8 +15,10 @@ Do AI models' accounts of their reasoning match what they do? This project tests
 - `analysis/analyze_pilot.py`: applies the decision criteria in `proposal/pilot_criteria.md`; writes `analysis/output/<dir>_report.md`
 - `analysis/planted_check.py`: synthetic models with known structure, to check that the criteria give the expected verdicts
 - `config/judges.json`, `scripts/code_justifications.py`: LLM judges that code each penalty justification for the role it gives the detection rate (they see only the explanation text)
-- `analysis/analyze_justifications.py`: joins those codes with the penalties: do justifications that cite the detection rate come with different penalties? Writes `analysis/output/justifications_report.md`
-- `notes/`: dated write-ups of each run and the next steps; **start with the latest one** (currently `notes/2026-11-12_justification_coding.md`)
+- `analysis/analyze_justifications.py`: joins those codes with the penalties: do justifications that cite the detection rate come with different penalties? Writes `analysis/output/justifications_report.md` (`--sources`, `--codes` and `--name` for the variant data)
+- `scripts/make_variants.py`: writes variant item files (`prompts/items_lowharm.jsonl`, `prompts/items_explfirst.jsonl`); run them with `run_pilot.py --items`, into their own data directory
+- Signal-check data: `data/signal_openrouter/` (nine models, 3 samples), `_justif/` (justification items to 10 samples), `_lowharm/`, `_explfirst/`, `_reasoning/` (reasoning on); judge codes in `data/justification_codes*/`
+- `notes/`: dated write-ups of each run and the next steps; **start with the latest one** (currently `notes/2026-11-12_full_signal_check.md`)
 
 Edit the JSON sources, then rebuild with `python3 scripts/build_items.py`. Don't edit the `.jsonl` files by hand.
 

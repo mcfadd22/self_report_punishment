@@ -15,7 +15,7 @@ that resample matched pairs, then samples within each cell):
 
 Codes: a justification's code is the judges' shared code when they agree, else the entry for it in
 data/justification_codes/adjudicated.jsonl, else "disputed" (left out of the tests and listed in
-analysis/output/justification_disputes.md for adjudication). A sensitivity table reruns the key tests with
+analysis/output/<name>_disputes.md for adjudication). A sensitivity table reruns the key tests with
 disputes where either judge said "raises" counted as raises, and again counted as not. An adjudicated.jsonl row:
   {"subject_model": ..., "item_id": ..., "sample": ..., "detection_role": ..., "raises_strength": ..., "note": ...}
 
@@ -23,7 +23,9 @@ Human validation: --sheet N writes a blind coding sheet of N justifications, str
 level, to analysis/output/justification_coding_sheet.csv (key: data/justification_codes/sheet_key.csv). Fill in
 the code columns and save it as data/justification_codes/human_codes.csv; the next run reports agreement.
 
-Usage: python3 analysis/analyze_justifications.py [--sources DIR ...] [--boot N] [--sheet N]
+Usage: python3 analysis/analyze_justifications.py [--sources DIR ...] [--codes DIR] [--name NAME] [--boot N] [--sheet N]
+  A variant run (e.g. data/signal_openrouter_lowharm) reuses item ids, so code it into its own --codes directory
+  and give its report its own --name.
 """
 
 import argparse
@@ -77,11 +79,11 @@ def load_responses(sources):
     return out
 
 
-def load_codes(judge_ids):
+def load_codes(judge_ids, codes_dir=CODES_DIR):
     """{judge: {key: code}}; the last successful row per key wins."""
     codes = {}
     for j in judge_ids:
-        path, codes[j] = CODES_DIR / f"{j}.jsonl", {}
+        path, codes[j] = codes_dir / f"{j}.jsonl", {}
         if path.exists():
             for r in map(json.loads, path.open()):
                 if r.get("error") is None and r.get("code"):
@@ -89,10 +91,11 @@ def load_codes(judge_ids):
     return codes
 
 
-def load_adjudicated():
-    if not ADJUDICATED.exists():
+def load_adjudicated(codes_dir=CODES_DIR):
+    path = codes_dir / ADJUDICATED.name
+    if not path.exists():
         return {}
-    return {(r["subject_model"], r["item_id"], r["sample"]): r for r in map(json.loads, ADJUDICATED.open())}
+    return {(r["subject_model"], r["item_id"], r["sample"]): r for r in map(json.loads, path.open())}
 
 
 def consensus(keys, codes, adjudicated):
@@ -300,7 +303,7 @@ def report_md(res, sources):
          "- Agreement by subject model: " + ", ".join(f"{m} {pct(v)}" for m, v in ag["role_agreement_by_model"].items()),
          f"- Codes used: {res['status_counts'].get('agreed', 0)} agreed, {res['status_counts'].get('adjudicated', 0)} "
          f"adjudicated, {res['status_counts'].get('disputed', 0)} still disputed (left out of the tests; listed in "
-         "analysis/output/justification_disputes.md)."]
+         "analysis/output/<name>_disputes.md)."]
     h = res.get("human")
     if h:
         L.append(f"- Against human codes (n={h['n']}): " + ", ".join(
@@ -396,15 +399,18 @@ def write_sheet(resp, cons, n, seed=0):
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--sources", nargs="+", type=Path, default=DEFAULT_SOURCES)
+    ap.add_argument("--codes", type=Path, default=CODES_DIR, help="judge codes directory")
+    ap.add_argument("--name", default="justifications", help="report name (default justifications)")
     ap.add_argument("--boot", type=int, default=2000)
     ap.add_argument("--sheet", type=int, help="write a blind human coding sheet of about N justifications")
     args = ap.parse_args()
 
     resp = load_responses(args.sources)
     judge_ids = [j["id"] for j in json.loads(JUDGES.read_text())["judges"]]
-    codes = load_codes(judge_ids)
+    codes_dir = args.codes if args.codes.is_absolute() else ROOT / args.codes
+    codes = load_codes(judge_ids, codes_dir)
     just_keys = [k for k, r in resp.items() if r["format"] == "justification" and r["explanation"]]
-    cons = consensus(just_keys, codes, load_adjudicated())
+    cons = consensus(just_keys, codes, load_adjudicated(codes_dir))
     if not cons:
         raise SystemExit("no justification has been coded by every judge; run scripts/code_justifications.py")
     if args.sheet:
@@ -436,14 +442,14 @@ def main():
                for s in args.sources]
     md = report_md(res, sources)
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    (OUT_DIR / "justifications_report.md").write_text(md)
-    (OUT_DIR / "justifications_report.json").write_text(json.dumps(
+    (OUT_DIR / f"{args.name}_report.md").write_text(md)
+    (OUT_DIR / f"{args.name}_report.json").write_text(json.dumps(
         {**res, "groups": {f"{m}|{f}": g for (m, f), g in res["groups"].items()}}, indent=2, default=list))
-    (OUT_DIR / "justification_disputes.md").write_text(disputes_md(resp, codes, cons))
+    (OUT_DIR / f"{args.name}_disputes.md").write_text(disputes_md(resp, codes, cons))
     if res["uncoded"]:
         print(f"note: {res['uncoded']} justifications aren't coded by every judge yet and are left out")
     print(md)
-    print("wrote analysis/output/justifications_report.{md,json} and justification_disputes.md")
+    print(f"wrote analysis/output/{args.name}_report.{{md,json}} and {args.name}_disputes.md")
 
 
 if __name__ == "__main__":

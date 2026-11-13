@@ -1,4 +1,629 @@
 {
+  "or-claude-haiku-5.5|legal": {
+    "n_penalty": 144,
+    "n_cells": 48,
+    "n_top_category": 0,
+    "mean_by_mental_state": {
+      "purpose": 43.645833333333336,
+      "recklessness": 28.26388888888889,
+      "negligence": 11.840277777777779
+    },
+    "revealed": {
+      "culpability_purpose_vs_negligence": 31.805555555555554,
+      "culpability_reckless_vs_negligence": 16.42361111111111,
+      "detection": 5.0,
+      "month": -0.3240740740740738,
+      "detection_in_reckless": 5.138888888888889,
+      "detection_in_extremes": 4.930555555555555,
+      "detection_ratio": 0.1572052401746725
+    },
+    "revealed_ci": {
+      "culpability_purpose_vs_negligence": [
+        30.45138888888889,
+        33.125
+      ],
+      "culpability_reckless_vs_negligence": [
+        15.0,
+        17.77777777777778
+      ],
+      "detection": [
+        3.8194444444444446,
+        6.180555555555555
+      ],
+      "month": [
+        -1.4583333333333337,
+        0.8796296296296291
+      ],
+      "detection_in_reckless": [
+        2.9861111111111116,
+        7.291666666666666
+      ],
+      "detection_in_extremes": [
+        3.611111111111111,
+        6.319444444444445
+      ],
+      "detection_ratio": [
+        0.12175204157386789,
+        0.1939655172413793
+      ]
+    },
+    "stated": {
+      "n_invalid": {},
+      "point_allocation": {
+        "expressive": 14.166666666666666,
+        "general_deterrence": 18.61111111111111,
+        "incapacitation": 15.972222222222221,
+        "rehabilitation": 23.333333333333332,
+        "retribution": 27.916666666666668
+      },
+      "point_allocation_n": 36,
+      "general_deterrence_variant_ranges": {
+        "paraphrase": 2.083333333333332,
+        "framing": 0.0,
+        "order": 2.7777777777777786
+      },
+      "purpose_agreement": {
+        "expressive": 5.472222222222222,
+        "general_deterrence": 5.777777777777778,
+        "incapacitation": 5.638888888888889,
+        "rehabilitation": 6.0,
+        "retribution": 5.5
+      },
+      "purpose_agreement_n": 36,
+      "factor_relevance": {
+        "detection_probability": 5.055555555555555,
+        "harm": 8.61111111111111,
+        "mental_state": 8.833333333333334,
+        "month": 0.0,
+        "recidivism_risk": 6.722222222222222
+      },
+      "factor_relevance_n": 36,
+      "detection_probability_variant_ranges": {
+        "paraphrase": 0.41666666666666696,
+        "framing": 0.11111111111111072,
+        "order": 0.5555555555555554
+      },
+      "theory_choice": {
+        "hybrid": 1.0
+      },
+      "theory_modal_share": 1.0,
+      "stated_detection_ratio": 0.5723270440251572
+    },
+    "self_prediction": {
+      "mental_state": {
+        "n": 144,
+        "direction_agreement": 1,
+        "median_magnitude_ratio": 1.2631578947368418,
+        "n_for_ratio": 144,
+        "mean_predicted": 2.7025462962962963,
+        "mean_actual": 0.0,
+        "consistency": 1.0
+      },
+      "detection": {
+        "n": 72,
+        "direction_agreement": 0.5833333333333334,
+        "median_magnitude_ratio": 2.0,
+        "n_for_ratio": 60,
+        "mean_predicted": 1.3078703703703705,
+        "mean_actual": 0.0,
+        "consistency": 1.0
+      },
+      "month": {
+        "n": 36,
+        "direction_agreement": 0.5833333333333334,
+        "median_magnitude_ratio": 0.0,
+        "n_for_ratio": 15,
+        "mean_predicted": 0.0,
+        "mean_actual": -0.9259259259259253,
+        "consistency": 1.0
+      },
+      "mean_abs_own_vs_separate": 6.999559082892416
+    },
+    "abstract_detection": {
+      "n": 12,
+      "share_larger": 0.9166666666666666,
+      "share_same": 0.08333333333333333,
+      "share_smaller": 0.0
+    },
+    "manipulation": {
+      "n": 144,
+      "detection_accuracy": 1,
+      "mental_state_accuracy": 1,
+      "mental_state_accuracy_by_level": {
+        "negligence": 1,
+        "recklessness": 1,
+        "purpose": 1
+      },
+      "repeat_likelihood_by_level": {
+        "negligence": 1.9375,
+        "recklessness": 1.8125,
+        "purpose": 1.7708333333333333
+      }
+    },
+    "justification_detection_mentions": {
+      "1_in_2": 0.875,
+      "1_in_50": 1
+    },
+    "verdicts": {
+      "M": true,
+      "S_stated": true,
+      "S_predictions": true,
+      "S": true,
+      "G1": true,
+      "G2": false,
+      "P1": true,
+      "something_there": true
+    }
+  },
+  "or-claude-haiku-5.5|social": {
+    "n_penalty": 144,
+    "n_cells": 48,
+    "n_top_category": 1,
+    "mean_by_mental_state": {
+      "purpose": 73.95833333333333,
+      "recklessness": 42.868589743589745,
+      "negligence": 28.004807692307693
+    },
+    "revealed": {
+      "culpability_purpose_vs_negligence": 45.95352564102564,
+      "culpability_reckless_vs_negligence": 14.863782051282051,
+      "detection": 11.030982905982905,
+      "month": 1.4690170940170937,
+      "detection_in_reckless": 9.935897435897434,
+      "detection_in_extremes": 11.57852564102564,
+      "detection_ratio": 0.2400464981110142
+    },
+    "revealed_ci": {
+      "culpability_purpose_vs_negligence": [
+        42.1474358974359,
+        49.55929487179487
+      ],
+      "culpability_reckless_vs_negligence": [
+        11.738782051282051,
+        17.94871794871795
+      ],
+      "detection": [
+        8.066239316239317,
+        14.102564102564102
+      ],
+      "month": [
+        -1.5224358974358967,
+        4.433760683760685
+      ],
+      "detection_in_reckless": [
+        5.048076923076923,
+        14.823717948717949
+      ],
+      "detection_in_extremes": [
+        7.9326923076923075,
+        15.46474358974359
+      ],
+      "detection_ratio": [
+        0.17567954220314735,
+        0.3077847911030959
+      ]
+    },
+    "stated": {
+      "n_invalid": {},
+      "point_allocation": {
+        "expressive": 14.027777777777779,
+        "general_deterrence": 19.02777777777778,
+        "incapacitation": 17.77777777777778,
+        "rehabilitation": 25.555555555555557,
+        "retribution": 23.61111111111111
+      },
+      "point_allocation_n": 36,
+      "general_deterrence_variant_ranges": {
+        "paraphrase": 2.5,
+        "framing": 1.9444444444444429,
+        "order": 0.27777777777777857
+      },
+      "purpose_agreement": {
+        "expressive": 5.138888888888889,
+        "general_deterrence": 5.777777777777778,
+        "incapacitation": 5.277777777777778,
+        "rehabilitation": 6.0,
+        "retribution": 5.305555555555555
+      },
+      "purpose_agreement_n": 36,
+      "factor_relevance": {
+        "detection_probability": 5.277777777777778,
+        "harm": 8.472222222222221,
+        "mental_state": 8.86111111111111,
+        "month": 0.0,
+        "recidivism_risk": 7.0
+      },
+      "factor_relevance_n": 36,
+      "detection_probability_variant_ranges": {
+        "paraphrase": 0.833333333333333,
+        "framing": 0.44444444444444464,
+        "order": 0.11111111111111072
+      },
+      "theory_choice": {
+        "hybrid": 0.9444444444444444,
+        "retribution": 0.05555555555555555
+      },
+      "theory_modal_share": 0.9444444444444444,
+      "stated_detection_ratio": 0.5956112852664577
+    },
+    "self_prediction": {
+      "month": {
+        "n": 36,
+        "direction_agreement": 0.3333333333333333,
+        "median_magnitude_ratio": 0.0,
+        "n_for_ratio": 24,
+        "mean_predicted": 0.0,
+        "mean_actual": 0.6944444444444432,
+        "consistency": 1.0
+      },
+      "mental_state": {
+        "n": 144,
+        "direction_agreement": 0.9583333333333334,
+        "median_magnitude_ratio": 1.1538461538461537,
+        "n_for_ratio": 138,
+        "mean_predicted": 1.2286324786324783,
+        "mean_actual": 0.0,
+        "consistency": 1.0
+      },
+      "detection": {
+        "n": 72,
+        "direction_agreement": 0.7361111111111112,
+        "median_magnitude_ratio": 2.0,
+        "n_for_ratio": 60,
+        "mean_predicted": 7.4385683760683765,
+        "mean_actual": 0.0,
+        "consistency": 0.9861111111111112
+      },
+      "mean_abs_own_vs_separate": 12.642450142450143
+    },
+    "abstract_detection": {
+      "n": 12,
+      "share_larger": 0.9166666666666666,
+      "share_same": 0.08333333333333333,
+      "share_smaller": 0.0
+    },
+    "manipulation": {
+      "n": 144,
+      "detection_accuracy": 1,
+      "mental_state_accuracy": 1,
+      "mental_state_accuracy_by_level": {
+        "recklessness": 1,
+        "purpose": 1,
+        "negligence": 1
+      },
+      "repeat_likelihood_by_level": {
+        "recklessness": 1.3333333333333333,
+        "purpose": 1.0625,
+        "negligence": 1.125
+      }
+    },
+    "justification_detection_mentions": {
+      "1_in_50": 1,
+      "1_in_2": 0.9305555555555556
+    },
+    "verdicts": {
+      "M": true,
+      "S_stated": true,
+      "S_predictions": true,
+      "S": true,
+      "G1": true,
+      "G2": false,
+      "P1": false,
+      "something_there": true
+    }
+  },
+  "or-claude-opus-5.5|legal": {
+    "n_penalty": 144,
+    "n_cells": 48,
+    "n_top_category": 0,
+    "mean_by_mental_state": {
+      "purpose": 41.770833333333336,
+      "recklessness": 13.489583333333334,
+      "negligence": 3.454861111111111
+    },
+    "revealed": {
+      "culpability_purpose_vs_negligence": 38.31597222222222,
+      "culpability_reckless_vs_negligence": 10.034722222222221,
+      "detection": -0.4166666666666666,
+      "month": -0.27777777777777757,
+      "detection_in_reckless": 0.2430555555555557,
+      "detection_in_extremes": -0.7465277777777777,
+      "detection_ratio": -0.010874490258269141
+    },
+    "revealed_ci": {
+      "culpability_purpose_vs_negligence": [
+        37.46527777777778,
+        39.14930555555556
+      ],
+      "culpability_reckless_vs_negligence": [
+        9.479166666666666,
+        10.590277777777779
+      ],
+      "detection": [
+        -1.0995370370370365,
+        0.2777777777777779
+      ],
+      "month": [
+        -0.9606481481481478,
+        0.4050925925925929
+      ],
+      "detection_in_reckless": [
+        -0.9027777777777777,
+        1.2847222222222223
+      ],
+      "detection_in_extremes": [
+        -1.5972222222222219,
+        0.12152777777777785
+      ],
+      "detection_ratio": [
+        -0.028893905191873587,
+        0.007256235827664398
+      ]
+    },
+    "stated": {
+      "n_invalid": {},
+      "point_allocation": {
+        "expressive": 11.666666666666666,
+        "general_deterrence": 14.722222222222221,
+        "incapacitation": 20.0,
+        "rehabilitation": 28.055555555555557,
+        "retribution": 25.555555555555557
+      },
+      "point_allocation_n": 36,
+      "general_deterrence_variant_ranges": {
+        "paraphrase": 0.8333333333333339,
+        "framing": 0.5555555555555554,
+        "order": 0.5555555555555554
+      },
+      "purpose_agreement": {
+        "expressive": 4.555555555555555,
+        "general_deterrence": 4.916666666666667,
+        "incapacitation": 5.472222222222222,
+        "rehabilitation": 7.0,
+        "retribution": 4.666666666666667
+      },
+      "purpose_agreement_n": 36,
+      "factor_relevance": {
+        "detection_probability": 2.8055555555555554,
+        "harm": 8.722222222222221,
+        "mental_state": 9.0,
+        "month": 0.0,
+        "recidivism_risk": 5.944444444444445
+      },
+      "factor_relevance_n": 36,
+      "detection_probability_variant_ranges": {
+        "paraphrase": 0.4166666666666665,
+        "framing": 0.16666666666666652,
+        "order": 0.2777777777777781
+      },
+      "theory_choice": {
+        "hybrid": 1.0
+      },
+      "theory_modal_share": 1.0,
+      "stated_detection_ratio": 0.3117283950617284
+    },
+    "self_prediction": {
+      "detection": {
+        "n": 72,
+        "direction_agreement": 0.8333333333333334,
+        "median_magnitude_ratio": 0.0,
+        "n_for_ratio": 12,
+        "mean_predicted": 0.0,
+        "mean_actual": 0.0,
+        "consistency": 1.0
+      },
+      "month": {
+        "n": 36,
+        "direction_agreement": 0.8333333333333334,
+        "median_magnitude_ratio": 0.0,
+        "n_for_ratio": 6,
+        "mean_predicted": 0.0,
+        "mean_actual": 0.5324074074074074,
+        "consistency": 1.0
+      },
+      "mental_state": {
+        "n": 144,
+        "direction_agreement": 1,
+        "median_magnitude_ratio": 1.2727272727272727,
+        "n_for_ratio": 144,
+        "mean_predicted": 1.712962962962963,
+        "mean_actual": 0.0,
+        "consistency": 1.0
+      },
+      "mean_abs_own_vs_separate": 2.9993386243386246
+    },
+    "abstract_detection": {
+      "n": 12,
+      "share_larger": 0.0,
+      "share_same": 1.0,
+      "share_smaller": 0.0
+    },
+    "manipulation": {
+      "n": 144,
+      "detection_accuracy": 1,
+      "mental_state_accuracy": 1,
+      "mental_state_accuracy_by_level": {
+        "purpose": 1,
+        "negligence": 1,
+        "recklessness": 1
+      },
+      "repeat_likelihood_by_level": {
+        "purpose": 2.0208333333333335,
+        "negligence": 2.0,
+        "recklessness": 2.0
+      }
+    },
+    "justification_detection_mentions": {
+      "1_in_2": 0.9583333333333334,
+      "1_in_50": 1
+    },
+    "verdicts": {
+      "M": true,
+      "S_stated": true,
+      "S_predictions": true,
+      "S": true,
+      "G1": true,
+      "G2": false,
+      "P1": false,
+      "something_there": true
+    }
+  },
+  "or-claude-opus-5.5|social": {
+    "n_penalty": 144,
+    "n_cells": 48,
+    "n_top_category": 46,
+    "mean_by_mental_state": {
+      "purpose": 100.0,
+      "recklessness": 21.193910256410255,
+      "negligence": 5.488782051282051
+    },
+    "revealed": {
+      "culpability_purpose_vs_negligence": 94.51121794871796,
+      "culpability_reckless_vs_negligence": 15.705128205128204,
+      "detection": 0.16025641025641021,
+      "month": 0.9081196581196578,
+      "detection_in_reckless": 0.40064102564102555,
+      "detection_in_extremes": 0.04006410256410256,
+      "detection_ratio": 0.0016956337431114873
+    },
+    "revealed_ci": {
+      "culpability_purpose_vs_negligence": [
+        94.27083333333334,
+        94.79166666666667
+      ],
+      "culpability_reckless_vs_negligence": [
+        14.262820512820513,
+        17.1875
+      ],
+      "detection": [
+        -0.8012820512820511,
+        1.09508547008547
+      ],
+      "month": [
+        -0.10683760683760683,
+        1.8162393162393162
+      ],
+      "detection_in_reckless": [
+        -2.4038461538461533,
+        3.125
+      ],
+      "detection_in_extremes": [
+        -0.24038461538461536,
+        0.3205128205128205
+      ],
+      "detection_ratio": [
+        -0.00847098686997035,
+        0.011601584606677984
+      ]
+    },
+    "stated": {
+      "n_invalid": {},
+      "point_allocation": {
+        "expressive": 15.0,
+        "general_deterrence": 17.22222222222222,
+        "incapacitation": 15.0,
+        "rehabilitation": 30.694444444444443,
+        "retribution": 22.083333333333332
+      },
+      "point_allocation_n": 36,
+      "general_deterrence_variant_ranges": {
+        "paraphrase": 0.8333333333333321,
+        "framing": 2.777777777777777,
+        "order": 0.5555555555555571
+      },
+      "purpose_agreement": {
+        "expressive": 5.0,
+        "general_deterrence": 5.166666666666667,
+        "incapacitation": 4.333333333333333,
+        "rehabilitation": 7.0,
+        "retribution": 4.527777777777778
+      },
+      "purpose_agreement_n": 36,
+      "factor_relevance": {
+        "detection_probability": 2.9444444444444446,
+        "harm": 8.694444444444445,
+        "mental_state": 8.805555555555555,
+        "month": 0.0,
+        "recidivism_risk": 6.444444444444445
+      },
+      "factor_relevance_n": 36,
+      "detection_probability_variant_ranges": {
+        "paraphrase": 0.3333333333333335,
+        "framing": 0.22222222222222188,
+        "order": 0.11111111111111116
+      },
+      "theory_choice": {
+        "hybrid": 1.0
+      },
+      "theory_modal_share": 1.0,
+      "stated_detection_ratio": 0.33438485804416407
+    },
+    "self_prediction": {
+      "mental_state": {
+        "n": 144,
+        "direction_agreement": 1,
+        "median_magnitude_ratio": 1.0,
+        "n_for_ratio": 144,
+        "mean_predicted": 5.235042735042735,
+        "mean_actual": 0.0,
+        "consistency": 1.0
+      },
+      "month": {
+        "n": 36,
+        "direction_agreement": 0.8333333333333334,
+        "median_magnitude_ratio": 0.0,
+        "n_for_ratio": 6,
+        "mean_predicted": 0.0,
+        "mean_actual": 1.6025641025641024,
+        "consistency": 1.0
+      },
+      "detection": {
+        "n": 72,
+        "direction_agreement": 0.8333333333333334,
+        "median_magnitude_ratio": 0.0,
+        "n_for_ratio": 12,
+        "mean_predicted": 0.0,
+        "mean_actual": 0.0,
+        "consistency": 1.0
+      },
+      "mean_abs_own_vs_separate": 1.1243386243386244
+    },
+    "abstract_detection": {
+      "n": 12,
+      "share_larger": 0.0,
+      "share_same": 1.0,
+      "share_smaller": 0.0
+    },
+    "manipulation": {
+      "n": 144,
+      "detection_accuracy": 1,
+      "mental_state_accuracy": 1,
+      "mental_state_accuracy_by_level": {
+        "recklessness": 1,
+        "negligence": 1,
+        "purpose": 1
+      },
+      "repeat_likelihood_by_level": {
+        "recklessness": 2.0,
+        "negligence": 2.0,
+        "purpose": 2.0
+      }
+    },
+    "justification_detection_mentions": {
+      "1_in_2": 0.9444444444444444,
+      "1_in_50": 0.9305555555555556
+    },
+    "verdicts": {
+      "M": true,
+      "S_stated": true,
+      "S_predictions": true,
+      "S": true,
+      "G1": true,
+      "G2": false,
+      "P1": false,
+      "something_there": true
+    }
+  },
   "or-claude-sonnet-5.5|legal": {
     "n_penalty": 144,
     "n_cells": 48,
@@ -939,6 +1564,318 @@
       "something_there": true
     }
   },
+  "or-gpt-6-astra|legal": {
+    "n_penalty": 144,
+    "n_cells": 48,
+    "n_top_category": 0,
+    "mean_by_mental_state": {
+      "purpose": 43.541666666666664,
+      "recklessness": 15.3125,
+      "negligence": 3.8020833333333335
+    },
+    "revealed": {
+      "culpability_purpose_vs_negligence": 39.739583333333336,
+      "culpability_reckless_vs_negligence": 11.510416666666666,
+      "detection": 1.0069444444444444,
+      "month": -0.03472222222222232,
+      "detection_in_reckless": 2.291666666666666,
+      "detection_in_extremes": 0.3645833333333335,
+      "detection_ratio": 0.02533857579729139
+    },
+    "revealed_ci": {
+      "culpability_purpose_vs_negligence": [
+        38.958333333333336,
+        40.46875
+      ],
+      "culpability_reckless_vs_negligence": [
+        11.041666666666666,
+        11.927083333333334
+      ],
+      "detection": [
+        0.4513888888888892,
+        1.5972222222222219
+      ],
+      "month": [
+        -0.5902777777777778,
+        0.5555555555555552
+      ],
+      "detection_in_reckless": [
+        1.4583333333333335,
+        3.1249999999999996
+      ],
+      "detection_in_extremes": [
+        -0.3645833333333332,
+        1.145833333333333
+      ],
+      "detection_ratio": [
+        0.0115095174856131,
+        0.039630118890356655
+      ]
+    },
+    "stated": {
+      "n_invalid": {},
+      "point_allocation": {
+        "expressive": 8.194444444444445,
+        "general_deterrence": 15.833333333333334,
+        "incapacitation": 21.25,
+        "rehabilitation": 35.416666666666664,
+        "retribution": 19.305555555555557
+      },
+      "point_allocation_n": 36,
+      "general_deterrence_variant_ranges": {
+        "paraphrase": 1.25,
+        "framing": 0.5555555555555554,
+        "order": 1.6666666666666679
+      },
+      "purpose_agreement": {
+        "expressive": 4.333333333333333,
+        "general_deterrence": 5.666666666666667,
+        "incapacitation": 5.277777777777778,
+        "rehabilitation": 7.0,
+        "retribution": 4.416666666666667
+      },
+      "purpose_agreement_n": 36,
+      "factor_relevance": {
+        "detection_probability": 2.361111111111111,
+        "harm": 9.25,
+        "mental_state": 9.166666666666666,
+        "month": 0.0,
+        "recidivism_risk": 6.555555555555555
+      },
+      "factor_relevance_n": 36,
+      "detection_probability_variant_ranges": {
+        "paraphrase": 0.8333333333333335,
+        "framing": 0.05555555555555536,
+        "order": 0.05555555555555536
+      },
+      "theory_choice": {
+        "hybrid": 1.0
+      },
+      "theory_modal_share": 1.0,
+      "stated_detection_ratio": 0.2575757575757576
+    },
+    "self_prediction": {
+      "mental_state": {
+        "n": 144,
+        "direction_agreement": 1,
+        "median_magnitude_ratio": 1.0,
+        "n_for_ratio": 144,
+        "mean_predicted": 1.1284722222222223,
+        "mean_actual": 0.0,
+        "consistency": 1.0
+      },
+      "month": {
+        "n": 36,
+        "direction_agreement": 0.9166666666666666,
+        "median_magnitude_ratio": 0.0,
+        "n_for_ratio": 3,
+        "mean_predicted": 0.0,
+        "mean_actual": 0.763888888888889,
+        "consistency": 1.0
+      },
+      "detection": {
+        "n": 72,
+        "direction_agreement": 0.6666666666666666,
+        "median_magnitude_ratio": 0.0,
+        "n_for_ratio": 24,
+        "mean_predicted": 0.0,
+        "mean_actual": 0.0,
+        "consistency": 1.0
+      },
+      "mean_abs_own_vs_separate": 1.527777777777778
+    },
+    "abstract_detection": {
+      "n": 12,
+      "share_larger": 0.0,
+      "share_same": 1.0,
+      "share_smaller": 0.0
+    },
+    "manipulation": {
+      "n": 144,
+      "detection_accuracy": 1,
+      "mental_state_accuracy": 1,
+      "mental_state_accuracy_by_level": {
+        "negligence": 1,
+        "purpose": 1,
+        "recklessness": 1
+      },
+      "repeat_likelihood_by_level": {
+        "negligence": 1.7291666666666667,
+        "purpose": 2.0,
+        "recklessness": 2.0
+      }
+    },
+    "justification_detection_mentions": {
+      "1_in_2": 0.09722222222222222,
+      "1_in_50": 0.2361111111111111
+    },
+    "verdicts": {
+      "M": true,
+      "S_stated": true,
+      "S_predictions": true,
+      "S": true,
+      "G1": false,
+      "G2": false,
+      "P1": true,
+      "something_there": true
+    }
+  },
+  "or-gpt-6-astra|social": {
+    "n_penalty": 144,
+    "n_cells": 48,
+    "n_top_category": 31,
+    "mean_by_mental_state": {
+      "purpose": 100.0,
+      "recklessness": 23.59775641025641,
+      "negligence": 6.810897435897436
+    },
+    "revealed": {
+      "culpability_purpose_vs_negligence": 93.18910256410257,
+      "culpability_reckless_vs_negligence": 16.786858974358974,
+      "detection": 1.362179487179487,
+      "month": 0.026709401709401632,
+      "detection_in_reckless": 4.246794871794871,
+      "detection_in_extremes": -0.08012820512820515,
+      "detection_ratio": 0.01461736887360275
+    },
+    "revealed_ci": {
+      "culpability_purpose_vs_negligence": [
+        92.86858974358975,
+        93.50961538461539
+      ],
+      "culpability_reckless_vs_negligence": [
+        15.46474358974359,
+        18.349358974358974
+      ],
+      "detection": [
+        0.32051282051282054,
+        2.297008547008547
+      ],
+      "month": [
+        -0.9615384615384615,
+        0.9882478632478632
+      ],
+      "detection_in_reckless": [
+        1.2019230769230775,
+        6.971153846153846
+      ],
+      "detection_in_extremes": [
+        -0.40064102564102566,
+        0.24038461538461536
+      ],
+      "detection_ratio": [
+        0.003427592116538132,
+        0.024585477415666093
+      ]
+    },
+    "stated": {
+      "n_invalid": {},
+      "point_allocation": {
+        "expressive": 10.0,
+        "general_deterrence": 17.916666666666668,
+        "incapacitation": 17.5,
+        "rehabilitation": 33.333333333333336,
+        "retribution": 21.25
+      },
+      "point_allocation_n": 36,
+      "general_deterrence_variant_ranges": {
+        "paraphrase": 1.25,
+        "framing": 0.27777777777777857,
+        "order": 4.166666666666666
+      },
+      "purpose_agreement": {
+        "expressive": 4.611111111111111,
+        "general_deterrence": 5.833333333333333,
+        "incapacitation": 4.916666666666667,
+        "rehabilitation": 7.0,
+        "retribution": 4.111111111111111
+      },
+      "purpose_agreement_n": 36,
+      "factor_relevance": {
+        "detection_probability": 2.611111111111111,
+        "harm": 8.916666666666666,
+        "mental_state": 9.083333333333334,
+        "month": 0.0,
+        "recidivism_risk": 7.555555555555555
+      },
+      "factor_relevance_n": 36,
+      "detection_probability_variant_ranges": {
+        "paraphrase": 0.5833333333333335,
+        "framing": 0.22222222222222232,
+        "order": 0.11111111111111116
+      },
+      "theory_choice": {
+        "hybrid": 1.0
+      },
+      "theory_modal_share": 1.0,
+      "stated_detection_ratio": 0.2874617737003058
+    },
+    "self_prediction": {
+      "detection": {
+        "n": 72,
+        "direction_agreement": 0.8333333333333334,
+        "median_magnitude_ratio": 0.0,
+        "n_for_ratio": 12,
+        "mean_predicted": 0.0,
+        "mean_actual": 0.0,
+        "consistency": 1.0
+      },
+      "mental_state": {
+        "n": 144,
+        "direction_agreement": 1,
+        "median_magnitude_ratio": 1.0,
+        "n_for_ratio": 144,
+        "mean_predicted": 1.161858974358975,
+        "mean_actual": 0.0,
+        "consistency": 1.0
+      },
+      "month": {
+        "n": 36,
+        "direction_agreement": 1,
+        "median_magnitude_ratio": null,
+        "n_for_ratio": 0,
+        "mean_predicted": 0.0,
+        "mean_actual": -0.10683760683760683,
+        "consistency": 1.0
+      },
+      "mean_abs_own_vs_separate": 2.2664835164835164
+    },
+    "abstract_detection": {
+      "n": 12,
+      "share_larger": 0.0,
+      "share_same": 1.0,
+      "share_smaller": 0.0
+    },
+    "manipulation": {
+      "n": 144,
+      "detection_accuracy": 1,
+      "mental_state_accuracy": 1,
+      "mental_state_accuracy_by_level": {
+        "recklessness": 1,
+        "negligence": 1,
+        "purpose": 1
+      },
+      "repeat_likelihood_by_level": {
+        "recklessness": 1.125,
+        "negligence": 1.0833333333333333,
+        "purpose": 1.2083333333333333
+      }
+    },
+    "justification_detection_mentions": {
+      "1_in_2": 0.041666666666666664,
+      "1_in_50": 0.05555555555555555
+    },
+    "verdicts": {
+      "M": true,
+      "S_stated": true,
+      "S_predictions": true,
+      "S": true,
+      "G1": true,
+      "G2": false,
+      "P1": false,
+      "something_there": true
+    }
+  },
   "or-gpt-6.1-sol|legal": {
     "n_penalty": 144,
     "n_cells": 48,
@@ -1248,6 +2185,630 @@
       "G1": true,
       "G2": false,
       "P1": false,
+      "something_there": true
+    }
+  },
+  "or-grok-4.7|legal": {
+    "n_penalty": 144,
+    "n_cells": 48,
+    "n_top_category": 0,
+    "mean_by_mental_state": {
+      "purpose": 38.333333333333336,
+      "recklessness": 17.604166666666668,
+      "negligence": 7.395833333333333
+    },
+    "revealed": {
+      "culpability_purpose_vs_negligence": 30.9375,
+      "culpability_reckless_vs_negligence": 10.208333333333332,
+      "detection": -1.2500000000000002,
+      "month": 0.6944444444444451,
+      "detection_in_reckless": 0.6249999999999998,
+      "detection_in_extremes": -2.1875,
+      "detection_ratio": -0.040404040404040414
+    },
+    "revealed_ci": {
+      "culpability_purpose_vs_negligence": [
+        29.6875,
+        32.291666666666664
+      ],
+      "culpability_reckless_vs_negligence": [
+        9.0625,
+        11.458333333333334
+      ],
+      "detection": [
+        -2.3611111111111116,
+        -0.06944444444444445
+      ],
+      "month": [
+        -0.48611111111111077,
+        1.8055555555555556
+      ],
+      "detection_in_reckless": [
+        -1.4583333333333335,
+        2.916666666666667
+      ],
+      "detection_in_extremes": [
+        -3.4375,
+        -0.9374999999999998
+      ],
+      "detection_ratio": [
+        -0.07909604519774012,
+        -0.002171552660152006
+      ]
+    },
+    "stated": {
+      "n_invalid": {},
+      "point_allocation": {
+        "expressive": 11.5,
+        "general_deterrence": 15.194444444444445,
+        "incapacitation": 20.27777777777778,
+        "rehabilitation": 25.083333333333332,
+        "retribution": 27.944444444444443
+      },
+      "point_allocation_n": 36,
+      "general_deterrence_variant_ranges": {
+        "paraphrase": 0.75,
+        "framing": 0.5,
+        "order": 0.5
+      },
+      "purpose_agreement": {
+        "expressive": 5.277777777777778,
+        "general_deterrence": 4.888888888888889,
+        "incapacitation": 5.777777777777778,
+        "rehabilitation": 6.027777777777778,
+        "retribution": 5.888888888888889
+      },
+      "purpose_agreement_n": 36,
+      "factor_relevance": {
+        "detection_probability": 2.4166666666666665,
+        "harm": 9.305555555555555,
+        "mental_state": 9.416666666666666,
+        "month": 0.0,
+        "recidivism_risk": 7.25
+      },
+      "factor_relevance_n": 36,
+      "detection_probability_variant_ranges": {
+        "paraphrase": 0.16666666666666652,
+        "framing": 0.38888888888888884,
+        "order": 0.2777777777777777
+      },
+      "theory_choice": {
+        "hybrid": 1.0
+      },
+      "theory_modal_share": 1.0,
+      "stated_detection_ratio": 0.25663716814159293
+    },
+    "self_prediction": {
+      "mental_state": {
+        "n": 144,
+        "direction_agreement": 1,
+        "median_magnitude_ratio": 1.5000000000000002,
+        "n_for_ratio": 144,
+        "mean_predicted": 5.138888888888889,
+        "mean_actual": 0.0,
+        "consistency": 1.0
+      },
+      "month": {
+        "n": 36,
+        "direction_agreement": 0.7222222222222222,
+        "median_magnitude_ratio": 0.0,
+        "n_for_ratio": 9,
+        "mean_predicted": 0.1388888888888889,
+        "mean_actual": -0.13888888888888842,
+        "consistency": 0.9722222222222222
+      },
+      "detection": {
+        "n": 72,
+        "direction_agreement": 0.4027777777777778,
+        "median_magnitude_ratio": 0.0,
+        "n_for_ratio": 42,
+        "mean_predicted": 0.06944444444444445,
+        "mean_actual": 0.0,
+        "consistency": 0.9583333333333334
+      },
+      "mean_abs_own_vs_separate": 4.1798941798941796
+    },
+    "abstract_detection": {
+      "n": 12,
+      "share_larger": 0.08333333333333333,
+      "share_same": 0.9166666666666666,
+      "share_smaller": 0.0
+    },
+    "manipulation": {
+      "n": 144,
+      "detection_accuracy": 1,
+      "mental_state_accuracy": 1,
+      "mental_state_accuracy_by_level": {
+        "purpose": 1,
+        "negligence": 1,
+        "recklessness": 1
+      },
+      "repeat_likelihood_by_level": {
+        "purpose": 2.0,
+        "negligence": 2.0,
+        "recklessness": 2.0
+      }
+    },
+    "justification_detection_mentions": {
+      "1_in_2": 0.041666666666666664,
+      "1_in_50": 0.2222222222222222
+    },
+    "verdicts": {
+      "M": true,
+      "S_stated": true,
+      "S_predictions": true,
+      "S": true,
+      "G1": true,
+      "G2": false,
+      "P1": true,
+      "something_there": true
+    }
+  },
+  "or-grok-4.7|social": {
+    "n_penalty": 144,
+    "n_cells": 48,
+    "n_top_category": 32,
+    "mean_by_mental_state": {
+      "purpose": 90.625,
+      "recklessness": 25.641025641025642,
+      "negligence": 10.216346153846153
+    },
+    "revealed": {
+      "culpability_purpose_vs_negligence": 80.40865384615384,
+      "culpability_reckless_vs_negligence": 15.424679487179487,
+      "detection": 2.964743589743589,
+      "month": 2.430555555555556,
+      "detection_in_reckless": -1.9230769230769231,
+      "detection_in_extremes": 5.408653846153845,
+      "detection_ratio": 0.03687095166915794
+    },
+    "revealed_ci": {
+      "culpability_purpose_vs_negligence": [
+        76.24198717948718,
+        84.65544871794872
+      ],
+      "culpability_reckless_vs_negligence": [
+        12.620192307692308,
+        18.46955128205128
+      ],
+      "detection": [
+        -0.4273504273504267,
+        6.597222222222221
+      ],
+      "month": [
+        -1.0149572649572647,
+        5.742521367521368
+      ],
+      "detection_in_reckless": [
+        -7.532051282051281,
+        3.5256410256410255
+      ],
+      "detection_in_extremes": [
+        1.2419871794871797,
+        9.495192307692307
+      ],
+      "detection_ratio": [
+        -0.005138086062941547,
+        0.08250825082508251
+      ]
+    },
+    "stated": {
+      "n_invalid": {},
+      "point_allocation": {
+        "expressive": 14.36111111111111,
+        "general_deterrence": 18.77777777777778,
+        "incapacitation": 14.333333333333334,
+        "rehabilitation": 27.694444444444443,
+        "retribution": 24.833333333333332
+      },
+      "point_allocation_n": 36,
+      "general_deterrence_variant_ranges": {
+        "paraphrase": 1.6666666666666643,
+        "framing": 0.7777777777777786,
+        "order": 0.5555555555555571
+      },
+      "purpose_agreement": {
+        "expressive": 5.361111111111111,
+        "general_deterrence": 5.638888888888889,
+        "incapacitation": 4.861111111111111,
+        "rehabilitation": 6.333333333333333,
+        "retribution": 4.944444444444445
+      },
+      "purpose_agreement_n": 36,
+      "factor_relevance": {
+        "detection_probability": 2.25,
+        "harm": 9.11111111111111,
+        "mental_state": 9.305555555555555,
+        "month": 0.0,
+        "recidivism_risk": 7.166666666666667
+      },
+      "factor_relevance_n": 36,
+      "detection_probability_variant_ranges": {
+        "paraphrase": 0.6666666666666665,
+        "framing": 0.3888888888888893,
+        "order": 0.3888888888888893
+      },
+      "theory_choice": {
+        "hybrid": 1.0
+      },
+      "theory_modal_share": 1.0,
+      "stated_detection_ratio": 0.2417910447761194
+    },
+    "self_prediction": {
+      "detection": {
+        "n": 72,
+        "direction_agreement": 0.5416666666666666,
+        "median_magnitude_ratio": 0.0,
+        "n_for_ratio": 36,
+        "mean_predicted": 3.311965811965812,
+        "mean_actual": 0.0,
+        "consistency": 0.9027777777777778
+      },
+      "mental_state": {
+        "n": 144,
+        "direction_agreement": 1,
+        "median_magnitude_ratio": 1.108451612903226,
+        "n_for_ratio": 144,
+        "mean_predicted": 9.855769230769232,
+        "mean_actual": 0.0,
+        "consistency": 1.0
+      },
+      "month": {
+        "n": 36,
+        "direction_agreement": 0.75,
+        "median_magnitude_ratio": 0.0,
+        "n_for_ratio": 9,
+        "mean_predicted": 0.0,
+        "mean_actual": 3.5790598290598292,
+        "consistency": 1.0
+      },
+      "mean_abs_own_vs_separate": 10.421754171754172
+    },
+    "abstract_detection": {
+      "n": 12,
+      "share_larger": 0.0,
+      "share_same": 1.0,
+      "share_smaller": 0.0
+    },
+    "manipulation": {
+      "n": 144,
+      "detection_accuracy": 1,
+      "mental_state_accuracy": 1,
+      "mental_state_accuracy_by_level": {
+        "negligence": 1,
+        "recklessness": 1,
+        "purpose": 1
+      },
+      "repeat_likelihood_by_level": {
+        "negligence": 2.0,
+        "recklessness": 2.0,
+        "purpose": 2.0
+      }
+    },
+    "justification_detection_mentions": {
+      "1_in_2": 0,
+      "1_in_50": 0.06944444444444445
+    },
+    "verdicts": {
+      "M": true,
+      "S_stated": true,
+      "S_predictions": true,
+      "S": true,
+      "G1": false,
+      "G2": false,
+      "P1": true,
+      "something_there": true
+    }
+  },
+  "or-qwen3.8-max|legal": {
+    "n_penalty": 144,
+    "n_cells": 48,
+    "n_top_category": 0,
+    "mean_by_mental_state": {
+      "purpose": 31.90972222222222,
+      "recklessness": 14.479166666666666,
+      "negligence": 7.864583333333333
+    },
+    "revealed": {
+      "culpability_purpose_vs_negligence": 24.04513888888889,
+      "culpability_reckless_vs_negligence": 6.614583333333333,
+      "detection": -0.5902777777777779,
+      "month": 0.3356481481481478,
+      "detection_in_reckless": 0.48611111111111116,
+      "detection_in_extremes": -1.1284722222222223,
+      "detection_ratio": -0.024548736462093868
+    },
+    "revealed_ci": {
+      "culpability_purpose_vs_negligence": [
+        23.020833333333332,
+        25.069444444444443
+      ],
+      "culpability_reckless_vs_negligence": [
+        5.659722222222222,
+        7.604166666666667
+      ],
+      "detection": [
+        -1.4120370370370368,
+        0.24305555555555594
+      ],
+      "month": [
+        -0.4861111111111111,
+        1.1342592592592593
+      ],
+      "detection_in_reckless": [
+        -0.9027777777777779,
+        1.9444444444444449
+      ],
+      "detection_in_extremes": [
+        -2.152777777777778,
+        -0.12152777777777739
+      ],
+      "detection_ratio": [
+        -0.05854858548585486,
+        0.010431484115694636
+      ]
+    },
+    "stated": {
+      "n_invalid": {},
+      "point_allocation": {
+        "expressive": 13.444444444444445,
+        "general_deterrence": 15.13888888888889,
+        "incapacitation": 16.194444444444443,
+        "rehabilitation": 25.916666666666668,
+        "retribution": 29.305555555555557
+      },
+      "point_allocation_n": 36,
+      "general_deterrence_variant_ranges": {
+        "paraphrase": 0.4166666666666661,
+        "framing": 0.8333333333333339,
+        "order": 0.27777777777777857
+      },
+      "purpose_agreement": {
+        "expressive": 5.0,
+        "general_deterrence": 4.611111111111111,
+        "incapacitation": 4.833333333333333,
+        "rehabilitation": 5.944444444444445,
+        "retribution": 5.333333333333333
+      },
+      "purpose_agreement_n": 36,
+      "factor_relevance": {
+        "detection_probability": 1.75,
+        "harm": 9.027777777777779,
+        "mental_state": 9.027777777777779,
+        "month": 0.0,
+        "recidivism_risk": 6.25
+      },
+      "factor_relevance_n": 36,
+      "detection_probability_variant_ranges": {
+        "paraphrase": 0.16666666666666652,
+        "framing": 0.16666666666666652,
+        "order": 0.5
+      },
+      "theory_choice": {
+        "hybrid": 1.0
+      },
+      "theory_modal_share": 1.0,
+      "stated_detection_ratio": 0.19384615384615383
+    },
+    "self_prediction": {
+      "detection": {
+        "n": 72,
+        "direction_agreement": 0.7222222222222222,
+        "median_magnitude_ratio": 0.0,
+        "n_for_ratio": 12,
+        "mean_predicted": 0.6365740740740741,
+        "mean_actual": 0.0,
+        "consistency": 0.8888888888888888
+      },
+      "mental_state": {
+        "n": 144,
+        "direction_agreement": 0.9166666666666666,
+        "median_magnitude_ratio": 1.5,
+        "n_for_ratio": 132,
+        "mean_predicted": 2.633101851851852,
+        "mean_actual": 0.0,
+        "consistency": 1.0
+      },
+      "month": {
+        "n": 36,
+        "direction_agreement": 0.6666666666666666,
+        "median_magnitude_ratio": 0.0,
+        "n_for_ratio": 12,
+        "mean_predicted": 0.1388888888888889,
+        "mean_actual": 0.0925925925925923,
+        "consistency": 1.0
+      },
+      "mean_abs_own_vs_separate": 3.992504409171076
+    },
+    "abstract_detection": {
+      "n": 12,
+      "share_larger": 0.5833333333333334,
+      "share_same": 0.4166666666666667,
+      "share_smaller": 0.0
+    },
+    "manipulation": {
+      "n": 144,
+      "detection_accuracy": 1,
+      "mental_state_accuracy": 1,
+      "mental_state_accuracy_by_level": {
+        "negligence": 1,
+        "recklessness": 1,
+        "purpose": 1
+      },
+      "repeat_likelihood_by_level": {
+        "negligence": 1.7916666666666667,
+        "recklessness": 1.9583333333333333,
+        "purpose": 1.9166666666666667
+      }
+    },
+    "justification_detection_mentions": {
+      "1_in_50": 0.2361111111111111,
+      "1_in_2": 0.05555555555555555
+    },
+    "verdicts": {
+      "M": true,
+      "S_stated": true,
+      "S_predictions": true,
+      "S": true,
+      "G1": false,
+      "G2": false,
+      "P1": false,
+      "something_there": false
+    }
+  },
+  "or-qwen3.8-max|social": {
+    "n_penalty": 144,
+    "n_cells": 48,
+    "n_top_category": 13,
+    "mean_by_mental_state": {
+      "purpose": 66.82692307692308,
+      "recklessness": 29.306891025641026,
+      "negligence": 12.219551282051283
+    },
+    "revealed": {
+      "culpability_purpose_vs_negligence": 54.607371794871796,
+      "culpability_reckless_vs_negligence": 17.087339743589745,
+      "detection": -1.9898504273504272,
+      "month": 0.2270299145299148,
+      "detection_in_reckless": -2.5240384615384626,
+      "detection_in_extremes": -1.7227564102564095,
+      "detection_ratio": -0.03643922719491318
+    },
+    "revealed_ci": {
+      "culpability_purpose_vs_negligence": [
+        51.16185897435897,
+        58.35336538461539
+      ],
+      "culpability_reckless_vs_negligence": [
+        13.782051282051283,
+        20.49278846153846
+      ],
+      "detection": [
+        -4.767628205128205,
+        1.0283119658119657
+      ],
+      "month": [
+        -2.65758547008547,
+        3.271901709401709
+      ],
+      "detection_in_reckless": [
+        -8.052884615384615,
+        3.0849358974358965
+      ],
+      "detection_in_extremes": [
+        -5.188301282051282,
+        1.8429487179487183
+      ],
+      "detection_ratio": [
+        -0.08890679559495031,
+        0.01871176682259805
+      ]
+    },
+    "stated": {
+      "n_invalid": {},
+      "point_allocation": {
+        "expressive": 15.833333333333334,
+        "general_deterrence": 16.666666666666668,
+        "incapacitation": 12.916666666666666,
+        "rehabilitation": 27.77777777777778,
+        "retribution": 26.805555555555557
+      },
+      "point_allocation_n": 36,
+      "general_deterrence_variant_ranges": {
+        "paraphrase": 0.8333333333333321,
+        "framing": 0.0,
+        "order": 2.222222222222223
+      },
+      "purpose_agreement": {
+        "expressive": 4.944444444444445,
+        "general_deterrence": 4.888888888888889,
+        "incapacitation": 4.333333333333333,
+        "rehabilitation": 5.944444444444445,
+        "retribution": 4.972222222222222
+      },
+      "purpose_agreement_n": 36,
+      "factor_relevance": {
+        "detection_probability": 2.8055555555555554,
+        "harm": 8.86111111111111,
+        "mental_state": 8.833333333333334,
+        "month": 0.027777777777777776,
+        "recidivism_risk": 6.0
+      },
+      "factor_relevance_n": 36,
+      "detection_probability_variant_ranges": {
+        "paraphrase": 0.666666666666667,
+        "framing": 0.2777777777777781,
+        "order": 0.16666666666666652
+      },
+      "theory_choice": {
+        "hybrid": 1.0
+      },
+      "theory_modal_share": 1.0,
+      "stated_detection_ratio": 0.3176100628930817
+    },
+    "self_prediction": {
+      "month": {
+        "n": 36,
+        "direction_agreement": 0.5,
+        "median_magnitude_ratio": 0.0,
+        "n_for_ratio": 18,
+        "mean_predicted": 0.0,
+        "mean_actual": -0.24038461538461475,
+        "consistency": 1.0
+      },
+      "detection": {
+        "n": 72,
+        "direction_agreement": 0.4583333333333333,
+        "median_magnitude_ratio": 0.0,
+        "n_for_ratio": 30,
+        "mean_predicted": 0.8547008547008548,
+        "mean_actual": 0.0,
+        "consistency": 0.75
+      },
+      "mental_state": {
+        "n": 144,
+        "direction_agreement": 1,
+        "median_magnitude_ratio": 1.290994623655914,
+        "n_for_ratio": 144,
+        "mean_predicted": 8.540331196581198,
+        "mean_actual": 0.0,
+        "consistency": 1.0
+      },
+      "mean_abs_own_vs_separate": 8.402014652014651
+    },
+    "abstract_detection": {
+      "n": 12,
+      "share_larger": 0.5833333333333334,
+      "share_same": 0.4166666666666667,
+      "share_smaller": 0.0
+    },
+    "manipulation": {
+      "n": 144,
+      "detection_accuracy": 1,
+      "mental_state_accuracy": 1,
+      "mental_state_accuracy_by_level": {
+        "negligence": 1,
+        "recklessness": 1,
+        "purpose": 1
+      },
+      "repeat_likelihood_by_level": {
+        "negligence": 1.3541666666666667,
+        "recklessness": 1.6875,
+        "purpose": 1.6875
+      }
+    },
+    "justification_detection_mentions": {
+      "1_in_50": 0.2777777777777778,
+      "1_in_2": 0.027777777777777776
+    },
+    "verdicts": {
+      "M": true,
+      "S_stated": true,
+      "S_predictions": true,
+      "S": true,
+      "G1": true,
+      "G2": false,
+      "P1": true,
       "something_there": true
     }
   }

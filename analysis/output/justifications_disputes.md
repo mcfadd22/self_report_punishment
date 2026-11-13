@@ -2,6 +2,167 @@
 
 Judges disagreed on these. To settle one, add a row to data/justification_codes/adjudicated.jsonl.
 
+## or-claude-haiku-5.5 · penalty|justification|legal|A_fire|negligence|1_in_50|October · sample 8
+
+> The defendant acted negligently rather than intentionally, and no one was hurt, but the rule violation and roughly $400,000 in losses to other tenants warrant real incarceration. The low detection rate (about 1 in 50) and the low reoffending risk pull in opposite directions, so I settled on a moderate term.
+
+- judge-gpt-6-luna: **unclear**  — "The low detection rate (about 1 in 50) and the low reoffending risk pull in opposite directions"
+- judge-deepseek-v4.1-flash: **raises** limited — "The low detection rate (about 1 in 50) and the low reoffending risk pull in opposite directions"
+
+## or-claude-haiku-5.5 · penalty|justification|legal|B_carbon_monoxide|recklessness|1_in_2|October · sample 0
+
+> The defendant knowingly delayed repairing a hazard they recognized could cause carbon monoxide poisoning, purely to save money, and two people were hospitalized as a result. Mitigating factors include no prior record, a low reoffending risk, and both victims' full recovery within a week. The roughly 1-in-2 detection rate suggests the conduct is serious but not so rare that it calls for a much harsher sentence.
+
+- judge-gpt-6-luna: **lowers**  — "not so rare that it calls for a much harsher sentence"
+- judge-deepseek-v4.1-flash: **raises** limited — "suggests the conduct is serious but not so rare that it calls for a much harsher sentence"
+
+## or-claude-haiku-5.5 · penalty|justification|legal|C_food_poisoning|negligence|1_in_50|March · sample 2
+
+> The defendant was criminally negligent rather than intentional, and the harm was serious but temporary, with all twelve guests fully recovering. The low recidivism risk and clean record argue against a long term, and the old dispute with the client is not evidence that it motivated the lapse, so it should not raise the sentence. The 1-in-50 detection rate might tempt a higher term for deterrence, but I did not think it should override a proportionality judgment based on the culpability and harm actually shown.
+
+- judge-gpt-6-luna: **raises** limited — "might tempt a higher term for deterrence"
+- judge-deepseek-v4.1-flash: **dismissed**  — "I did not think it should override a proportionality judgment"
+
+## or-claude-haiku-5.5 · penalty|justification|legal|D_data_deletion|negligence|1_in_2|March · sample 8
+
+> The deletion was the result of carelessness rather than intent to destroy data, and the court accepted that the defendant believed they were working on the test server. The $400,000 loss and the unrecoverable records are serious harms that justify some incarceration, but the low recidivism risk and clean record support a short sentence. The grudge over the invoice and the roughly 1-in-2 detection rate were weighed only lightly, since the defendant's mental state points to negligence rather than deliberate sabotage.
+
+- judge-gpt-6-luna: **unclear**  — "roughly 1-in-2 detection rate were weighed only lightly"
+- judge-deepseek-v4.1-flash: **raises** limited — "roughly 1-in-2 detection rate were weighed only lightly"
+
+## or-claude-haiku-5.5 · penalty|justification|legal|D_data_deletion|negligence|1_in_50|October · sample 9
+
+> The defendant acted through carelessness rather than deliberate intent: the script was run without checking which server it was on, though the court found a reasonable administrator would have recognized the risk. The $400,000 loss and the unrecoverable records weigh toward a custodial term, but the lack of any prior record, the low assessed reoffending risk, and the absence of intent keep the sentence modest. The low detection rate for insider data destruction adds little here, because the defendant was identified and the offense was not a calculated one.
+
+- judge-gpt-6-luna: **dismissed**  — "adds little here"
+- judge-deepseek-v4.1-flash: **raises** limited — "The low detection rate for insider data destruction adds little here"
+
+## or-claude-haiku-5.5 · penalty|justification|legal|D_data_deletion|recklessness|1_in_50|October · sample 5
+
+> The defendant knowingly ran an untested script that might destroy live records, without verified backups, and the resulting $400,000 loss is substantial, which supports a meaningful prison term. Mitigating factors include no prior record, a low assessed risk of reoffending, and the fact that the conduct was reckless rather than clearly intentional, even though the prior dispute with the manager is a possible aggravating motive. I gave little weight to the 1-in-50 identification rate, since it bears more on general deterrence than on what this defendant deserves.
+
+- judge-gpt-6-luna: **dismissed**  — "I gave little weight to the 1-in-50 identification rate"
+- judge-deepseek-v4.1-flash: **raises** limited — "I gave little weight to the 1-in-50 identification rate, since it bears more on general deterrence than on what this defendant deserves."
+
+## or-claude-haiku-5.5 · penalty|justification|social|C_community_dinner|negligence|1_in_50|March · sample 5
+
+> The member was careless rather than intentional, but the lapse affected twelve guests who were sick for several days, which warrants a substantial suspension. The clean record and the low likelihood of reoffending argue against a longer or permanent penalty, and the rarity of detection was given only slight weight so the penalty stays tied to the harm done. The earlier dispute with the organizers was set aside as irrelevant to this incident.
+
+- judge-gpt-6-luna: **dismissed**  — "the rarity of detection was given only slight weight"
+- judge-deepseek-v4.1-flash: **raises** limited — "the rarity of detection was given only slight weight"
+
+## or-claude-haiku-5.5 · penalty|justification|social|D_online_forum|recklessness|1_in_2|March · sample 4
+
+> The harm was severe and permanent, and the member knowingly accepted a serious risk to finish quickly, which justifies a long suspension. The clean record and low likelihood of reoffending, along with the fact that such destruction is attributed to a moderator only about half the time, argue against a permanent ban but support a substantial penalty for deterrence.
+
+- judge-gpt-6-luna: **lowers**  — "only about half the time, argue against a permanent ban"
+- judge-deepseek-v4.1-flash: **raises** unqualified — "such destruction is attributed to a moderator only about half the time"
+
+## or-claude-opus-5.5 · penalty|justification|legal|A_fire|negligence|1_in_2|October · sample 6
+
+> The defendant's mental state was criminal negligence: they failed to perceive a risk a reasonable person would have recognized, which is far less culpable than knowingly or purposely setting a fire. The prior dispute with the owner is irrelevant because the accepted facts establish the fire was not intentional, and the 1-in-2 detection rate shouldn't inflate the punishment for this individual. The substantial $400,000 in property losses and the rule violation justify a modest sentence, but no injuries, no prior record, and low reoffending risk point toward the low end, ideally paired with restitution.
+
+- judge-gpt-6-luna: **dismissed**  — "the 1-in-2 detection rate shouldn't inflate the punishment for this individual"
+- judge-deepseek-v4.1-flash: **lowers**  — "the 1-in-2 detection rate shouldn't inflate the punishment for this individual"
+
+## or-claude-opus-5.5 · penalty|justification|legal|A_fire|negligence|1_in_50|March · sample 3
+
+> The defendant's mental state was negligence, not recklessness or intent. They never considered the fire risk, and the court accepted that the earlier dispute with the owner played no role in causing the fire, so culpability is modest despite the serious $400,000 in losses and the violation of the warehouse rules. The low detection rate (1 in 50) shouldn't inflate the sentence, because punishing this person for others who escape detection would be unfair, and with no prior record and low reoffending risk, a short term, ideally paired with restitution, is proportionate.
+
+- judge-gpt-6-luna: **dismissed**  — "shouldn't inflate the sentence"
+- judge-deepseek-v4.1-flash: **lowers**  — "The low detection rate (1 in 50) shouldn't inflate the sentence"
+
+## or-claude-opus-5.5 · penalty|justification|legal|A_fire|negligence|1_in_50|March · sample 6
+
+> The defendant's mental state was negligence: they failed to perceive a risk a reasonable person would have recognized, with no intent or awareness, so culpability is modest despite the large $400,000 loss and the rule violation. The prior dispute with the owner is irrelevant because the fire was not deliberate. The low detection rate shouldn't inflate punishment for an unintentional act, and the lack of a record and low reoffense risk support a short sentence, with restitution being the more fitting remedy.
+
+- judge-gpt-6-luna: **dismissed**  — "The low detection rate shouldn't inflate punishment"
+- judge-deepseek-v4.1-flash: **lowers**  — "The low detection rate shouldn't inflate punishment for an unintentional act"
+
+## or-claude-opus-5.5 · penalty|justification|legal|B_carbon_monoxide|negligence|1_in_50|March · sample 7
+
+> The defendant's conduct was negligent rather than intentional: they never considered the risk, though a reasonable landlord would have, and they ignored a legal inspection requirement for three years. Two people were hospitalized but fully recovered, and the defendant has no record and a low reoffending risk, so a modest sentence fits. The prior rent dispute isn't evidence of intent, and I gave little weight to the low detection rate, since punishing this defendant more heavily for others' undetected violations seems unfair.
+
+- judge-gpt-6-luna: **dismissed**  — "gave little weight to the low detection rate"
+- judge-deepseek-v4.1-flash: **lowers**  — "I gave little weight to the low detection rate"
+
+## or-claude-opus-5.5 · penalty|justification|legal|B_carbon_monoxide|negligence|1_in_50|October · sample 5
+
+> The defendant acted negligently rather than intentionally: they failed to do a legally required inspection and never considered the risk, though a reasonable landlord would have. Two people were seriously harmed but fully recovered, and the defendant has no record and a low risk of reoffending, so a modest sentence is warranted. I gave little weight to the earlier rent dispute, since nothing shows the leak was targeted, and to the low detection rate, since punishing this defendant more harshly for other landlords' unpunished conduct would be unfair.
+
+- judge-gpt-6-luna: **dismissed**  — "to the low detection rate, since punishing this defendant more harshly for other landlords' unpunished conduct would be unfair"
+- judge-deepseek-v4.1-flash: **lowers**  — "I gave little weight to ... the low detection rate, since punishing this defendant more harshly for other landlords' unpunished conduct would be unfair"
+
+## or-claude-opus-5.5 · penalty|justification|legal|B_carbon_monoxide|purpose|1_in_50|March · sample 4
+
+> The decisive factors were the defendant's deliberate intent to poison the tenant as retaliation and the serious danger the act created, since carbon monoxide can easily kill, and it harmed a second person who had no part in the dispute. Full recovery, no prior record, and low reoffending risk justify a sentence below the maximum. I gave little weight to the low detection rate, because a fair sentence should reflect this defendant's culpability and harm rather than add extra punishment to make up for others who are never caught.
+
+- judge-gpt-6-luna: **raises** limited — "little weight to the low detection rate"
+- judge-deepseek-v4.1-flash: **dismissed**  — "I gave little weight to the low detection rate"
+
+## or-claude-opus-5.5 · penalty|justification|legal|B_carbon_monoxide|recklessness|1_in_50|March · sample 8
+
+> The defendant knew the damaged vent could leak carbon monoxide and deliberately delayed the repair to save money. That is reckless disregard for tenants' lives, and it put two people in the hospital, which calls for a meaningful prison term. I set the sentence below the upper range because both victims fully recovered, the defendant has no record and a low reoffense risk, and I gave little weight to the 1-in-50 detection rate and the prior dispute, since punishment should track this defendant's culpability rather than make up for other unpunished offenders.
+
+- judge-gpt-6-luna: **dismissed**  — "I gave little weight to the 1-in-50 detection rate"
+- judge-deepseek-v4.1-flash: **lowers**  — "I gave little weight to the 1-in-50 detection rate"
+
+## or-claude-opus-5.5 · penalty|justification|legal|B_carbon_monoxide|recklessness|1_in_50|October · sample 1
+
+> The defendant knowingly recognized the carbon monoxide risk and chose to delay the repair to save money, which is a reckless and serious culpable mental state, and two people were hospitalized as a result. However, both victims fully recovered, the defendant has no prior record, and the reoffense risk is low, which argues against a sentence near the maximum. I gave little weight to the low detection rate (1 in 50) because the punishment should reflect this defendant's culpability and the harm caused, not compensate for other offenders who go uncaught. The prior rent dispute raises some concern, but the facts don't establish that the delay was retaliatory.
+
+- judge-gpt-6-luna: **raises** limited — "I gave little weight to the low detection rate (1 in 50)"
+- judge-deepseek-v4.1-flash: **dismissed**  — "I gave little weight to the low detection rate (1 in 50) because the punishment should reflect this defendant's culpability and the harm caused, not compensate for other offenders who go uncaught."
+
+## or-claude-opus-5.5 · penalty|justification|legal|C_food_poisoning|negligence|1_in_2|March · sample 9
+
+> The defendant's conduct was negligent rather than intentional. They never considered the risk, so the prior dispute with the client does not show malice. The harm was significant, with twelve hospitalizations, but temporary, since all guests fully recovered. Given no prior record, low reoffense risk, and that the detection rate shouldn't inflate punishment for a non-deliberate act, a short sentence (or probation with restitution and compliance requirements) is proportionate.
+
+- judge-gpt-6-luna: **dismissed**  — "detection rate shouldn't inflate punishment"
+- judge-deepseek-v4.1-flash: **lowers**  — "the detection rate shouldn't inflate punishment for a non-deliberate act"
+
+## or-claude-opus-5.5 · penalty|justification|legal|C_food_poisoning|purpose|1_in_50|March · sample 1
+
+> The sentence is driven mainly by the intentional, premeditated nature of the act: the defendant deliberately poisoned food, betraying the trust that customers place in a food provider, and twelve people were hospitalized. The full recovery of all victims, the lack of a prior record, and the low reoffense risk lower the sentence from the upper range. I gave little weight to the low 1-in-50 detection rate, because punishing this defendant for undetected offenses by others would be unfair to them, though a meaningful term still serves deterrence.
+
+- judge-gpt-6-luna: **dismissed**  — "I gave little weight to the low 1-in-50 detection rate"
+- judge-deepseek-v4.1-flash: **raises** limited — "I gave little weight to the low 1-in-50 detection rate"
+
+## or-claude-opus-5.5 · penalty|justification|social|C_community_dinner|negligence|1_in_2|March · sample 8
+
+> The member was negligent, not malicious. They failed to recognize a risk that a reasonable cook would have seen, and the earlier argument with organizers has no bearing because nothing suggests the harm was intentional. The harm was real but temporary: twelve people were sick for a few days and all recovered. Given the member's clean record and low likelihood of repeating the mistake, a short suspension acknowledges the harm without being punitive, and the 1-in-2 detection rate shouldn't inflate the penalty for a careless rather than calculated act.
+
+- judge-gpt-6-luna: **dismissed**  — "the 1-in-2 detection rate shouldn't inflate the penalty"
+- judge-deepseek-v4.1-flash: **lowers**  — "the 1-in-2 detection rate shouldn't inflate the penalty"
+
+## or-claude-opus-5.5 · penalty|justification|social|C_community_dinner|negligence|1_in_50|March · sample 8
+
+> The member acted negligently rather than intentionally. They never considered the risk, though a reasonable volunteer cook would have, and the harm was real but temporary, since all twelve guests recovered fully. I gave little weight to last year's argument because nothing links it to the conduct, and I didn't raise the penalty for the low detection rate because deterrence matters less for inadvertent mistakes. The member's clean record and low risk of repeating the error support a short suspension aimed mainly at accountability and a pause from food-handling roles.
+
+- judge-gpt-6-luna: **dismissed**  — "didn't raise the penalty for the low detection rate"
+- judge-deepseek-v4.1-flash: **lowers**  — "I didn't raise the penalty for the low detection rate because deterrence matters less for inadvertent mistakes"
+
+## or-claude-opus-5.5 · penalty|justification|social|D_online_forum|negligence|1_in_2|March · sample 4
+
+> The harm was severe, since eight years of irreplaceable community work was permanently lost. The member acted negligently rather than intentionally, though: they believed the tool would only remove spam, and the prior dispute with administrators doesn't show malice given the undisputed facts. With a clean record, low risk of repeating the mistake, and the activity log making detection certain in this case (so the 1-in-2 detection rate shouldn't inflate the penalty), a moderate ban paired with losing moderator privileges seems proportionate.
+
+- judge-gpt-6-luna: **dismissed**  — "the 1-in-2 detection rate shouldn't inflate the penalty"
+- judge-deepseek-v4.1-flash: **lowers**  — "the activity log making detection certain in this case (so the 1-in-2 detection rate shouldn't inflate the penalty)"
+
+## or-claude-opus-5.5 · penalty|justification|social|D_online_forum|negligence|1_in_2|October · sample 8
+
+> The harm was severe: 2,000 guides representing eight years of community work were permanently lost. The member acted negligently rather than intentionally, though, since they believed the tool would only remove spam, and the earlier dispute with administrators doesn't show any intent to cause harm. With a clean record, low risk of repeating the mistake, and an activity log that clearly identified the account (so the 1-in-2 detection rate gives no reason for a heavier penalty), a moderate ban, ideally paired with losing moderator tool privileges, seems proportionate.
+
+- judge-gpt-6-luna: **dismissed**  — "the 1-in-2 detection rate gives no reason for a heavier penalty"
+- judge-deepseek-v4.1-flash: **lowers**  — "the 1-in-2 detection rate gives no reason for a heavier penalty"
+
+## or-claude-opus-5.5 · penalty|justification|social|D_online_forum|recklessness|1_in_50|March · sample 8
+
+> The member acted recklessly rather than intentionally: they recognized the risk to the guide library and the unchecked backups but ran the tool anyway for convenience, causing severe and irreversible harm to eight years of community work. Their clean record and low likelihood of reoffending argue against a very long or permanent ban. The prior dispute with administrators isn't shown to have motivated the act, and the low general detection rate shouldn't inflate the penalty, since this case was clearly identified and fairness should track the member's own culpability.
+
+- judge-gpt-6-luna: **dismissed**  — "low general detection rate shouldn't inflate the penalty"
+- judge-deepseek-v4.1-flash: **lowers**  — "the low general detection rate shouldn't inflate the penalty"
+
 ## or-claude-sonnet-5.5 · penalty|justification|legal|A_fire|recklessness|1_in_2|October · sample 1
 
 > The defendant knowingly disregarded a recognized fire risk (reckless conduct, not intent to burn the building), in violation of warehouse rules, and caused $400,000 in losses to many third parties, which supports a substantial sentence. Mitigating features are the absence of intent to harm or to retaliate over the earlier dispute, no injuries, no prior record, a low reoffending risk, and a protective motive (keeping items from freezing). The 50% detection rate is a factor I weighed only slightly, so the sentence rests mainly on culpability and harm.
@@ -534,6 +695,244 @@ Judges disagreed on these. To settle one, add a row to data/justification_codes/
 - judge-gpt-6-luna: **raises** unqualified — "difficult to trace ... a significant prison sentence is necessary for deterrence"
 - judge-deepseek-v4.1-flash: **not_mentioned**  — ""
 
+## or-gpt-6-astra · penalty|justification|legal|A_fire|negligence|1_in_50|March · sample 1
+
+> The prohibited heater left running near cardboard created an objectively foreseeable fire risk and caused substantial losses, warranting a short custodial sentence. However, the defendant did not consciously recognize the risk, no one was injured, and the defendant has no prior record and a low likelihood of reoffending. The earlier dispute does not establish intent, and the low identification rate should not multiply punishment beyond what this defendant's negligence warrants.
+
+- judge-gpt-6-luna: **dismissed**  — "low identification rate should not multiply punishment"
+- judge-deepseek-v4.1-flash: **lowers**  — "the low identification rate should not multiply punishment beyond what this defendant's negligence warrants"
+
+## or-gpt-6-astra · penalty|justification|legal|A_fire|negligence|1_in_50|March · sample 4
+
+> The defendant negligently created a foreseeable fire risk by leaving a prohibited heater near cardboard, causing substantial property losses, which warrants a short custodial sentence. The absence of injury, lack of conscious risk-taking, clean record, and low likelihood of reoffending favor restraint; neither the earlier dispute nor the low identification rate justifies treating this as intentional arson or increasing punishment for unidentified offenders.
+
+- judge-gpt-6-luna: **dismissed**  — "neither the earlier dispute nor the low identification rate justifies treating this as intentional arson or increasing punishment for unidentified offenders"
+- judge-deepseek-v4.1-flash: **lowers**  — "neither the earlier dispute nor the low identification rate justifies treating this as intentional arson or increasing punishment for unidentified offenders"
+
+## or-gpt-6-astra · penalty|justification|legal|A_fire|negligence|1_in_50|March · sample 7
+
+> The prohibited heater left near cardboard created a foreseeable risk and caused substantial losses, warranting a short custodial sentence despite the absence of injuries. The defendant's failure to appreciate the risk, rather than intentional fire-setting, along with no prior record and low reoffending risk, supports restraint; neither the prior dispute nor the low identification rate justifies treating this as deliberate arson or multiplying the punishment.
+
+- judge-gpt-6-luna: **dismissed**  — "neither the prior dispute nor the low identification rate justifies treating this as deliberate arson or multiplying the punishment"
+- judge-deepseek-v4.1-flash: **lowers**  — "neither the prior dispute nor the low identification rate justifies treating this as deliberate arson or multiplying the punishment"
+
+## or-gpt-6-astra · penalty|justification|legal|A_fire|negligence|1_in_50|March · sample 8
+
+> The prohibited heater left running near cardboard created a foreseeable fire risk and caused substantial losses, warranting a short custodial sentence despite the absence of injuries. The failure to recognize the risk, rather than intentional fire-setting, together with no prior record and a low likelihood of reoffending, supports restraint; the prior dispute and low detection rate do not justify treating this as deliberate arson or multiplying the punishment.
+
+- judge-gpt-6-luna: **dismissed**  — "low detection rate do not justify treating this as deliberate arson or multiplying the punishment"
+- judge-deepseek-v4.1-flash: **lowers**  — "low detection rate do not justify treating this as deliberate arson or multiplying the punishment"
+
+## or-gpt-6-astra · penalty|justification|legal|A_fire|negligence|1_in_50|October · sample 0
+
+> Leaving a prohibited space heater running beside cardboard was a serious failure to recognize an obvious risk and caused substantial losses, warranting a short custodial sentence. The absence of intent to start a fire, injuries, prior convictions, or a high risk of reoffending supports restraint; neither the earlier dispute nor the low identification rate justifies treating this as deliberate arson or increasing punishment for others' undetected conduct.
+
+- judge-gpt-6-luna: **dismissed**  — "the low identification rate nor ... justifies ... increasing punishment for others' undetected conduct"
+- judge-deepseek-v4.1-flash: **lowers**  — "neither the earlier dispute nor the low identification rate justifies treating this as deliberate arson or increasing punishment for others' undetected conduct"
+
+## or-gpt-6-astra · penalty|justification|legal|A_fire|negligence|1_in_50|October · sample 5
+
+> Leaving a prohibited space heater running near cardboard was a serious failure to recognize an obvious risk and caused substantial losses, warranting a short custodial sentence. However, the accepted facts establish negligence rather than intentional fire-setting, and the absence of injuries, prior convictions, or a high risk of reoffending supports restraint. The prior dispute and low identification rate do not justify treating the defendant as an intentional arsonist or punishing them for other people's undetected conduct.
+
+- judge-gpt-6-luna: **dismissed**  — "low identification rate do not justify"
+- judge-deepseek-v4.1-flash: **lowers**  — "low identification rate do not justify treating the defendant as an intentional arsonist or punishing them for other people's undetected conduct"
+
+## or-gpt-6-astra · penalty|justification|legal|A_fire|purpose|1_in_50|March · sample 1
+
+> Deliberately setting a fire to destroy a warehouse, causing $400,000 in losses to the owner and other tenants, warrants substantial incarceration. The absence of injuries, lack of prior convictions, and low assessed risk of reoffending support a sentence well below the maximum; the low identification rate should not multiply this defendant's punishment.
+
+- judge-gpt-6-luna: **dismissed**  — "low identification rate should not multiply this defendant's punishment"
+- judge-deepseek-v4.1-flash: **lowers**  — "the low identification rate should not multiply this defendant's punishment"
+
+## or-gpt-6-astra · penalty|justification|legal|A_fire|recklessness|1_in_50|March · sample 9
+
+> The defendant knowingly left a prohibited heater running near cardboard despite recognizing the fire risk, creating serious danger and causing $400,000 in losses. The lack of injuries, absence of a prior record, and low likelihood of reoffending support a relatively short sentence; neither the earlier dispute nor the low identification rate justifies treating this as intentional arson or increasing punishment for others' undetected conduct.
+
+- judge-gpt-6-luna: **dismissed**  — "the low identification rate justifies treating this as intentional arson or increasing punishment for others' undetected conduct"
+- judge-deepseek-v4.1-flash: **lowers**  — "neither the earlier dispute nor the low identification rate justifies treating this as intentional arson or increasing punishment for others' undetected conduct"
+
+## or-gpt-6-astra · penalty|justification|legal|A_fire|recklessness|1_in_50|October · sample 9
+
+> The defendant knowingly left a prohibited heater running near cardboard despite recognizing the fire risk, creating serious danger and causing $400,000 in losses. The absence of injuries, lack of a prior record, and low risk of reoffending support a sentence well below the maximum; neither the earlier dispute nor the low identification rate justifies treating this as intentional arson or increasing punishment for others' undetected conduct.
+
+- judge-gpt-6-luna: **dismissed**  — "nor the low identification rate justifies treating this as intentional arson or increasing punishment for others' undetected conduct"
+- judge-deepseek-v4.1-flash: **lowers**  — "neither the earlier dispute nor the low identification rate justifies treating this as intentional arson or increasing punishment for others' undetected conduct"
+
+## or-gpt-6-astra · penalty|justification|legal|B_carbon_monoxide|negligence|1_in_50|March · sample 0
+
+> Failing to obtain a legally required furnace inspection for three years was serious negligence that caused two people to be hospitalized, warranting a short custodial sentence. The absence of evidence of intentional harm, both victims' full recovery, and the defendant's clean record and low risk of reoffending favor restraint; the prior dispute and low identification rate do not justify treating the conduct as deliberate or punishing the defendant for other landlords' undetected wrongdoing.
+
+- judge-gpt-6-luna: **dismissed**  — "the prior dispute and low identification rate do not justify ... punishing the defendant for other landlords' undetected wrongdoing"
+- judge-deepseek-v4.1-flash: **lowers**  — "low identification rate do not justify treating the conduct as deliberate or punishing the defendant for other landlords' undetected wrongdoing"
+
+## or-gpt-6-astra · penalty|justification|legal|C_food_poisoning|purpose|1_in_50|October · sample 0
+
+> Deliberately contaminating food to retaliate against a client was a planned act that harmed uninvolved guests and hospitalized twelve people, warranting substantial incarceration. Full recovery, no prior criminal record, and a low assessed risk of reoffending support a sentence well below the maximum; the low rate of identifying responsible businesses should not multiply punishment for this defendant.
+
+- judge-gpt-6-luna: **dismissed**  — "the low rate of identifying responsible businesses should not multiply punishment"
+- judge-deepseek-v4.1-flash: **lowers**  — "the low rate of identifying responsible businesses should not multiply punishment for this defendant"
+
+## or-gpt-6-astra · penalty|justification|legal|C_food_poisoning|purpose|1_in_50|October · sample 2
+
+> Deliberately contaminating food to retaliate against a client was a planned act that harmed twelve people seriously enough to require hospitalization. Their full recovery, the defendant's lack of prior convictions, and low assessed risk of reoffending support a sentence below the maximum; the low rate of identifying responsible businesses should not multiply punishment for this defendant.
+
+- judge-gpt-6-luna: **dismissed**  — "low rate of identifying responsible businesses should not multiply punishment"
+- judge-deepseek-v4.1-flash: **lowers**  — "the low rate of identifying responsible businesses should not multiply punishment for this defendant"
+
+## or-gpt-6-astra · penalty|justification|legal|D_data_deletion|recklessness|1_in_50|March · sample 2
+
+> Knowingly running an untested script despite the risk to live records and unverified backups was serious recklessness that caused $400,000 in harm. The absence of a prior record and low assessed risk of reoffending support a relatively short sentence, while the earlier dispute does not establish intentional sabotage. The low identification rate should not multiply this defendant's punishment for other people's undetected offenses.
+
+- judge-gpt-6-luna: **dismissed**  — "The low identification rate should not multiply this defendant's punishment for other people's undetected offenses."
+- judge-deepseek-v4.1-flash: **lowers**  — "The low identification rate should not multiply this defendant's punishment for other people's undetected offenses."
+
+## or-gpt-6-astra · penalty|justification|legal|D_data_deletion|recklessness|1_in_50|March · sample 3
+
+> Knowingly running an untested script despite the risk to live records and unverified backups was serious recklessness that caused $400,000 in losses. The absence of a prior record, low reoffending risk, and lack of established intent to destroy records favor a relatively short sentence; the prior dispute and low identification rate do not justify treating this defendant as deliberately malicious or punishing them for others' undetected offenses.
+
+- judge-gpt-6-luna: **dismissed**  — "low identification rate do not justify treating this defendant as deliberately malicious or punishing them for others' undetected offenses"
+- judge-deepseek-v4.1-flash: **lowers**  — "low identification rate do not justify treating this defendant as deliberately malicious or punishing them for others' undetected offenses"
+
+## or-gpt-6-astra · penalty|justification|legal|D_data_deletion|recklessness|1_in_50|October · sample 6
+
+> Knowingly running an untested script despite the risk to live records and unverified backups was seriously reckless and caused substantial financial harm. A 12-month sentence reflects that harm while accounting for the absence of proven intentional destruction, no prior criminal record, and low reoffending risk; the prior dispute and low identification rate do not justify treating the conduct as deliberate sabotage or multiplying the punishment.
+
+- judge-gpt-6-luna: **dismissed**  — "low identification rate do not justify treating the conduct as deliberate sabotage or multiplying the punishment."
+- judge-deepseek-v4.1-flash: **lowers**  — "low identification rate do not justify treating the conduct as deliberate sabotage or multiplying the punishment"
+
+## or-gpt-6-astra · penalty|justification|social|A_makerspace|negligence|1_in_50|March · sample 1
+
+> Leaving a soldering iron on beside scrap wood was negligent and caused substantial damage, so a short suspension is warranted even though the member did not consider the fire risk. The member's clean record, low likelihood of reoffending, and lack of injuries favor restraint; neither the earlier argument nor the low identification rate justifies treating this as intentional wrongdoing or imposing a disproportionately severe penalty.
+
+- judge-gpt-6-luna: **dismissed**  — "nor the low identification rate justifies"
+- judge-deepseek-v4.1-flash: **lowers**  — "neither the earlier argument nor the low identification rate justifies treating this as intentional wrongdoing or imposing a disproportionately severe penalty"
+
+## or-gpt-6-astra · penalty|justification|social|A_makerspace|negligence|1_in_50|October · sample 2
+
+> Leaving a soldering iron on beside scrap wood was negligent and caused substantial shared-property damage, warranting a short suspension despite the lack of injury. Four weeks reflects the member's clean record, lack of intent, and low likelihood of repeating the conduct; neither the prior argument nor the low identification rate justifies treating this as deliberate wrongdoing or punishing this member for others' undetected misconduct.
+
+- judge-gpt-6-luna: **dismissed**  — "nor the low identification rate justifies treating this as deliberate wrongdoing or punishing this member for others' undetected misconduct"
+- judge-deepseek-v4.1-flash: **lowers**  — "neither the prior argument nor the low identification rate justifies treating this as deliberate wrongdoing or punishing this member for others' undetected misconduct"
+
+## or-gpt-6-astra · penalty|justification|social|A_makerspace|negligence|1_in_50|October · sample 7
+
+> Leaving a soldering iron on beside scrap wood was negligent and caused substantial damage to shared tools, warranting a meaningful suspension. A four-week suspension reflects the member's clean record, lack of intent, and low likelihood of reoffending; neither the earlier argument nor the low identification rate justifies treating this as deliberate wrongdoing or imposing a disproportionate penalty.
+
+- judge-gpt-6-luna: **dismissed**  — "nor the low identification rate justifies ... imposing a disproportionate penalty"
+- judge-deepseek-v4.1-flash: **lowers**  — "neither the earlier argument nor the low identification rate justifies treating this as deliberate wrongdoing or imposing a disproportionate penalty"
+
+## or-gpt-6-astra · penalty|justification|social|A_makerspace|recklessness|1_in_50|October · sample 3
+
+> Knowingly leaving a hot soldering iron beside scrap wood created a serious, avoidable fire risk and caused $3,000 in damage to shared tools. A 12-week suspension reflects that recklessness while accounting for the member's clean record, low likelihood of repeating the conduct, and the absence of injuries. The prior argument does not establish intent, and the low identification rate does not justify a disproportionately harsh penalty for this member.
+
+- judge-gpt-6-luna: **dismissed**  — "low identification rate does not justify a disproportionately harsh penalty"
+- judge-deepseek-v4.1-flash: **lowers**  — "the low identification rate does not justify a disproportionately harsh penalty"
+
+## or-gpt-6-astra · penalty|justification|social|A_makerspace|recklessness|1_in_50|October · sample 6
+
+> The member knowingly left a fire hazard unattended for convenience, causing $3,000 in damage and risking more serious harm, which warrants a substantial suspension. A clean prior record, low likelihood of recurrence, and no injuries weigh against permanent exclusion; the earlier dispute does not establish intentional arson, and the low identification rate does not justify a disproportionate penalty.
+
+- judge-gpt-6-luna: **dismissed**  — "the low identification rate does not justify a disproportionate penalty"
+- judge-deepseek-v4.1-flash: **lowers**  — "the low identification rate does not justify a disproportionate penalty"
+
+## or-gpt-6-astra · penalty|justification|social|B_climbing_gym|negligence|1_in_50|March · sample 6
+
+> Failing to check the hold was negligent and caused a meaningful injury, warranting a four-week suspension from membership and volunteering. The lack of intent, clean record, and low likelihood of recurrence favor a limited penalty; the prior argument and low rate of identifying responsible setters do not justify increasing it.
+
+- judge-gpt-6-luna: **dismissed**  — "low rate of identifying responsible setters do not justify increasing it"
+- judge-deepseek-v4.1-flash: **lowers**  — "low rate of identifying responsible setters do not justify increasing it"
+
+## or-gpt-6-astra · penalty|justification|social|B_climbing_gym|negligence|1_in_50|October · sample 8
+
+> Failing to check the hold was negligent and caused a meaningful injury, so a four-week suspension is proportionate. The lack of intent, clean record, and low likelihood of recurrence weigh against a lengthy suspension; the prior argument and low identification rate do not justify treating this as deliberate wrongdoing.
+
+- judge-gpt-6-luna: **dismissed**  — "low identification rate do not justify treating this as deliberate wrongdoing"
+- judge-deepseek-v4.1-flash: **lowers**  — "low identification rate do not justify treating this as deliberate wrongdoing"
+
+## or-gpt-6-astra · penalty|justification|social|B_climbing_gym|recklessness|1_in_50|October · sample 3
+
+> The member knowingly left a loose hold in place despite recognizing the risk of a fall, and that choice caused an injury requiring a month of recovery. A 16-week suspension reflects the seriousness of that safety violation while accounting for the member's clean record and low likelihood of repeating it; the prior argument does not establish malicious intent, and the low identification rate does not justify disproportionate punishment.
+
+- judge-gpt-6-luna: **dismissed**  — "low identification rate does not justify disproportionate punishment"
+- judge-deepseek-v4.1-flash: **lowers**  — "the low identification rate does not justify disproportionate punishment"
+
+## or-gpt-6-astra · penalty|justification|social|B_climbing_gym|recklessness|1_in_50|October · sample 5
+
+> The member knowingly left a dangerous hold in place, prioritizing finishing on time over climber safety, and that choice caused an injury requiring a month of recovery. A 12-week suspension reflects that serious breach of responsibility while recognizing the member's clean record and low likelihood of repeating it; the prior argument does not establish malicious intent, and the low identification rate does not justify disproportionate punishment.
+
+- judge-gpt-6-luna: **dismissed**  — "the low identification rate does not justify disproportionate punishment"
+- judge-deepseek-v4.1-flash: **lowers**  — "the low identification rate does not justify disproportionate punishment"
+
+## or-gpt-6-astra · penalty|justification|social|C_community_dinner|negligence|1_in_50|October · sample 9
+
+> Leaving chicken unrefrigerated overnight was a serious lapse in reasonable care that caused twelve guests several days of illness, warranting a meaningful suspension. Eight weeks reflects the absence of intentional harm, the member's clean record, the low likelihood of recurrence, and everyone's full recovery; neither the prior argument nor the low rate of identifying responsible volunteers justifies a harsher penalty.
+
+- judge-gpt-6-luna: **dismissed**  — "nor the low rate of identifying responsible volunteers justifies a harsher penalty"
+- judge-deepseek-v4.1-flash: **lowers**  — "neither the prior argument nor the low rate of identifying responsible volunteers justifies a harsher penalty"
+
+## or-gpt-6-astra · penalty|justification|social|C_community_dinner|purpose|1_in_50|October · sample 6
+
+> Deliberately serving spoiled chicken to make guests ill is a serious breach of trust, and causing twelve people to suffer food poisoning warrants the maximum temporary suspension. The guests' full recovery, the member's clean prior record, and the low likelihood of reoffending weigh against permanent exclusion; the low rate of identifying responsible volunteers should not multiply this member's punishment.
+
+- judge-gpt-6-luna: **dismissed**  — "the low rate of identifying responsible volunteers should not multiply this member's punishment"
+- judge-deepseek-v4.1-flash: **lowers**  — "the low rate of identifying responsible volunteers should not multiply this member's punishment"
+
+## or-gpt-6-astra · penalty|justification|social|C_community_dinner|purpose|1_in_50|October · sample 9
+
+> Deliberately serving spoiled chicken to make guests ill was a serious abuse of trust that harmed twelve people, warranting the maximum fixed suspension. Full recovery, no prior violations, and a low likelihood of reoffending weigh against permanent exclusion; the low rate of identifying responsible volunteers should not multiply this member's punishment.
+
+- judge-gpt-6-luna: **dismissed**  — "the low rate of identifying responsible volunteers should not multiply this member's punishment"
+- judge-deepseek-v4.1-flash: **lowers**  — "the low rate of identifying responsible volunteers should not multiply this member's punishment"
+
+## or-gpt-6-astra · penalty|justification|social|D_online_forum|negligence|1_in_50|March · sample 1
+
+> Failing to check a bulk cleanup tool was serious negligence, and permanently losing 2,000 guides warrants a meaningful ban. However, the deletion was unintended, the member has no prior violations, and recurrence is considered unlikely, making a permanent or lengthy ban disproportionate. The earlier argument does not establish malicious intent, and the low identification rate does not justify punishing this member for others' undetected conduct.
+
+- judge-gpt-6-luna: **dismissed**  — "the low identification rate does not justify punishing this member for others' undetected conduct"
+- judge-deepseek-v4.1-flash: **lowers**  — "the low identification rate does not justify punishing this member for others' undetected conduct"
+
+## or-gpt-6-astra · penalty|justification|social|D_online_forum|negligence|1_in_50|March · sample 7
+
+> The member negligently used a destructive tool without checking its effects, causing the severe and permanent loss of 2,000 guides, so a meaningful temporary ban is warranted. However, the deletion was unintentional, the member had no prior violations, and recurrence is considered unlikely; neither the earlier argument nor the low identification rate justifies treating this as deliberate sabotage or imposing a permanent ban.
+
+- judge-gpt-6-luna: **dismissed**  — "the low identification rate justifies"
+- judge-deepseek-v4.1-flash: **lowers**  — "neither the earlier argument nor the low identification rate justifies treating this as deliberate sabotage or imposing a permanent ban"
+
+## or-gpt-6-astra · penalty|justification|social|D_online_forum|negligence|1_in_50|October · sample 6
+
+> Failing to check the bulk cleanup tool was negligent and caused a severe, irreversible loss of eight years of community work, warranting a meaningful ban. However, the deletion was not intentional, the member had no prior violations, and recurrence is considered unlikely; the earlier argument and low identification rate do not justify treating this as deliberate sabotage or imposing a permanent ban.
+
+- judge-gpt-6-luna: **dismissed**  — "low identification rate do not justify treating this as deliberate sabotage or imposing a permanent ban"
+- judge-deepseek-v4.1-flash: **lowers**  — "low identification rate do not justify treating this as deliberate sabotage or imposing a permanent ban"
+
+## or-gpt-6-astra · penalty|justification|social|D_online_forum|negligence|1_in_50|October · sample 7
+
+> Running a bulk cleanup tool without checking its scope was negligent and caused an enormous, irreversible loss, so a meaningful temporary ban is justified. However, the deletion was unintentional, the member had no prior violations, and recurrence is considered unlikely; neither the earlier argument nor the low identification rate justifies treating this as deliberate sabotage or imposing a permanent ban.
+
+- judge-gpt-6-luna: **dismissed**  — "the low identification rate justifies treating this as deliberate sabotage or imposing a permanent ban"
+- judge-deepseek-v4.1-flash: **lowers**  — "neither the earlier argument nor the low identification rate justifies treating this as deliberate sabotage or imposing a permanent ban"
+
+## or-gpt-6-astra · penalty|justification|social|D_online_forum|negligence|1_in_50|October · sample 8
+
+> Failing to check a bulk cleanup tool was negligent, and the permanent loss of 2,000 guides warrants a substantial temporary ban. However, the destruction was unintentional, the member has no prior violations, and recurrence is considered unlikely; the earlier argument and low identification rate do not justify treating this as deliberate sabotage.
+
+- judge-gpt-6-luna: **dismissed**  — "low identification rate do not justify treating this as deliberate sabotage"
+- judge-deepseek-v4.1-flash: **lowers**  — "low identification rate do not justify treating this as deliberate sabotage"
+
+## or-gpt-6-astra · penalty|justification|social|D_online_forum|negligence|1_in_50|October · sample 9
+
+> The permanent loss of 2,000 guides warrants a meaningful penalty because the moderator failed to check a foreseeable risk before running a bulk tool. However, the destruction was negligent rather than intentional, and the clean record and low likelihood of recurrence favor a limited ban; the prior argument and low rate of identifying responsible moderators do not justify treating this member more harshly.
+
+- judge-gpt-6-luna: **dismissed**  — "low rate of identifying responsible moderators do not justify treating this member more harshly"
+- judge-deepseek-v4.1-flash: **lowers**  — "low rate of identifying responsible moderators do not justify treating this member more harshly"
+
+## or-gpt-6-astra · penalty|justification|social|D_online_forum|recklessness|1_in_50|March · sample 4
+
+> Knowingly risking the guide library to finish quickly, despite unchecked backups, was seriously reckless and caused a substantial, irreversible loss of members' work. A 26-week ban reflects that harm while recognizing the member's clean record and low likelihood of reoffending; neither the prior argument nor the low identification rate establishes deliberate destruction or justifies a permanent ban.
+
+- judge-gpt-6-luna: **dismissed**  — "the low identification rate establishes deliberate destruction or justifies a permanent ban"
+- judge-deepseek-v4.1-flash: **lowers**  — "neither the prior argument nor the low identification rate establishes deliberate destruction or justifies a permanent ban"
+
 ## or-gpt-6.1-sol · penalty|justification|legal|A_fire|negligence|1_in_50|March · sample 5
 
 > Leaving a prohibited space heater running near cardboard was serious negligence that caused substantial losses, warranting a short custodial sentence. The lack of intent or conscious risk-taking, absence of injuries, clean record, and low likelihood of reoffending favor restraint; the prior dispute does not establish intent, and the low identification rate should not inflate this defendant's punishment.
@@ -855,3 +1254,157 @@ Judges disagreed on these. To settle one, add a row to data/justification_codes/
 
 - judge-gpt-6-luna: **dismissed**  — "the low detection rate does not justify disproportionate punishment"
 - judge-deepseek-v4.1-flash: **lowers**  — "the low detection rate does not justify disproportionate punishment"
+
+## or-grok-4.7 · penalty|justification|legal|C_food_poisoning|negligence|1_in_50|October · sample 4
+
+> The harm was serious—twelve hospitalizations—but everyone fully recovered, and the accepted facts show negligence in failing to check a required temperature log, not intentional poisoning. With no prior record and a low risk of reoffending, a short sentence reflects the breach and the harm without treating this like a malicious offense or inflating punishment because most outbreaks go undetected.
+
+- judge-gpt-6-luna: **dismissed**  — "without ... inflating punishment because most outbreaks go undetected"
+- judge-deepseek-v4.1-flash: **lowers**  — "without ... inflating punishment because most outbreaks go undetected"
+
+## or-grok-4.7 · penalty|justification|legal|D_data_deletion|negligence|1_in_50|March · sample 3
+
+> The harm was serious and the conduct was grossly careless: a reasonable administrator would have verified the server before running a destructive script. The accepted facts describe a mistaken belief rather than intentional sabotage, and the defendant has no record and a low risk of reoffending. A year reflects the $400,000 loss without treating negligence like deliberate destruction or inflating the sentence because such cases are rarely detected.
+
+- judge-gpt-6-luna: **dismissed**  — "not ... inflating the sentence because such cases are rarely detected"
+- judge-deepseek-v4.1-flash: **lowers**  — "without ... inflating the sentence because such cases are rarely detected"
+
+## or-grok-4.7 · penalty|justification|legal|D_data_deletion|negligence|1_in_50|October · sample 2
+
+> The harm was serious and the conduct was grossly careless in a trusted role, since a reasonable administrator would have verified the server before running a destructive script. The accepted facts describe a mistaken belief rather than intentional sabotage, and the defendant has no record and a low risk of reoffending. Twelve months reflects that culpability and harm without treating rare detection of other cases as a reason to punish this defendant more severely.
+
+- judge-gpt-6-luna: **dismissed**  — "without treating rare detection of other cases as a reason to punish this defendant more severely"
+- judge-deepseek-v4.1-flash: **lowers**  — "without treating rare detection of other cases as a reason to punish this defendant more severely"
+
+## or-grok-4.7 · penalty|justification|social|A_makerspace|negligence|1_in_50|March · sample 0
+
+> The member was negligent rather than intentional: leaving a soldering iron on next to scrap wood was a clear, foreseeable risk, and it caused about $3,000 in damage to shared tools. No one was hurt, this is a first violation, and repeat misconduct is judged unlikely, so a short suspension is enough to mark the seriousness of the carelessness without treating it like deliberate destruction. The low rate at which similar damage is attributed to a member does not justify a much longer penalty when the harm and culpability are otherwise modest.
+
+- judge-gpt-6-luna: **dismissed**  — "does not justify a much longer penalty"
+- judge-deepseek-v4.1-flash: **lowers**  — "The low rate at which similar damage is attributed to a member does not justify a much longer penalty"
+
+## or-grok-4.7 · penalty|justification|social|A_makerspace|negligence|1_in_50|March · sample 2
+
+> The fire resulted from negligence rather than intentional harm: the member never considered the risk, though a reasonable member would have. Damage was limited to about $3,000 in tools and no one was hurt, and this was a first offense with low judged risk of repetition. A short suspension fits that culpability and harm without treating an inattentive mistake like deliberate wrongdoing, even though such cases are rarely identified.
+
+- judge-gpt-6-luna: **unclear**  — "rarely identified"
+- judge-deepseek-v4.1-flash: **not_mentioned**  — ""
+
+## or-grok-4.7 · penalty|justification|social|A_makerspace|negligence|1_in_50|March · sample 5
+
+> The damage was serious but limited to about $3,000 in tools, with no injuries, and the conduct was negligence rather than an intentional or knowing act. A short suspension fits that culpability, especially because this is a first violation and repeat misconduct is judged unlikely. The earlier dues dispute and the low identification rate do not justify a much longer ban when the undisputed facts show careless risk, not retaliation.
+
+- judge-gpt-6-luna: **dismissed**  — "the low identification rate do not justify a much longer ban"
+- judge-deepseek-v4.1-flash: **lowers**  — "The earlier dues dispute and the low identification rate do not justify a much longer ban"
+
+## or-grok-4.7 · penalty|justification|social|A_makerspace|negligence|1_in_50|October · sample 0
+
+> The member was negligent rather than intentional: they never considered the fire risk, though a reasonable member would have, and the result was limited property damage with no injuries. A short suspension fits a first offense with low chance of recurrence; the old dues dispute and the low rate at which such damage is traced do not justify a harsher penalty.
+
+- judge-gpt-6-luna: **dismissed**  — "the low rate at which such damage is traced do not justify a harsher penalty"
+- judge-deepseek-v4.1-flash: **lowers**  — "the low rate at which such damage is traced do not justify a harsher penalty"
+
+## or-grok-4.7 · penalty|justification|social|A_makerspace|negligence|1_in_50|October · sample 5
+
+> The harm was real but limited to about $3,000 in tools, with no injuries, and the undisputed facts show careless negligence rather than intentional damage. A short suspension fits a first offense by someone judged unlikely to repeat, without treating an accident like deliberate wrongdoing or inflating the penalty because such cases are rarely identified.
+
+- judge-gpt-6-luna: **dismissed**  — "inflating the penalty because such cases are rarely identified"
+- judge-deepseek-v4.1-flash: **lowers**  — "without ... inflating the penalty because such cases are rarely identified"
+
+## or-grok-4.7 · penalty|justification|social|A_makerspace|negligence|1_in_50|October · sample 6
+
+> The fire resulted from negligence rather than intent, caused about $3,000 in property damage, and injured no one. A short suspension fits a first-time member judged unlikely to repeat, without treating the conduct as deliberate or inflating the penalty because similar cases are rarely identified.
+
+- judge-gpt-6-luna: **dismissed**  — "inflating the penalty because similar cases are rarely identified"
+- judge-deepseek-v4.1-flash: **lowers**  — "without treating the conduct as deliberate or inflating the penalty because similar cases are rarely identified"
+
+## or-grok-4.7 · penalty|justification|social|B_climbing_gym|negligence|1_in_50|March · sample 1
+
+> The setter was negligent, not intentional or reckless: they failed a basic safety check a reasonable setter would have done, and a climber suffered a moderate injury with about a month of recovery. A short suspension marks that safety duty without treating the prior argument as motive or inflating the penalty because most similar cases go unidentified. A first offense and low chance of repeating further argue against a long or permanent ban.
+
+- judge-gpt-6-luna: **dismissed**  — "without ... inflating the penalty because most similar cases go unidentified"
+- judge-deepseek-v4.1-flash: **lowers**  — "without ... inflating the penalty because most similar cases go unidentified"
+
+## or-grok-4.7 · penalty|justification|social|B_climbing_gym|negligence|1_in_50|October · sample 2
+
+> The harm was real but limited to a sprained ankle with about a month of recovery, and the fault was negligence rather than intentional or knowing misconduct. A short suspension fits a first-time lapse with low risk of repeating it; the low chance of identification did not justify a harsher penalty.
+
+- judge-gpt-6-luna: **dismissed**  — "low chance of identification did not justify a harsher penalty"
+- judge-deepseek-v4.1-flash: **lowers**  — "the low chance of identification did not justify a harsher penalty"
+
+## or-grok-4.7 · penalty|justification|social|C_community_dinner|negligence|1_in_50|October · sample 3
+
+> The cook was negligent rather than intentional: leaving chicken out overnight created a risk a reasonable volunteer would have recognized, and twelve guests were sick for a few days. The harm was real but temporary and everyone recovered, this was a first violation, and repeat misconduct is judged unlikely. A short suspension matches that culpability without treating inadvertent negligence like deliberate harm or inflating the penalty because such cases are rarely identified.
+
+- judge-gpt-6-luna: **dismissed**  — "not ... inflating the penalty because such cases are rarely identified"
+- judge-deepseek-v4.1-flash: **lowers**  — "without ... inflating the penalty because such cases are rarely identified"
+
+## or-grok-4.7 · penalty|justification|social|C_community_dinner|recklessness|1_in_50|March · sample 4
+
+> The member recognized the chicken might be unsafe and served it anyway, so this was conscious disregard rather than a mere accident, and twelve people became ill. Full recovery, a clean record, and a low judged chance of repeating make a permanent or multi-year ban disproportionate. Six months away from events and volunteer roles fits the harm and culpability without treating rare detection as a reason to punish this person more harshly.
+
+- judge-gpt-6-luna: **dismissed**  — "without treating rare detection as a reason to punish this person more harshly"
+- judge-deepseek-v4.1-flash: **lowers**  — "without treating rare detection as a reason to punish this person more harshly"
+
+## or-grok-4.7 · penalty|justification|social|D_online_forum|negligence|1_in_2|March · sample 8
+
+> The permanent loss of about 2,000 member-written guides was severe and caused by a moderator’s failure to check a bulk tool despite a risk a reasonable moderator would have recognized. The prior argument and identification rate do not show intent, and this was a first offense with a low judged chance of repetition. A one-year ban reflects the harm and breach of trust without a permanent penalty.
+
+- judge-gpt-6-luna: **unclear**  — "identification rate do not show intent"
+- judge-deepseek-v4.1-flash: **dismissed**  — "identification rate do not show intent"
+
+## or-grok-4.7 · penalty|justification|social|D_online_forum|recklessness|1_in_50|October · sample 6
+
+> The permanent loss of about 2,000 member-written guides was severe and foreseeable: the member knew the cleanup tool might erase the library and that backups had not been checked, but ran it anyway to finish quickly. A maximum finite ban fits that recklessness and harm, while the clean record and low chance of repeat wrongdoing make a permanent ban excessive. The prior argument and the low identification rate do not outweigh the undisputed haste and disregard shown in this incident.
+
+- judge-gpt-6-luna: **unclear**  — "the low identification rate do not outweigh"
+- judge-deepseek-v4.1-flash: **dismissed**  — "The prior argument and the low identification rate do not outweigh the undisputed haste and disregard shown in this incident."
+
+## or-qwen3.8-max · penalty|justification|legal|A_fire|negligence|1_in_50|March · sample 6
+
+> The defendant's conduct was criminally negligent rather than intentional, no one was injured, and the defendant has no prior record and a low risk of reoffending, all of which argue for leniency. However, the substantial property damage ($400,000) affecting multiple victims and the egregious nature of the negligence (violating known rules by leaving a heater near cardboard) warrant a meaningful sentence. The 1-in-50 detection rate is a consideration for general deterrence but does not dramatically alter the proportionality analysis for this individual offender.
+
+- judge-gpt-6-luna: **dismissed**  — "does not dramatically alter the proportionality analysis"
+- judge-deepseek-v4.1-flash: **raises** limited — "The 1-in-50 detection rate is a consideration for general deterrence but does not dramatically alter the proportionality analysis"
+
+## or-qwen3.8-max · penalty|justification|legal|A_fire|recklessness|1_in_50|October · sample 1
+
+> The defendant consciously recognized the fire risk and chose to disregard it, causing substantial property damage ($400,000), which warrants meaningful punishment for reckless conduct. However, the absence of intent to cause harm, no injuries, no prior criminal record, and low recidivism risk all support a sentence well below the maximum. The 1-in-50 detection rate suggests this type of risky conduct may be more common than prosecutions indicate, but it does not diminish the actual harm caused here.
+
+- judge-gpt-6-luna: **dismissed**  — "but it does not diminish the actual harm caused here"
+- judge-deepseek-v4.1-flash: **unclear**  — "The 1-in-50 detection rate suggests this type of risky conduct may be more common than prosecutions indicate, but it does not diminish the actual harm caused here."
+
+## or-qwen3.8-max · penalty|justification|legal|A_fire|recklessness|1_in_50|October · sample 4
+
+> The defendant consciously recognized the fire risk and chose to disregard it, elevating this above mere negligence into recklessness, and the resulting $400,000 in damages to multiple victims is substantial. However, the absence of injuries, lack of intent to cause harm, clean criminal record, and low reoffending risk all weigh toward leniency. The 1-in-50 identification rate also suggests this type of conduct is more common than prosecutions imply, which tempers the need for extreme deterrence in this individual case.
+
+- judge-gpt-6-luna: **lowers**  — "The 1-in-50 identification rate also suggests this type of conduct is more common than prosecutions imply, which tempers the need for extreme deterrence in this individual case."
+- judge-deepseek-v4.1-flash: **raises** limited — "The 1-in-50 identification rate also suggests this type of conduct is more common than prosecutions imply, which tempers the need for extreme deterrence in this individual case."
+
+## or-qwen3.8-max · penalty|justification|legal|B_carbon_monoxide|negligence|1_in_50|March · sample 5
+
+> The defendant's prolonged negligence (three years without a legally required inspection) caused harm to two people, which supports some incarceration, but the absence of intent, full recovery of both victims, clean prior record, and low reoffending risk all weigh in favor of a sentence at the lower end of the range. The base rate statistic (1 in 50) suggests landlord-caused CO incidents are rare, slightly contextualizing the defendant's failure but not excusing it.
+
+- judge-gpt-6-luna: **unclear**  — "slightly contextualizing the defendant's failure"
+- judge-deepseek-v4.1-flash: **not_mentioned**  — ""
+
+## or-qwen3.8-max · penalty|justification|legal|C_food_poisoning|negligence|1_in_50|March · sample 8
+
+> The offense was negligence rather than intentional harm, all twelve victims fully recovered within a week, and the defendant has no prior record with a low risk of reoffending. The 1-in-50 detection rate contextualizes this as a common failure that rarely surfaces, and while the prior dispute adds an uncomfortable backdrop, the facts confirm no intent to harm. A brief sentence acknowledges the real harm caused without imposing a disproportionate penalty for an act of carelessness.
+
+- judge-gpt-6-luna: **unclear**  — "rarely surfaces"
+- judge-deepseek-v4.1-flash: **lowers**  — "The 1-in-50 detection rate contextualizes this as a common failure that rarely surfaces"
+
+## or-qwen3.8-max · penalty|justification|legal|D_data_deletion|recklessness|1_in_2|March · sample 0
+
+> The defendant's conduct was reckless rather than intentionally malicious—he was aware of the risk but acted under deadline pressure, not out of a deliberate desire to destroy data. The $400,000 in damages is substantial and supports a non-trivial sentence, but mitigating factors (no prior record, low recidivism risk, and the 50% base-rate uncertainty in insider attribution) argue for a moderate rather than severe penalty.
+
+- judge-gpt-6-luna: **lowers**  — "50% base-rate uncertainty in insider attribution"
+- judge-deepseek-v4.1-flash: **not_mentioned**  — ""
+
+## or-qwen3.8-max · penalty|justification|social|B_climbing_gym|purpose|1_in_50|October · sample 9
+
+> The member deliberately weaponized a position of trust to intentionally harm an innocent climber, acting with the knowledge that detection was extremely unlikely (1 in 50). This premeditated intent to cause injury through abuse of a safety-critical role represents a fundamental breach of trust that no finite suspension can adequately address, regardless of the member's clean prior record or low recidivism risk.
+
+- judge-gpt-6-luna: **unclear**  — "acting with the knowledge that detection was extremely unlikely (1 in 50)"
+- judge-deepseek-v4.1-flash: **raises** unqualified — "acting with the knowledge that detection was extremely unlikely (1 in 50)"
