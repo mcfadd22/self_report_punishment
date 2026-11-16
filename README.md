@@ -18,6 +18,7 @@ Do AI models' accounts of their reasoning match what they do? This project tests
 - `analysis/analyze_justifications.py`: joins those codes with the penalties: do justifications that cite the detection rate come with different penalties? Writes `analysis/output/justifications_report.md` (`--sources`, `--codes` and `--name` for the variant data)
 - `scripts/make_variants.py`: writes variant item files (`prompts/items_lowharm.jsonl`, `prompts/items_explfirst.jsonl`); run them with `run_pilot.py --items`, into their own data directory
 - Signal-check data: `data/signal_openrouter/` (nine models, 3 samples), `_justif/` (justification items to 10 samples), `_lowharm/`, `_explfirst/`, `_reasoning/` (reasoning on); judge codes in `data/justification_codes*/`
+- `FINDINGS.md`: short summary of what the pilot has found so far, with links to the notes and reports
 - `notes/`: dated write-ups of each run and the next steps; **start with the latest one** (currently `notes/2026-11-12_full_signal_check.md`)
 
 Edit the JSON sources, then rebuild with `python3 scripts/build_items.py`. Don't edit the `.jsonl` files by hand.
