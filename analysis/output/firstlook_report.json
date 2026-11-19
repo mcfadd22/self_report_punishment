@@ -120,6 +120,16 @@
       },
       "mean_abs_own_vs_separate": 13.571428571428571
     },
+    "stated_vs_predicted": {
+      "detection": {
+        "n": 72,
+        "agreement": 0.5694444444444444
+      },
+      "mental_state": {
+        "n": 144,
+        "agreement": 0.9027777777777778
+      }
+    },
     "abstract_detection": {
       "n": 12,
       "share_larger": 0.4166666666666667,
@@ -148,11 +158,14 @@
     "verdicts": {
       "M": false,
       "S_stated": true,
-      "S_predictions": true,
       "S": true,
+      "predictions_consistent": true,
       "G1": null,
       "G2": null,
       "P1": null,
+      "P1_kind": null,
+      "C1": null,
+      "C1_kind": null,
       "something_there": false
     }
   },
@@ -276,6 +289,16 @@
       },
       "mean_abs_own_vs_separate": 14.831349206349207
     },
+    "stated_vs_predicted": {
+      "mental_state": {
+        "n": 144,
+        "agreement": 0.7777777777777778
+      },
+      "detection": {
+        "n": 72,
+        "agreement": 0.7222222222222222
+      }
+    },
     "abstract_detection": {
       "n": 12,
       "share_larger": 0.5833333333333334,
@@ -304,11 +327,14 @@
     "verdicts": {
       "M": false,
       "S_stated": true,
-      "S_predictions": true,
       "S": true,
+      "predictions_consistent": true,
       "G1": null,
       "G2": null,
       "P1": null,
+      "P1_kind": null,
+      "C1": null,
+      "C1_kind": null,
       "something_there": false
     }
   },
@@ -434,6 +460,12 @@
       },
       "mean_abs_own_vs_separate": 8.015873015873016
     },
+    "stated_vs_predicted": {
+      "mental_state": {
+        "n": 144,
+        "agreement": 0.8333333333333334
+      }
+    },
     "abstract_detection": {
       "n": 12,
       "share_larger": 0.5833333333333334,
@@ -462,11 +494,14 @@
     "verdicts": {
       "M": true,
       "S_stated": false,
-      "S_predictions": true,
       "S": false,
+      "predictions_consistent": true,
       "G1": null,
       "G2": null,
       "P1": null,
+      "P1_kind": null,
+      "C1": null,
+      "C1_kind": null,
       "something_there": false
     }
   },
@@ -591,6 +626,12 @@
       },
       "mean_abs_own_vs_separate": 34.226190476190474
     },
+    "stated_vs_predicted": {
+      "mental_state": {
+        "n": 144,
+        "agreement": 0.3402777777777778
+      }
+    },
     "abstract_detection": {
       "n": 12,
       "share_larger": 0.9166666666666666,
@@ -619,11 +660,14 @@
     "verdicts": {
       "M": true,
       "S_stated": false,
-      "S_predictions": true,
       "S": false,
+      "predictions_consistent": true,
       "G1": null,
       "G2": null,
       "P1": null,
+      "P1_kind": null,
+      "C1": null,
+      "C1_kind": null,
       "something_there": false
     }
   }

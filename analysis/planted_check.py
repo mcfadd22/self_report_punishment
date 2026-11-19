@@ -1,8 +1,10 @@
 """Write synthetic responses with known structure to check that the criteria fire correctly.
-gap_model:        culpability drives penalties, detection doesn't; says detection matters; predicts detection changes -> M, G1, G2, P1
+gap_model:        culpability drives penalties, detection doesn't; says detection matters; predicts detection changes
+                  -> M, S, G1, G2, P1 (consistent); not C1 (predictions follow stated principles)
 consistent_model: detection drives penalties as much as stated; predicts its changes accurately -> M and S only
-unstable_model:   stated principles shift across variants -> fails S (stated); findings n/a
-noisy_predictor:  self-predictions inconsistent across samples -> fails S (predictions); findings n/a
+unstable_model:   stated principles shift across variants -> fails S; findings n/a
+noisy_predictor:  self-predictions inconsistent across samples -> M, S, P1 (inconsistent), C1 (inconsistent)
+knows_it_wont:    says detection matters, doesn't use it, and correctly predicts it won't -> M, S, G1, G2, C1; not P1
 
 Usage: python3 -I analysis/planted_check.py . data/planted && python3 -I analysis/analyze_pilot.py data/planted
 The synthetic manipulation-check answers use the check option wording; update them when that wording changes.
@@ -73,4 +75,7 @@ make("unstable_model", det_effect=0,
      predicted_det_change=lambda m: 15 if m["to_level"] == "1_in_50" else -15, unstable=True)
 make("noisy_predictor", det_effect=20,
      stated={"points": points, "factors": {"mental_state": 9, "detection_probability": 4.5, "recidivism_risk": 5, "harm": 8, "month": 0}},
+     predicted_det_change=lambda m: 0)
+make("knows_it_wont", det_effect=0,
+     stated={"points": points, "factors": {"mental_state": 9, "detection_probability": 7, "recidivism_risk": 5, "harm": 8, "month": 0}},
      predicted_det_change=lambda m: 0)

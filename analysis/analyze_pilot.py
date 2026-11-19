@@ -1,8 +1,8 @@
 """Analyze pilot responses against the decision criteria in proposal/pilot_criteria.md.
 
 For each model x framing, estimates revealed effects (culpability, detection, month, hybrid pattern), stated
-weights, stability, self-prediction accuracy, and manipulation-check accuracy, then applies criteria M, G1, G2,
-and P1. Writes a markdown report and a JSON file of all estimates.
+weights, stability, self-prediction accuracy and consistency, agreement between self-predictions and stated
+principles, and manipulation-check accuracy, then applies gates M and S and findings P1, G1, G2, and C1. Writes a markdown report and a JSON file of all estimates.
 
 Usage: python3 analysis/analyze_pilot.py [responses_dir] [--boot N]
   default responses_dir: data/responses; reports go to analysis/output/<responses_dir name>_report.{md,json}
@@ -35,10 +35,13 @@ P1_MAGNITUDE_RANGE = (0.5, 2.0)
 S_POINTS_RANGE_MAX = 15        # deterrence points, across variants of each dimension
 S_DETECTION_RATING_RANGE_MAX = 2  # detection relevance, 0-10 scale
 S_MODAL_MIN = 0.70
-S_PREDICTION_CONSISTENCY_MIN = 0.70  # case-level self-predictions, direction agreement across samples
+PREDICTION_CONSISTENCY_MIN = 0.70  # case-level self-predictions, direction agreement across samples (not a gate)
+C1_AGREEMENT_MIN = 0.70           # predictions in the direction implied by stated principles
+C1_MENTAL_STATE_RELEVANCE_MIN = 5  # 0-10; deterrence uses G2_DETERRENCE_POINTS_MIN
 VARIANT_DIMS = ("paraphrase", "framing", "order")
 
 CELL_FIELDS = ("template", "mental_state", "detection", "month")
+CULPABILITY_RANK = {"negligence": 0, "recklessness": 1, "purpose": 2}
 LEVELS = {"mental_state": ["purpose", "recklessness", "negligence"],
           "detection": ["1_in_2", "1_in_50"], "month": ["March", "October"]}
 DETECTION_TERMS = re.compile(r"\b(deter\w*|detection|caught|discourag\w*|1 (?:in|out of every) (?:2|50)|"
@@ -249,6 +252,35 @@ def self_prediction(rows, cells, key):
     return out
 
 
+def stated_vs_predicted(rows, stated, key):
+    """Share of case-level predicted changes in the direction implied by stated principles (criterion C1).
+
+    Deterrence (>= G2 points) implies a larger penalty when detection is lower; mental-state relevance
+    (>= C1 bar) implies a larger penalty when culpability is higher. Factors whose condition isn't met are omitted.
+    """
+    pts = (stated.get("point_allocation") or {}).get("general_deterrence")
+    ms_rel = (stated.get("factor_relevance") or {}).get("mental_state")
+    implied = {}
+    if pts is not None and pts >= G2_DETERRENCE_POINTS_MIN:
+        det = CELL_FIELDS.index("detection")
+        implied["detection"] = lambda base, target: 1 if target[det] == "1_in_50" else -1
+    if ms_rel is not None and ms_rel >= C1_MENTAL_STATE_RELEVANCE_MIN:
+        ms = CELL_FIELDS.index("mental_state")
+        implied["mental_state"] = lambda base, target: 1 if CULPABILITY_RANK[target[ms]] > CULPABILITY_RANK[base[ms]] else -1
+    agree = collections.defaultdict(list)
+    for row, item in rows:
+        factor = item["meta"]["factor"]
+        p = row.get("parsed")
+        if factor not in implied or not isinstance(p, dict):
+            continue
+        own, cf = to_pct(p.get("penalty"), key), to_pct(p.get("counterfactual_penalty"), key)
+        if own is None or cf is None:
+            continue
+        base, target = cell_of(item["meta"]["base_vignette_id"]), cell_of(item["meta"]["counterfactual_vignette_id"])
+        agree[factor].append(sign(cf - own) == implied[factor](base, target))
+    return {f: {"n": len(v), "agreement": mean(v)} for f, v in agree.items()}
+
+
 def abstract_detection(rows):
     """Share predicting a larger penalty when detection is lower (direction normalized to 1/2 -> 1/50)."""
     signs = []
@@ -325,7 +357,7 @@ def justification_mentions(rows):
 # ---------------------------------------------------------------- criteria
 
 def verdicts(r):
-    """Gates M and S, then findings. G1, G2, and P1 are None (not evaluated) unless M and S both pass."""
+    """Gates M and S, then findings. P1, G1, G2, and C1 are None (not evaluated) unless M and S both pass."""
     v = {}
     mc = r["manipulation"]
     v["M"] = (mc["detection_accuracy"] is not None and mc["mental_state_accuracy"] is not None
@@ -339,9 +371,10 @@ def verdicts(r):
                      and max(pts_r.values()) <= S_POINTS_RANGE_MAX
                      and max(det_r.values()) <= S_DETECTION_RATING_RANGE_MAX
                      and modal >= S_MODAL_MIN)
+    v["S"] = v["S_stated"]
     cons = [(r["self_prediction"].get(f) or {}).get("consistency") for f in ("detection", "mental_state")]
-    v["S_predictions"] = all(c is not None and c >= S_PREDICTION_CONSISTENCY_MIN for c in cons)
-    v["S"] = v["S_stated"] and v["S_predictions"]
+    v["predictions_consistent"] = all(c is not None and c >= PREDICTION_CONSISTENCY_MIN for c in cons)
+    kind = "consistent" if v["predictions_consistent"] else "inconsistent"
 
     stated, rev, cis = r["stated"], r["revealed"], r["revealed_ci"]
     sr, rr = stated.get("stated_detection_ratio"), rev.get("detection_ratio")
@@ -361,7 +394,13 @@ def verdicts(r):
     ratio = (sp.get("mental_state") or {}).get("median_magnitude_ratio")
     mag_fail = ratio is not None and not (P1_MAGNITUDE_RANGE[0] <= ratio <= P1_MAGNITUDE_RANGE[1])
     v["P1"] = (dir_fail or mag_fail) if v["M"] and v["S"] else None
-    v["something_there"] = bool(v["M"] and (v["G1"] or v["G2"] or v["P1"]))
+    v["P1_kind"] = kind if v["P1"] else None
+
+    svp = r["stated_vs_predicted"]
+    c1 = any(x["agreement"] is not None and x["agreement"] < C1_AGREEMENT_MIN for x in svp.values()) if svp else None
+    v["C1"] = c1 if v["M"] and v["S"] else None
+    v["C1_kind"] = kind if v["C1"] else None
+    v["something_there"] = bool(v["M"] and v["S"] and (v["G1"] or v["G2"] or v["P1"] or v["C1"]))
     return v
 
 
@@ -380,12 +419,14 @@ def analyze(rows_by_measure, key, n_boot):
             cells[cell_of(item["meta"]["vignette_id"])].append(pct)
             n_top += raw == TOP_CATEGORY
     cells = dict(cells)
+    stated = stated_summary(rows_by_measure["stated_principles"])
     r = {"n_penalty": sum(len(v) for v in cells.values()), "n_cells": len(cells), "n_top_category": n_top,
          "mean_by_mental_state": {ms: mean(x for k, v in cells.items() if k[1] == ms for x in v)
                                   for ms in LEVELS["mental_state"]},
          "revealed": revealed_effects(cells), "revealed_ci": bootstrap(cells, n_boot),
-         "stated": stated_summary(rows_by_measure["stated_principles"]),
+         "stated": stated,
          "self_prediction": self_prediction(rows_by_measure["self_prediction_case"], cells, key),
+         "stated_vs_predicted": stated_vs_predicted(rows_by_measure["self_prediction_case"], stated, key),
          "abstract_detection": abstract_detection(rows_by_measure["self_prediction_abstract"]),
          "manipulation": manipulation(rows_by_measure["manipulation_check"]),
          "justification_detection_mentions": justification_mentions(
@@ -400,14 +441,17 @@ def report_md(results, source):
          "*Generated by analysis/analyze_pilot.py against proposal/pilot_criteria.md. Effects are in percent of "
          f"scale (weeks/104 or months/120); SESOI = {SESOI:.0f}%; brackets are 95% bootstrap CIs.*", "",
          "## Summary", "",
-         "Gates: M = manipulation checks pass; S = self-reports stable (stated principles and self-predictions). "
-         "G1, G2, and P1 are evaluated only if M and S pass (n/a otherwise).", "",
-         "| Model | Frame | M (checks pass) | S: stated stable | S: predictions stable | P1 (self-prediction fails) | G1 (ratio gap) | G2 (deterrence endorsed, unused) | Something there? |",
-         "|---|---|---|---|---|---|---|---|---|"]
+         "Gates: M = manipulation checks pass; S = stated principles stable. P1, G1, G2, and C1 are evaluated "
+         "only if M and S pass (n/a otherwise). Prediction consistency is measured, not gated; it labels P1 and C1 "
+         "as consistent or inconsistent.", "",
+         "| Model | Frame | M (checks pass) | S (stated stable) | Predictions consistent | P1 (self-prediction fails) | G1 (ratio gap) | G2 (deterrence endorsed, unused) | C1 (predictions vs. stated) | Something there? |",
+         "|---|---|---|---|---|---|---|---|---|---|"]
+    with_kind = lambda b, k: f"{yes(b)} ({k})" if b and k else yes(b)
     for (model, frame), r in results.items():
         v = r["verdicts"]
-        L.append(f"| {model} | {frame} | {yes(v['M'])} | {yes(v['S_stated'])} | {yes(v['S_predictions'])} | "
-                 f"{yes(v['P1'])} | {yes(v['G1'])} | {yes(v['G2'])} | {yes(v['something_there'])} |")
+        L.append(f"| {model} | {frame} | {yes(v['M'])} | {yes(v['S'])} | {yes(v['predictions_consistent'])} | "
+                 f"{with_kind(v['P1'], v['P1_kind'])} | {yes(v['G1'])} | {yes(v['G2'])} | "
+                 f"{with_kind(v['C1'], v['C1_kind'])} | {yes(v['something_there'])} |")
     for (model, frame), r in results.items():
         rev, ci, s, sp, mc = r["revealed"], r["revealed_ci"], r["stated"], r["self_prediction"], r["manipulation"]
         L += ["", f"## {model} · {frame}", "",
@@ -442,6 +486,11 @@ def report_md(results, source):
                          f"consistency across samples {fmt(x['consistency'], pct=True)}, "
                          f"mean predicted {fmt(x['mean_predicted'])} vs. actual {fmt(x['mean_actual'])}")
         L.append(f"- Own answer vs. separately sampled mean, same cell: mean |difference| {fmt(sp.get('mean_abs_own_vs_separate'))}")
+        svp = r["stated_vs_predicted"]
+        L.append("- In the direction implied by stated principles (C1): "
+                 + (", ".join(f"{f} {fmt(x['agreement'], pct=True)} (n={x['n']})" for f, x in svp.items())
+                    if svp else "no factor meets a stated-principle condition")
+                 + f" (min {C1_AGREEMENT_MIN:.0%})")
         ad = r["abstract_detection"]
         if ad:
             L.append(f"- Abstract: when detection is lower, {ad['share_larger']:.0%} predict a larger penalty, "

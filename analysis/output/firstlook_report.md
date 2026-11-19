@@ -4,14 +4,14 @@
 
 ## Summary
 
-Gates: M = manipulation checks pass; S = self-reports stable (stated principles and self-predictions). G1, G2, and P1 are evaluated only if M and S pass (n/a otherwise).
+Gates: M = manipulation checks pass; S = stated principles stable. P1, G1, G2, and C1 are evaluated only if M and S pass (n/a otherwise). Prediction consistency is measured, not gated; it labels P1 and C1 as consistent or inconsistent.
 
-| Model | Frame | M (checks pass) | S: stated stable | S: predictions stable | P1 (self-prediction fails) | G1 (ratio gap) | G2 (deterrence endorsed, unused) | Something there? |
-|---|---|---|---|---|---|---|---|---|
-| llama3.1-8b | legal | no | **yes** | **yes** | n/a | n/a | n/a | no |
-| llama3.1-8b | social | no | **yes** | **yes** | n/a | n/a | n/a | no |
-| qwen3-8b | legal | **yes** | no | **yes** | n/a | n/a | n/a | no |
-| qwen3-8b | social | **yes** | no | **yes** | n/a | n/a | n/a | no |
+| Model | Frame | M (checks pass) | S (stated stable) | Predictions consistent | P1 (self-prediction fails) | G1 (ratio gap) | G2 (deterrence endorsed, unused) | C1 (predictions vs. stated) | Something there? |
+|---|---|---|---|---|---|---|---|---|---|
+| llama3.1-8b | legal | no | **yes** | **yes** | n/a | n/a | n/a | n/a | no |
+| llama3.1-8b | social | no | **yes** | **yes** | n/a | n/a | n/a | n/a | no |
+| qwen3-8b | legal | **yes** | no | **yes** | n/a | n/a | n/a | n/a | no |
+| qwen3-8b | social | **yes** | no | **yes** | n/a | n/a | n/a | n/a | no |
 
 ## llama3.1-8b · legal
 
@@ -45,6 +45,7 @@ Gates: M = manipulation checks pass; S = self-reports stable (stated principles 
 - mental_state: n=144, direction agreement 66%, median |predicted|/|actual| 2.50 (n=120), consistency across samples 97%, mean predicted +5.6 vs. actual +0.0
 - month: n=36, direction agreement 47%, median |predicted|/|actual| 2.50 (n=30), consistency across samples 75%, mean predicted +10.4 vs. actual -0.8
 - Own answer vs. separately sampled mean, same cell: mean |difference| +13.6
+- In the direction implied by stated principles (C1): detection 57% (n=72), mental_state 90% (n=144) (min 70%)
 - Abstract: when detection is lower, 42% predict a larger penalty, 0% the same, 58% smaller (n=12)
 
 **Manipulation checks**
@@ -85,6 +86,7 @@ Gates: M = manipulation checks pass; S = self-reports stable (stated principles 
 - mental_state: n=144, direction agreement 69%, median |predicted|/|actual| 2.36 (n=126), consistency across samples 94%, mean predicted +28.1 vs. actual +0.0
 - month: n=36, direction agreement 50%, median |predicted|/|actual| 1.56 (n=30), consistency across samples 67%, mean predicted +3.3 vs. actual +0.4
 - Own answer vs. separately sampled mean, same cell: mean |difference| +14.8
+- In the direction implied by stated principles (C1): mental_state 78% (n=144), detection 72% (n=72) (min 70%)
 - Abstract: when detection is lower, 58% predict a larger penalty, 0% the same, 42% smaller (n=12)
 
 **Manipulation checks**
@@ -125,6 +127,7 @@ Gates: M = manipulation checks pass; S = self-reports stable (stated principles 
 - mental_state: n=144, direction agreement 58%, median |predicted|/|actual| 3.67 (n=102), consistency across samples 100%, mean predicted +15.3 vs. actual +0.0
 - month: n=36, direction agreement 61%, median |predicted|/|actual| 0.00 (n=12), consistency across samples 92%, mean predicted +3.1 vs. actual +1.1
 - Own answer vs. separately sampled mean, same cell: mean |difference| +8.0
+- In the direction implied by stated principles (C1): mental_state 83% (n=144) (min 70%)
 - Abstract: when detection is lower, 58% predict a larger penalty, 0% the same, 42% smaller (n=12)
 
 **Manipulation checks**
@@ -165,6 +168,7 @@ Gates: M = manipulation checks pass; S = self-reports stable (stated principles 
 - mental_state: n=144, direction agreement 46%, median |predicted|/|actual| 0.00 (n=72), consistency across samples 94%, mean predicted -20.5 vs. actual +0.0
 - month: n=36, direction agreement 61%, median |predicted|/|actual| 0.00 (n=12), consistency across samples 94%, mean predicted -2.8 vs. actual -5.6
 - Own answer vs. separately sampled mean, same cell: mean |difference| +34.2
+- In the direction implied by stated principles (C1): mental_state 34% (n=144) (min 70%)
 - Abstract: when detection is lower, 92% predict a larger penalty, 0% the same, 8% smaller (n=12)
 
 **Manipulation checks**
